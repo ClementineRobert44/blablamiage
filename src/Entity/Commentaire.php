@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Entity()
+ * @ORM\Table(name="Commentaire")
+ * @ORM\HasLifecycleCallbacks() 
  * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
  */
 class Commentaire
@@ -66,6 +69,14 @@ class Commentaire
 
         return $this;
     }
+
+    /**
+    * @ORM\PrePersist()
+    */
+    public function prePersist()
+    {
+    $this->dateCom = new \DateTime();
+    } 
 
     public function getContenuCom(): ?string
     {

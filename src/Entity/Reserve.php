@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Entity()
+ * @ORM\Table(name="Reserve")
+ * @ORM\HasLifecycleCallbacks() 
  * @ORM\Entity(repositoryClass="App\Repository\ReserveRepository")
  */
 class Reserve
@@ -55,6 +58,14 @@ class Reserve
 
         return $this;
     }
+
+    /**
+    * @ORM\PrePersist()
+    */
+    public function prePersist()
+    {
+    $this->dateReservation = new \DateTime();
+    } 
 
     /**
      * @return Collection|Passager[]
