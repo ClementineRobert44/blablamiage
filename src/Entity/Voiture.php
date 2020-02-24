@@ -49,7 +49,7 @@ class Voiture
     /**
      * @ORM\Column(type="integer")
      */
-    private $idUtilisateur;
+    private $idConducteur;
 
     public function getId(): ?int
     {
@@ -128,14 +128,14 @@ class Voiture
         return $this;
     }
 
-    public function getIdUtilisateur(): ?int
+    public function getIdConducteur(): ?int
     {
-        return $this->idUtilisateur;
+        return $this->idConducteur;
     }
 
-    public function setIdUtilisateur(int $idUtilisateur): self
+    public function setIdConducteur(int $idConducteur): self
     {
-        $this->idUtilisateur = $idUtilisateur;
+        $this->idConducteur = $idConducteur;
 
         return $this;
     }
