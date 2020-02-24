@@ -46,10 +46,6 @@ class Voiture
      */
     private $tailleBagages;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idConducteur;
 
     public function getId(): ?int
     {
@@ -128,15 +124,5 @@ class Voiture
         return $this;
     }
 
-    public function getIdConducteur(): ?int
-    {
-        return $this->idConducteur;
-    }
-
-    public function setIdConducteur(int $idConducteur): self
-    {
-        $this->idConducteur = $idConducteur;
-
-        return $this;
-    }
+    
 }

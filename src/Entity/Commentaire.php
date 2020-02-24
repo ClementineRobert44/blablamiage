@@ -31,10 +31,6 @@ class Commentaire
      */
     private $note;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idTrajet;
 
     public function getId(): ?int
     {
@@ -77,15 +73,5 @@ class Commentaire
         return $this;
     }
 
-    public function getIdTrajet(): ?int
-    {
-        return $this->idTrajet;
-    }
-
-    public function setIdTrajet(int $idTrajet): self
-    {
-        $this->idTrajet = $idTrajet;
-
-        return $this;
-    }
+    
 }

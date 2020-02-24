@@ -66,10 +66,6 @@ class Trajet
      */
     private $datePublication;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $idConducteur;
 
     public function getId(): ?int
     {
@@ -196,15 +192,4 @@ class Trajet
         return $this;
     }
 
-    public function getIdConducteur(): ?int
-    {
-        return $this->idConducteur;
-    }
-
-    public function setIdConducteur(int $idConducteur): self
-    {
-        $this->idConducteur = $idConducteur;
-
-        return $this;
-    }
 }
