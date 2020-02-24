@@ -56,6 +56,11 @@ class Passager
      */
     private $cigarette;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reserve", inversedBy="idPassager")
+     */
+    private $reserve;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +158,18 @@ class Passager
     public function setCigarette(string $cigarette): self
     {
         $this->cigarette = $cigarette;
+
+        return $this;
+    }
+
+    public function getReserve(): ?Reserve
+    {
+        return $this->reserve;
+    }
+
+    public function setReserve(?Reserve $reserve): self
+    {
+        $this->reserve = $reserve;
 
         return $this;
     }

@@ -72,6 +72,11 @@ class Trajet
      */
     private $idConducteur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reserve", inversedBy="idTrajet")
+     */
+    private $reserve;
+
 
     public function getId(): ?int
     {
@@ -206,6 +211,18 @@ class Trajet
     public function setIdConducteur(Conducteur $idConducteur): self
     {
         $this->idConducteur = $idConducteur;
+
+        return $this;
+    }
+
+    public function getReserve(): ?Reserve
+    {
+        return $this->reserve;
+    }
+
+    public function setReserve(?Reserve $reserve): self
+    {
+        $this->reserve = $reserve;
 
         return $this;
     }
