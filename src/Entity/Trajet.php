@@ -66,6 +66,12 @@ class Trajet
      */
     private $datePublication;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Conducteur", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idConducteur;
+
 
     public function getId(): ?int
     {
@@ -188,6 +194,18 @@ class Trajet
     public function setDatePublication(\DateTimeInterface $datePublication): self
     {
         $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    public function getIdConducteur(): ?Conducteur
+    {
+        return $this->idConducteur;
+    }
+
+    public function setIdConducteur(Conducteur $idConducteur): self
+    {
+        $this->idConducteur = $idConducteur;
 
         return $this;
     }

@@ -46,6 +46,12 @@ class Voiture
      */
     private $tailleBagages;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Conducteur", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idConducteur;
+
 
     public function getId(): ?int
     {
@@ -120,6 +126,18 @@ class Voiture
     public function setTailleBagages(string $tailleBagages): self
     {
         $this->tailleBagages = $tailleBagages;
+
+        return $this;
+    }
+
+    public function getIdConducteur(): ?Conducteur
+    {
+        return $this->idConducteur;
+    }
+
+    public function setIdConducteur(Conducteur $idConducteur): self
+    {
+        $this->idConducteur = $idConducteur;
 
         return $this;
     }
