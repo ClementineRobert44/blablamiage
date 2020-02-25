@@ -15,10 +15,9 @@ class ConducteurFixtures extends Fixture
     public function load(ObjectManager $manager) : void
     {
         $conducteur1 = new Conducteur();
-
         $conducteur1->setNomConducteur('Robert')
         ->setPrenomConducteur('Clémentine')
-        ->setDateNaissanceConducteur('25/03/1999')
+        ->setDateNaissanceConducteur(new \DateTime('1999-03-25'))
         ->setMailConducteur("clementine.robert.nantes@gmail.com")
         ->setBioConducteur("Etudainte, je fais la route Nantes-Rennes tous les vendredi soir et le retour le dimanche soir.")
         ->setTelConducteur("0605040809")
