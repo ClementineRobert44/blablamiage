@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table text-center">
+        <tr>
+            <th class="active text-center">Id</th>
+            <th class="active text-center">Nom</th>
+            <th class="active text-center">Prénom</th>
+            <th class="active text-center">Date de Naissance</th>
+            <th class="active text-center">Adresse Mail</th>
+            <th class="active text-center">Biographie</th>
+            <th class="active text-center">N° de téléphone</th>
+            <th class="active text-center">Animaux</th>
+            <th class="active text-center">Cigarette</th>
+            <th class="active text-center">Mot de Passe</th>
+        </tr>
+
+        {% for passager in passagers %}
+            <tr>
+                <td><a href="#">{{ passager.id }}</a></td>
+                <td>{{ passager.nomPassager }}</td>
+                <td>{{ passager.prenomPassager }}</td>
+                <td>{{ passager.dateNaissancePassager |date('d-m-Y') }}</td>
+                <td>{{ passager.mailPassager }}</td>
+                <td>{{ passager.bioPassager }}</td>
+                <td>{{ passager.telPassager }}</td>
+                <td>{{ passager.animaux }}</td>
+                <td>{{ passager.cigarette }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
