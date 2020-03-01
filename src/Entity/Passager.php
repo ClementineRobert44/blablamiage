@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PassagerRepository")
@@ -65,6 +66,13 @@ class Passager
      * @ORM\Column(type="string", length=25)
      */
     private $mdpPassager;
+
+    /**
+     * @var string
+     * @Gedmo\Slug(fields={"poste"})
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -189,5 +197,21 @@ class Passager
         $this->mdpPassager = $mdpPassager;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }
