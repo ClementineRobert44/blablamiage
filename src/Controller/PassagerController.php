@@ -10,10 +10,10 @@ class PassagerController extends AbstractController
     /**
      * @Route("/passager", name="passager")
      */
-    public function index()
+    public function list()
     {
-        return $this->render('passager/index.html.twig', [
-            'controller_name' => 'PassagerController',
-        ]);
+        $passagers = $this->getDoctrine()->getRepository(Passager::class)->findAll();
+        return $this->render('passager/list.html.twig', [
+            'passager' => $passagers,
     }
 }
