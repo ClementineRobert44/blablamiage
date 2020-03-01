@@ -41,7 +41,7 @@ class PassagerType extends AbstractType
             ->add('telPassager', NumberType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
-                    new Length(['max' => 10, 'min' => 10]),
+                    new Length(['max' => 9, 'min' => 9]),
  ] 
                 ])
             ->add('animaux',ChoiceType::class, [

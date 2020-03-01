@@ -58,4 +58,24 @@ class PassagerController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Modifier un passager.
+     * @Route("passager/{slug}/edit", name="passager.edit")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse|Response
+     */
+    public function edit(Request $request, Passager $passager, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(PassagerType::class, $passager);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('passager.list');
+        }
+        return $this->render('passager/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
