@@ -38,8 +38,8 @@ class PassagerController extends AbstractController
     }
 
     /**
-     * Créer un nouveau stage.
-     * @Route("/nouveau-stage", name="stage.create")
+     * Création d'un nouveau passager
+     * @Route("/nouveau-passager", name="passager.create")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
