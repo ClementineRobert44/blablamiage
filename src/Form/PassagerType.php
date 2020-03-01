@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 ;
 
@@ -20,14 +22,28 @@ class PassagerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomPassager', TextType::class)
-            ->add('prenomPassager', TextType::class)
+            ->add('nomPassager', TextType::class, [
+                'label' => 'Nom'                
+            ])
+            ->add('prenomPassager', TextType::class, [
+                'label' => 'Prenom'
+                ])
             ->add('dateNaissancePassager', BirthdayType::class, [
                 'format' => 'dd/MM/yyyy',
+                'label' => 'Date de naissance'
             ])
-            ->add('mailPassager', EmailType::class)
-            ->add('bioPassager', TextareaType::class)
-            ->add('telPassager', NumberType::class)
+            ->add('mailPassager', EmailType::class, [
+                'label' => 'Adresse mail'
+                ])
+            ->add('bioPassager', TextareaType::class, [
+                'label' => 'Biographie'
+                ])
+            ->add('telPassager', NumberType::class, [
+                'label' => 'Numéro de téléphone',
+                'constraints' => [
+                    new Length(['max' => 10, 'min' => 10]),
+ ] 
+                ])
             ->add('animaux',ChoiceType::class, [
                 'choices' => [
                 'Selectionné' => '','Refusé' => 'non','Accepté' => 'oui'],
@@ -35,8 +51,13 @@ class PassagerType extends AbstractType
             ->add('cigarette',ChoiceType::class, [
                 'choices' => [
                 'Selectionné' => '', 'Refusé' => 'non','Accepté' => 'oui', ],
-                'label' => 'Cigarette'])
-            ->add('mdpPassager', PasswordType::class)
+                'label' => 'Cigarette', 
+                'constraints' => [new NotBlank()]] 
+                )
+            ->add('mdpPassager', PasswordType::class, [
+                'label' => 'Mot de passe'
+                ]
+                )
         ;
     }
 
