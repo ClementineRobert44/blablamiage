@@ -22,7 +22,8 @@ class ConducteurFixtures extends Fixture
         ->setBioConducteur("Etudainte, je fais la route Nantes-Rennes tous les vendredi soir et le retour le dimanche soir.")
         ->setTelConducteur("0605040809")
         ->setAnimaux("Non")
-        ->setCigarette("Non");
+        ->setCigarette("Non")
+        ->setMdpConducteur("CoucouDu44");
 
         $manager->persist($conducteur1);
 

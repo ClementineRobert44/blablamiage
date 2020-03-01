@@ -22,7 +22,8 @@ class PassagerFixtures extends Fixture
         ->setBioPassager("Etudiante")
         ->setTelPassager("0604568963")
         ->setAnimaux("Oui")
-        ->setCigarette("Non");
+        ->setCigarette("Non")
+        ->setMdpPassager("Hello45");;
 
         $manager->persist($passager1);
 
