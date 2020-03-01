@@ -78,4 +78,30 @@ class PassagerController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Supprimer un passager.
+     * @Route("passager/{slug}/delete", name="passager.delete")
+     * @param Request $request
+     * @param Passager $passager
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function delete(Request $request, Passager $passager, EntityManagerInterface $em): Response
+    {
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('passager.delete', ['slug' => $passager->getSlug()]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('passager/delete.html.twig', [
+                'passager' => $passager,
+                'form' => $form->createView(),
+            ]);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($passager);
+        $em->flush();
+        return $this->redirectToRoute('passager.list');
+    }
 }
