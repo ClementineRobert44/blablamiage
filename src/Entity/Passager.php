@@ -69,7 +69,7 @@ class Passager
 
     /**
      * @var string
-     * @Gedmo\Slug(fields={"poste"})
+     * @Gedmo\Slug(fields={"nomPassager"})
      * @ORM\Column(type="string", length=128, unique=true)
      */
     private $slug;

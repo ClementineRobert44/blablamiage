@@ -17,7 +17,7 @@
 
         {% for passager in passagers %}
             <tr>
-                <td><a href="{{ path('passager.show', {id:passager.id})}}">{{ passager.id }}</a></td>
+                <td><a href="{{ path('passager.show', {slug:passager.slug})}}">{{ passager.id }}</a></td>
                 <td>{{ passager.nomPassager }}</td>
                 <td>{{ passager.prenomPassager }}</td>
                 <td>{{ passager.dateNaissancePassager |date('d-m-Y') }}</td>
