@@ -56,6 +56,11 @@ class Conducteur
      */
     private $cigarette;
 
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $mdpConducteur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +158,18 @@ class Conducteur
     public function setCigarette(string $cigarette): self
     {
         $this->cigarette = $cigarette;
+
+        return $this;
+    }
+
+    public function getMdpConducteur(): ?string
+    {
+        return $this->mdpConducteur;
+    }
+
+    public function setMdpConducteur(string $mdpConducteur): self
+    {
+        $this->mdpConducteur = $mdpConducteur;
 
         return $this;
     }

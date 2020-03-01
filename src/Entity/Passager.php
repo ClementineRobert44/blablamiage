@@ -61,6 +61,11 @@ class Passager
      */
     private $reserve;
 
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $mdpPassager;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +175,18 @@ class Passager
     public function setReserve(?Reserve $reserve): self
     {
         $this->reserve = $reserve;
+
+        return $this;
+    }
+
+    public function getMdpPassager(): ?string
+    {
+        return $this->mdpPassager;
+    }
+
+    public function setMdpPassager(string $mdpPassager): self
+    {
+        $this->mdpPassager = $mdpPassager;
 
         return $this;
     }
