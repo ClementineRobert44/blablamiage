@@ -15,5 +15,6 @@ class PassagerController extends AbstractController
         $passagers = $this->getDoctrine()->getRepository(Passager::class)->findAll();
         return $this->render('passager/list.html.twig', [
             'passager' => $passagers,
+        ]);
     }
 }
