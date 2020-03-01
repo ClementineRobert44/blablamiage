@@ -23,7 +23,7 @@ class PassagerController extends AbstractController
 
     /**
      * Afficher un passager spécifique.
-     * @Route("/passager/{id}", name="passager.show", requirements={"id" = "\d+"})
+     * @Route("/passager/{slug}", name="passager.show", requirements={"id" = "\d+"})
      * @param Passager $passager
      * @return Response
      */
