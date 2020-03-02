@@ -47,10 +47,10 @@ class Voiture
     private $tailleBagages;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Conducteur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idConducteur;
+    private $idUtilisateur;
 
 
     public function getId(): ?int
@@ -130,14 +130,14 @@ class Voiture
         return $this;
     }
 
-    public function getIdConducteur(): ?Conducteur
+    public function getIdUtilisateur(): ?Utilisateur
     {
-        return $this->idConducteur;
+        return $this->idUtilisateur;
     }
 
-    public function setIdConducteur(Conducteur $idConducteur): self
+    public function setIdUtilisateur(Utilisateur $idUtilisateur): self
     {
-        $this->idConducteur = $idConducteur;
+        $this->idUtilisateur = $idUtilisateur;
 
         return $this;
     }

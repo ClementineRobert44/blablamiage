@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrajetRepository")
+ * @ORM\Table(name="Trajet")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Trajet
 {
@@ -67,16 +71,20 @@ class Trajet
     private $datePublication;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Conducteur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idConducteur;
+    private $idUtilisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reserve", inversedBy="idTrajet")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Reserve", mappedBy="idTrajet")
      */
-    private $reserve;
+    private $reserves;
 
+    public function __construct()
+    {
+        $this->reserves = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -203,28 +211,51 @@ class Trajet
         return $this;
     }
 
-    public function getIdConducteur(): ?Conducteur
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
     {
-        return $this->idConducteur;
+        $this->datePublication = new \DateTime();
     }
 
-    public function setIdConducteur(Conducteur $idConducteur): self
+    public function getIdUtilisateur(): ?Utilisateur
     {
-        $this->idConducteur = $idConducteur;
+        return $this->idUtilisateur;
+    }
+
+    public function setIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        $this->idUtilisateur = $idUtilisateur;
 
         return $this;
     }
 
-    public function getReserve(): ?Reserve
+    /**
+     * @return Collection|Reserve[]
+     */
+    public function getReserves(): Collection
     {
-        return $this->reserve;
+        return $this->reserves;
     }
 
-    public function setReserve(?Reserve $reserve): self
+    public function addReserf(Reserve $reserf): self
     {
-        $this->reserve = $reserve;
+        if (!$this->reserves->contains($reserf)) {
+            $this->reserves[] = $reserf;
+            $reserf->addIdTrajet($this);
+        }
 
         return $this;
     }
 
+    public function removeReserf(Reserve $reserf): self
+    {
+        if ($this->reserves->contains($reserf)) {
+            $this->reserves->removeElement($reserf);
+            $reserf->removeIdTrajet($this);
+        }
+
+        return $this;
+    }
 }

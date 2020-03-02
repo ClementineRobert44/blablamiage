@@ -35,10 +35,10 @@ class Commentaire
     private $note;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Conducteur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $idConducteur;
+    private $idUtilisateur;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Trajet", cascade={"persist", "remove"})
@@ -47,11 +47,9 @@ class Commentaire
     private $idTrajet;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Passager", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $idPassager;
-
+    private $idUtilisateurCommente;
 
     public function getId(): ?int
     {
@@ -102,14 +100,14 @@ class Commentaire
         return $this;
     }
 
-    public function getIdConducteur(): ?Conducteur
+    public function getIdUtilisateur(): ?Utilisateur
     {
-        return $this->idConducteur;
+        return $this->idUtilisateur;
     }
 
-    public function setIdConducteur(Conducteur $idConducteur): self
+    public function setIdConducteur(Utilisateur $idUtilisateur): self
     {
-        $this->idConducteur = $idConducteur;
+        $this->idUtilisateur = $idUtilisateur;
 
         return $this;
     }
@@ -126,17 +124,19 @@ class Commentaire
         return $this;
     }
 
-    public function getIdPassager(): ?Passager
+    public function getIdUtilisateurCommente(): ?int
     {
-        return $this->idPassager;
+        return $this->idUtilisateurCommente;
     }
 
-    public function setIdPassager(Passager $idPassager): self
+    public function setIdUtilisateurCommente(int $idUtilisateurCommente): self
     {
-        $this->idPassager = $idPassager;
+        $this->idUtilisateurCommente = $idUtilisateurCommente;
 
         return $this;
     }
+
+    
 
     
 }
