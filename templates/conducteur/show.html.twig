@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Détail sur <i>{{ conducteur.nomConducteur }}</i> <i> {{ conducteur.prenomConducteur }} </i></h1>
+    <div class="media" style="margin-top: 60px;">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h3 class="media-heading"><strong>{{ conducteur.prenomConducteur }}</strong> <i>({{ conducteur.prenomConducteur }})</i></h3>
+                </div>
+
+                <div class="col-sm-2">
+                    <i class="pull-right">Publié le {{ conducteur.prenomConducteur }}</i>
+                </div>
+            </div>
+
+            <p>
+                <strong>{{ conducteur.prenomConducteur }}</strong>
+                <small> - <i>{{ conducteur.prenomConducteur }}</i></small>
+            </p>
+
+            <p>{{ conducteur.bioConducteur|nl2br }}</p>
+
+            <p>
+                <strong>Email de contact :</strong> {{ conducteur.bioConducteur }}
+            </p>
+            <p>
+                <strong>Date d'expirtaion :</strong> {{ conducteur.bioConducteur }}
+            </p>
+            
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <a class="btn btn-default" href="#">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                        Liste des stages
+                    </a>
+
+                    <a class="btn btn-primary" href="{{ path('conducteur.create', {slug:conducteur.slug})}}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        Éditer
+                    </a>
+                    <a class="btn btn-danger" href="{{ path('conducteur.delete', {slug:conducteur.slug})}}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        Supprimer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

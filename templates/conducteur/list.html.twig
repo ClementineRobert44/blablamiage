@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table text-center">
+        <tr>
+            <th class="active text-center">Id</th>
+            <th class="active text-center">Nom</th>
+            <th class="active text-center">Prénom</th>
+            <th class="active text-center">Date de Naissance</th>
+            <th class="active text-center">Adresse Mail</th>
+            <th class="active text-center">Biographie</th>
+            <th class="active text-center">N° de téléphone</th>
+            <th class="active text-center">Animaux</th>
+            <th class="active text-center">Cigarette</th>
+        </tr>
+
+        {% for conducteur in conducteurs %}
+            <tr>
+                <td><a href="{{ path('conducteur.show', {slug:conducteur.slug})}}">{{ conducteur.id }}</a></td>
+                <td>{{ conducteur.nomConducteur }}</td>
+                <td>{{ conducteur.prenomConducteur }}</td>
+                <td>{{ conducteur.dateNaissanceConducteur |date('d-m-Y') }}</td>
+                <td>{{ conducteur.mailConducteur }}</td>
+                <td>{{ conducteur.bioConducteur }}</td>
+                <td>{{ conducteur.telConducteur }}</td>
+                <td>{{ conducteur.animaux }}</td>
+                <td>{{ conducteur.cigarette }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div>
+        <a href="{{ path('conducteur.create')}}" class="btn btn-default">Ajouter un conducteur</a>
+    </div>
+{% endblock %}
