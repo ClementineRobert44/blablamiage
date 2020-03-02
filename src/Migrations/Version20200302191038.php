@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200301151447 extends AbstractMigration
+final class Version20200302191038 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,9 +22,8 @@ final class Version20200301151447 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE passager ADD slug VARCHAR(128) NOT NULL, CHANGE reserve_id reserve_id INT DEFAULT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_BFF42EE9989D9B62 ON passager (slug)');
-        $this->addSql('ALTER TABLE trajet CHANGE reserve_id reserve_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE utilisateur ADD slug VARCHAR(128) NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_1D1C63B3989D9B62 ON utilisateur (slug)');
     }
 
     public function down(Schema $schema) : void
@@ -32,8 +31,7 @@ final class Version20200301151447 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_BFF42EE9989D9B62 ON passager');
-        $this->addSql('ALTER TABLE passager DROP slug, CHANGE reserve_id reserve_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE trajet CHANGE reserve_id reserve_id INT DEFAULT NULL');
+        $this->addSql('DROP INDEX UNIQ_1D1C63B3989D9B62 ON utilisateur');
+        $this->addSql('ALTER TABLE utilisateur DROP slug');
     }
 }

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table text-center">
+        <tr>
+            <th class="active text-center">Id</th>
+            <th class="active text-center">Nom</th>
+            <th class="active text-center">Prénom</th>
+            <th class="active text-center">Date de Naissance</th>
+            <th class="active text-center">Adresse Mail</th>
+            <th class="active text-center">Biographie</th>
+            <th class="active text-center">N° de téléphone</th>
+            <th class="active text-center">Animaux</th>
+            <th class="active text-center">Cigarette</th>
+        </tr>
+
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td><a href="{{ path('utilisateur.show', {slug:utilisateur.slug})}}">{{ utilisateur.id }}</a></td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.dateNaissance |date('d-m-Y') }}</td>
+                <td>{{ utilisateur.mail }}</td>
+                <td>{{ utilisateur.bio }}</td>
+                <td>{{ utilisateur.tel }}</td>
+                <td>{{ utilisateur.animaux }}</td>
+                <td>{{ utilisateur.cigarette }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div>
+        <a href="{{ path('utilisateur.create')}}" class="btn btn-default">Ajouter un utilisateur</a>
+    </div>
+{% endblock %}
