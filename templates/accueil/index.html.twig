@@ -1,20 +1,55 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}BlaBlaMiage{% endblock %}</title>
 
-{% block title %}Hello AccueilController!{% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">{% endblock %} <!--Changer avec un paramètre pour changer de template-->
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+    
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/Developpement_Web/blablamiage/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/Developpement_Web/blablamiage/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BlaBlaMiage</a>
+    </div>
+    
+    <ul class="nav navbar-nav navbar-right">
+    <li><a href="#">Proposer un trajet</a></li>
+    <li><a href="{{path('passager.list')}}">Voir tous les passagers</a></li>
+    <li><a href="{{path('conducteur.list')}}">Voir tous les conducteurs</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>  Inscription
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{path('passager.create')}}">Passager</a></li>
+          <li><a href="{{path('conducteur.create')}}">Conducteur</a></li>
+        </ul>
+      </li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Connexion</a></li>
+      
     </ul>
+  </div>
+</nav>
+
+<div class="bienvenue">
+<h1>Bienvenue sur BlaBlaMiage</h1>
+
 </div>
-{% endblock %}
+
+<div class="img-accueil">
+    <img src="{{asset('images/road.jpg')}}" title="route_acueil" alt="route">
+</div>
+</body>
+</html>
