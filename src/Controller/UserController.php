@@ -5,68 +5,68 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response;
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\UtilisateurType;
 
-class UtilisateurController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * Afficher tous les utilisateurs isncrits sur le site
-     * @Route("/utilisateur", name="utilisateur.list")
+     * @Route("/user", name="user.list")
      */
     public function list()
     {
-        $utilisateurs = $this->getDoctrine()->getRepository(Utilisateur::class)->findAll();
-        return $this->render('utilisateur/list.html.twig', [
+        $utilisateurs = $this->getDoctrine()->getRepository(User::class)->findAll();
+        return $this->render('user/list.html.twig', [
             'utilisateurs' => $utilisateurs,
         ]);
     }
 
     /**
      * Afficher un utilisateur spécifique.
-     * @Route("/utilisateur/{slug}", name="utilisateur.show", requirements={"id" = "\d+"})
-     * @param Utilisateur $utilisateur
+     * @Route("/user/{slug}", name="user.show", requirements={"id" = "\d+"})
+     * @param User $utilisateur
      * @return Response
      */
-    public function show(Utilisateur $utilisateur)
+    public function show(User $utilisateur)
     {
-        return $this->render('utilisateur/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
         ]);
     }
 
     /**
      * Création d'un nouveau Utilisateur
-     * @Route("/nouveau-utilisateur", name="utilisateur.create")
+     * @Route("/nouveau-user", name="user.create")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
     public function create(Request $request, EntityManagerInterface $em)
     {
-        $utilisateur = new Utilisateur();
+        $utilisateur = new User();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($utilisateur);
             $em->flush();
-            return $this->redirectToRoute('utilisateur.list');
+            return $this->redirectToRoute('user.list');
         }
-        return $this->render('utilisateur/create.html.twig', [
+        return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
      * Modifier un Utilisateur.
-     * @Route("utilisateur/{slug}/edit", name="utilisateur.edit")
+     * @Route("user/{slug}/edit", name="user.edit")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
-    public function edit(Request $request, Utilisateur $utilisateur, EntityManagerInterface $em)
+    public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
@@ -74,27 +74,27 @@ class UtilisateurController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('utilisateur.list');
         }
-        return $this->render('utilisateur/create.html.twig', [
+        return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
      * Supprimer un Utilisateur.
-     * @Route("utilisateur/{slug}/delete", name="utilisateur.delete")
+     * @Route("user/{slug}/delete", name="user.delete")
      * @param Request $request
-     * @param Utilisateur $utilisateur
+     * @param User $utilisateur
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function delete(Request $request, Utilisateur $utilisateur, EntityManagerInterface $em)
+    public function delete(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
         $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('utilisateur.delete', ['slug' => $utilisateur->getSlug()]))
+            ->setAction($this->generateUrl('user.delete', ['slug' => $utilisateur->getSlug()]))
             ->getForm();
         $form->handleRequest($request);
         if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->render('Utilisateur/delete.html.twig', [
+            return $this->render('User/delete.html.twig', [
                 'utilisateur' => $utilisateur,
                 'form' => $form->createView(),
             ]);
@@ -102,6 +102,6 @@ class UtilisateurController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($utilisateur);
         $em->flush();
-        return $this->redirectToRoute('utilisateur.list');
+        return $this->redirectToRoute('user.list');
     }
 }

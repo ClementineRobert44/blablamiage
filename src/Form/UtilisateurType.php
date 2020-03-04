@@ -30,7 +30,7 @@ class UtilisateurType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'label' => 'Date de naissance'
             ])
-            ->add('mail', EmailType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'Adresse mail'
                 ])
             ->add('bio', TextareaType::class, [

@@ -16,11 +16,11 @@
 
         {% for utilisateur in utilisateurs %}
             <tr>
-                <td><a href="{{ path('utilisateur.show', {slug:utilisateur.slug})}}">{{ utilisateur.id }}</a></td>
+                <td><a href="{{ path('user.show', {slug:utilisateur.slug})}}">{{ utilisateur.id }}</a></td>
                 <td>{{ utilisateur.nom }}</td>
                 <td>{{ utilisateur.prenom }}</td>
                 <td>{{ utilisateur.dateNaissance |date('d-m-Y') }}</td>
-                <td>{{ utilisateur.mail }}</td>
+                <td>{{ utilisateur.email }}</td>
                 <td>{{ utilisateur.bio }}</td>
                 <td>{{ utilisateur.tel }}</td>
                 <td>{{ utilisateur.animaux }}</td>
@@ -31,6 +31,6 @@
     </table>
 
     <div>
-        <a href="{{ path('utilisateur.create')}}" class="btn btn-default">Ajouter un utilisateur</a>
+        <a href="{{ path('user.create')}}" class="btn btn-default">Ajouter un utilisateur</a>
     </div>
 {% endblock %}
