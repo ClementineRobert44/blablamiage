@@ -1,6 +1,6 @@
 easy_admin:
   entities:
-    - App\Entity\Passager
+    - App\Entity\Utilisateur
 
 
 
