@@ -35,7 +35,7 @@ class Commentaire
     private $note;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUtilisateur;
@@ -100,12 +100,12 @@ class Commentaire
         return $this;
     }
 
-    public function getIdUtilisateur(): ?Utilisateur
+    public function getIdUtilisateur(): ?User
     {
         return $this->idUtilisateur;
     }
 
-    public function setIdConducteur(Utilisateur $idUtilisateur): self
+    public function setIdConducteur(User $idUtilisateur): self
     {
         $this->idUtilisateur = $idUtilisateur;
 

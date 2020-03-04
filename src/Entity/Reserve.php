@@ -24,7 +24,7 @@ class Reserve
     private $idTrajet;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", inversedBy="reserves")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="reserves")
      */
     private $idUtilisateur;
 
@@ -66,14 +66,14 @@ class Reserve
     }
 
     /**
-     * @return Collection|Utilisateur[]
+     * @return Collection|User[]
      */
     public function getIdUtilisateur(): Collection
     {
         return $this->idUtilisateur;
     }
 
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
+    public function addIdUtilisateur(User $idUtilisateur): self
     {
         if (!$this->idUtilisateur->contains($idUtilisateur)) {
             $this->idUtilisateur[] = $idUtilisateur;
@@ -82,7 +82,7 @@ class Reserve
         return $this;
     }
 
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
+    public function removeIdUtilisateur(User $idUtilisateur): self
     {
         if ($this->idUtilisateur->contains($idUtilisateur)) {
             $this->idUtilisateur->removeElement($idUtilisateur);

@@ -47,7 +47,7 @@ class Voiture
     private $tailleBagages;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Utilisateur", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUtilisateur;
@@ -130,12 +130,12 @@ class Voiture
         return $this;
     }
 
-    public function getIdUtilisateur(): ?Utilisateur
+    public function getIdUtilisateur(): ?User
     {
         return $this->idUtilisateur;
     }
 
-    public function setIdUtilisateur(Utilisateur $idUtilisateur): self
+    public function setIdUtilisateur(User $idUtilisateur): self
     {
         $this->idUtilisateur = $idUtilisateur;
 
