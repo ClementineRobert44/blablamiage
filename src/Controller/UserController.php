@@ -41,27 +41,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * Création d'un nouveau Utilisateur
-     * @Route("/nouveau-user", name="user.create")
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     * @return RedirectResponse|Response
-     */
-    public function create(Request $request, EntityManagerInterface $em)
-    {
-        $utilisateur = new User();
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($utilisateur);
-            $em->flush();
-            return $this->redirectToRoute('user.list');
-        }
-        return $this->render('user/create.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
+    
 
     /**
      * Modifier un Utilisateur.
@@ -70,6 +50,7 @@ class UserController extends AbstractController
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
+    /*
     public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
@@ -81,7 +62,7 @@ class UserController extends AbstractController
         return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
+    }*/
 
     /**
      * Supprimer un Utilisateur.

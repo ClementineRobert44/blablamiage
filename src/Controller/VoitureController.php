@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Voiture;
+use App\Form\VoitureType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class VoitureController extends AbstractController
@@ -16,4 +21,29 @@ class VoitureController extends AbstractController
             'controller_name' => 'VoitureController',
         ]);
     }
+
+    /**
+     * Créer un nouvelle voiture.
+     * @Route("/nouvelle-voiture", name="voiture.create")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse|Response
+     */
+
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $voiture = new Voiture();
+        $form = $this->createForm(VoitureType::class, $voiture);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+        $em->persist($voiture);
+        $em->flush();
+        return $this->redirectToRoute('voiture');
+        }
+        return $this->render('voiture/create.html.twig', [
+        'form' => $form->createView(),
+        ]);
+    }
+
+   
 }

@@ -66,6 +66,8 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [new NotBlank()]] 
                 )
 
+             
+
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
