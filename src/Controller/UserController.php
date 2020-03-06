@@ -10,7 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\UtilisateurType;
 
+/*
+ * @Route("/{_locale}, defaults={"_locale":"en"}, requirements={"_locale": "en|fr"})
+ */ 
 class UserController extends AbstractController
+
 {
     /**
      * Afficher tous les utilisateurs isncrits sur le site
