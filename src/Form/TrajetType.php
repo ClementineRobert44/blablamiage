@@ -50,12 +50,12 @@ class TrajetType extends AbstractType
             'label' => "Prix du trajet"                
         ])
 
-        ->add('idUtilisateur', EntityType::class, [
+        /*->add('idUtilisateur', EntityType::class, [
             'class' => User::class,
             'multiple' => false,
             'expanded' => true,
             'choice_label' => 'nom'
-        ])
+        ])*/
 
         ->add('nbPassagers',ChoiceType::class, [
             'choices' => [

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Trajet;
+use App\Entity\User;
 use App\Form\TrajetType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,12 +33,14 @@ class TrajetController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em)
     {
         $trajet = new Trajet();
+        $user = $this->getUser();
+        $trajet->addIdUtilisateur($user);
         $form = $this->createForm(TrajetType::class, $trajet);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
         $em->persist($trajet);
         $em->flush();
-        return $this->redirectToRoute('trajet');
+        return $this->redirectToRoute('accueil');
         }
         return $this->render('trajet/create.html.twig', [
         'form' => $form->createView(),

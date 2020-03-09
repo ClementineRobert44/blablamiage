@@ -46,16 +46,7 @@ class VoitureType extends AbstractType
             'constraints' => [new NotBlank()]] 
             )
 
-        ->add('idUtilisateur',EntityType::class, [
-            'label' => 'idUtilisateur'
-        ])
-
-        ->add('idUtilisateur', EntityType::class, [
-            'class' => User::class,
-            'multiple' => false,
-            'expanded' => true,
-            'choice_label' => 'nom'
-        ])
+        
 
         ;
     }

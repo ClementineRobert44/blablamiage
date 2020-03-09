@@ -70,20 +70,22 @@ class Trajet
      */
     private $datePublication;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idUtilisateur;
+    
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Reserve", mappedBy="idTrajet")
      */
     private $reserves;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="trajets")
+     */
+    private $idUtilisateur;
+
     public function __construct()
     {
         $this->reserves = new ArrayCollection();
+        $this->idUtilisateur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,17 +221,7 @@ class Trajet
         $this->datePublication = new \DateTime();
     }
 
-    public function getIdUtilisateur(): ?User
-    {
-        return $this->idUtilisateur;
-    }
-
-    public function setIdUtilisateur(User $idUtilisateur): self
-    {
-        $this->idUtilisateur = $idUtilisateur;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection|Reserve[]
@@ -254,6 +246,32 @@ class Trajet
         if ($this->reserves->contains($reserf)) {
             $this->reserves->removeElement($reserf);
             $reserf->removeIdTrajet($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getIdUtilisateur(): Collection
+    {
+        return $this->idUtilisateur;
+    }
+
+    public function addIdUtilisateur(User $idUtilisateur): self
+    {
+        if (!$this->idUtilisateur->contains($idUtilisateur)) {
+            $this->idUtilisateur[] = $idUtilisateur;
+        }
+
+        return $this;
+    }
+
+    public function removeIdUtilisateur(User $idUtilisateur): self
+    {
+        if ($this->idUtilisateur->contains($idUtilisateur)) {
+            $this->idUtilisateur->removeElement($idUtilisateur);
         }
 
         return $this;

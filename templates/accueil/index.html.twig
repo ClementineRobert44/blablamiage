@@ -19,8 +19,6 @@
 
 </head>
 <body>
-
-<p>Hello {% block p %} $user->getNom(){% endblock %}</p>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -39,19 +37,28 @@
     </li>
     
     <ul class="nav navbar-nav navbar-right">
-    <li><a href="#">Proposer un trajet</a></li>
+    <li><a href="{{path('trajet.create')}}">Proposer un trajet</a></li>
     <li><a href="{{path('user.list')}}">{{'utilisateur.voir'|trans}}</a></li>
     <li><a href="{{path('voiture.create')}}">Ajouter une voiture</a></li>
     <li><a href="{{path('trajet.create')}}">Ajouter un trajet</a></li>
     <li><a href="{{path('app_register')}}"><span class="glyphicon glyphicon-user"></span>  Inscription</a></li>
-    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>  Connexion</a></li>
+    <li><a href="{{path('app_login')}}"><span class="glyphicon glyphicon-log-in"></span>  Connexion</a></li>
       
     </ul>
   </div>
 </nav>
 
 <div class="bienvenue">
-<h1>Bienvenue sur BlaBlaMiage</h1>
+<h1>Bienvenue sur BlaBlaMiage
+
+{% if app.user.id is defined %}
+  {{app.user.prenom}}</h1>
+
+ {% else %}
+ </h1>
+ {% endif %}
+
+
 
 </div>
 
