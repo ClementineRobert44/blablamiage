@@ -1,6 +1,10 @@
 easy_admin:
   entities:
     - App\Entity\User
+    - App\Entity\Commentaire
+    - App\Entity\Reserve
+    - App\Entity\Trajet
+    - App\Entity\Voiture
 
 
 

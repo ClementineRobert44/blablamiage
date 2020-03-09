@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table class="table text-center">
+        <tr>
+            <th class="active text-center">Date Départ</th>
+            <th class="active text-center">Heure Départ</th>
+            <th class="active text-center">Adresse Départ</th>
+            <th class="active text-center">Code postal Départ</th>
+            <th class="active text-center">Ville départ</th>
+            <th class="active text-center">Adresse arrivée</th>
+            <th class="active text-center">Code Postal arrivée</th>
+            <th class="active text-center">Ville arrivée</th>
+            <th class="active text-center">Nombre de passager</th>
+            <th class="active text-center">Prix</th>
+            <th class="active text-center">Détails</th>
+
+
+            
+
+        </tr>
+
+        {% for trajet in trajets %}
+            <tr>
+                <td>{{ trajet.dateDepart |date('d-m-Y') }}</td>
+                <td>{{ trajet.heureDepart |date('H:i') }}</td>
+                <td>{{ trajet.adresseDepart }}</td>
+                <td>{{ trajet.codePostalDepart }}</td>
+                <td>{{ trajet.villeDepart }}</td>
+                <td>{{ trajet.adresseArrivee }}</td>
+                <td>{{ trajet.codePostalArrivee }}</td>
+                <td>{{ trajet.villeArrivee }}</td>
+                <td>{{ trajet.nbPassagers }}</td>
+                <td>{{ trajet.prixTrajet }}€</td>
+                <td><a href="{{ path('trajet.show', {id: trajet.id})}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+    
+            </tr>
+        {% endfor %}
+    </table>
+
+   
+{% endblock %}

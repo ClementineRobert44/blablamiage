@@ -12,17 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TrajetController extends AbstractController
 {
-    /**
-     * @Route("/trajet", name="trajet")
-     */
-    public function index()
-    {
-        return $this->render('trajet/index.html.twig', [
-            'controller_name' => 'TrajetController',
-        ]);
-    }
-
-    /**
+     /**
      * Créer un neauveau trajet.
      * @Route("/nouveau-trajet", name="trajet.create")
      * @param Request $request
@@ -44,6 +34,54 @@ class TrajetController extends AbstractController
         }
         return $this->render('trajet/create.html.twig', [
         'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Afficher tous les trajets dispos sur le site
+     * @Route("/trajet", name="trajet.list")
+     */
+    public function list()
+    {
+        $trajets = $this->getDoctrine()->getRepository(Trajet::class)->findAll();
+               
+        return $this->render('trajet/list.html.twig', [
+            'trajets' => $trajets,
+        ]);
+    }
+
+    /**
+     * Afficher un trajet spécifique.
+     * @Route("/trajet/{id}", name="trajet.show")
+     * @param Trajet $trajet
+     * @return Response
+     */
+    public function show(Trajet $trajet, EntityManagerInterface $em)
+    {
+        $users = $trajet->getIdUtilisateur();
+        foreach($users as $user){
+            $userId = $user->getId();
+        }
+        
+
+        $query = $em->createQuery(
+            'SELECT u FROM App:User u WHERE u.id = :idUser'
+            )->setParameter('idUser', $userId);
+            $user = $query->getResult();
+            
+            
+            $query = $em->createQuery(
+                'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
+                )->setParameter('idUser', $userId);
+                $voiture = $query->getResult();
+
+        
+
+        
+        return $this->render('trajet/show.html.twig', [
+            'trajet' => $trajet,
+            'user' => $user,
+            'voiture' => $voiture
         ]);
     }
 }

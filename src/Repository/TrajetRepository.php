@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Trajet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\AST\Join;
+use Doctrine\ORM\Query\Expr\Join as ExprJoin;
 
 /**
  * @method Trajet|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +49,8 @@ class TrajetRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    
+      
+    
 }

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for u in user %}
+    <p>Nom du conducteur : {{u.nom}}</p>
+{% endfor %}
+
+{% for v in voiture %}
+    <p>Marque voiture : {{v.marqueVoiture}}</p>
+{% endfor %}
+{% endblock %}

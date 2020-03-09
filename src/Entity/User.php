@@ -91,6 +91,8 @@ class User implements UserInterface
         $this->trajets = new ArrayCollection();
     }
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -269,31 +271,42 @@ class User implements UserInterface
         $this->slug = $slug;
     }
 
+    
+
     /**
-     * @return Collection|Trajet[]
-     */
-    public function getTrajets(): Collection
-    {
-        return $this->trajets;
-    }
+    * toString
+    * @return string
+    */
+   public function __toString()
+   {
+           return $this->getNom();
+   }
 
-    public function addTrajet(Trajet $trajet): self
-    {
-        if (!$this->trajets->contains($trajet)) {
-            $this->trajets[] = $trajet;
-            $trajet->addIdUtilisateur($this);
-        }
+   /**
+    * @return Collection|Trajet[]
+    */
+   public function getTrajets(): Collection
+   {
+       return $this->trajets;
+   }
 
-        return $this;
-    }
+   public function addTrajet(Trajet $trajet): self
+   {
+       if (!$this->trajets->contains($trajet)) {
+           $this->trajets[] = $trajet;
+           $trajet->addIdUtilisateur($this);
+       }
 
-    public function removeTrajet(Trajet $trajet): self
-    {
-        if ($this->trajets->contains($trajet)) {
-            $this->trajets->removeElement($trajet);
-            $trajet->removeIdUtilisateur($this);
-        }
+       return $this;
+   }
 
-        return $this;
-    }
+   public function removeTrajet(Trajet $trajet): self
+   {
+       if ($this->trajets->contains($trajet)) {
+           $this->trajets->removeElement($trajet);
+           $trajet->removeIdUtilisateur($this);
+       }
+
+       return $this;
+   }
 }

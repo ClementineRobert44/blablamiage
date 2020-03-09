@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrajetRepository")
@@ -69,7 +71,6 @@ class Trajet
      * @ORM\Column(type="datetime")
      */
     private $datePublication;
-
     
 
     /**
@@ -77,10 +78,21 @@ class Trajet
      */
     private $reserves;
 
+    
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateDepart;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="trajets")
      */
     private $idUtilisateur;
+
+    
+
+    
 
     public function __construct()
     {
@@ -251,29 +263,59 @@ class Trajet
         return $this;
     }
 
+   
+
     /**
-     * @return Collection|User[]
-     */
-    public function getIdUtilisateur(): Collection
-    {
-        return $this->idUtilisateur;
-    }
+    * toString
+    * @return string
+    */
+   public function __toString()
+   {
+           return $this->getVilleArrivee();
+   }
 
-    public function addIdUtilisateur(User $idUtilisateur): self
-    {
-        if (!$this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur[] = $idUtilisateur;
-        }
+   public function getDateDepart(): ?\DateTimeInterface
+   {
+       return $this->dateDepart;
+   }
 
-        return $this;
-    }
+   public function setDateDepart(\DateTimeInterface $dateDepart): self
+   {
+       $this->dateDepart = $dateDepart;
 
-    public function removeIdUtilisateur(User $idUtilisateur): self
-    {
-        if ($this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur->removeElement($idUtilisateur);
-        }
+       return $this;
+   }
 
-        return $this;
-    }
+   /**
+    * @return Collection|User[]
+    */
+   public function getIdUtilisateur(): Collection
+   {
+       return $this->idUtilisateur;
+   }
+
+   public function addIdUtilisateur(User $idUtilisateur): self
+   {
+       if (!$this->idUtilisateur->contains($idUtilisateur)) {
+           $this->idUtilisateur[] = $idUtilisateur;
+       }
+
+       return $this;
+   }
+
+   public function removeIdUtilisateur(User $idUtilisateur): self
+   {
+       if ($this->idUtilisateur->contains($idUtilisateur)) {
+           $this->idUtilisateur->removeElement($idUtilisateur);
+       }
+
+       return $this;
+   }
+
+   
+
+   
+
+
+   
 }
