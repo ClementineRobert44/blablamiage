@@ -35,6 +35,7 @@
     <li><a href="{{path('user.list')}}">{{'utilisateur.voir'|trans}}</a></li>
     <li><a href="{{path('voiture.create')}}">Ajouter une voiture</a></li>
     <li><a href="{{path('trajet.create')}}">Ajouter un trajet</a></li>
+    <li><a href="{{ path('user.show', {slug:app.user.slug})}}">Mon compte</a></li>
     <li><a href="{{path('app_logout')}}"><span class="glyphicon glyphicon-off"></span>  Deconnexion</a></li>
     {% else %}
 

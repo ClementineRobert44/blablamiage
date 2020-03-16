@@ -27,6 +27,12 @@
             <p>
                 <strong>Date d'expirtaion :</strong> {{ utilisateur.bio }}
             </p>
+
+            {% for trajetPoste in trajetsPostes %}
+                <p>
+                <strong>Mes trajets postés :</strong> {{ trajetPoste.id }}
+            </p>
+            {% endfor %}
             
             <div class="row">
                 <div class="col-sm-12 text-right">
@@ -35,10 +41,7 @@
                         Liste des stages
                     </a>
 
-                    <a class="btn btn-primary" href="{{ path('user.create', {slug:utilisateur.slug})}}">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                        Éditer
-                    </a>
+                    
                     <a class="btn btn-danger" href="{{ path('user.delete', {slug:utilisateur.slug})}}">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         Supprimer

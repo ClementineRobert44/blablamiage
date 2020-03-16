@@ -29,17 +29,35 @@ class UserController extends AbstractController
     }
 
     /**
-     * Afficher un utilisateur spécifique.
+     * Afficher un utilisateur spécifique avec toutes ses données.
      * @Route("/user/{slug}", name="user.show", requirements={"id" = "\d+"})
      * @param User $utilisateur
      * @return Response
      */
-    public function show(User $utilisateur)
+    public function show(User $utilisateur, EntityManagerInterface $em)
     {
+        // Afficher les trajets qu'il a posté
+        $trajetsPostes = $utilisateur->getTrajets();
+
+
+        $query = $em->createQuery(
+            'SELECT t FROM App:Trajet v WHERE v.idUtilisateur = :idUser'
+            )->setParameter('idUser', $userId);
+            $voiture = $query->getResult();
+
+
+
+
+
+        // Afficher les trajets à venir
+
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
+            'trajetsPostes' => $trajetsPostes
         ]);
     }
+
+    
 
     
 
