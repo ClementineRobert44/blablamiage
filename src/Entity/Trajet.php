@@ -73,10 +73,7 @@ class Trajet
     private $datePublication;
     
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Reserve", mappedBy="idTrajet")
-     */
-    private $reserves;
+    
 
     
 
@@ -87,8 +84,15 @@ class Trajet
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="trajets")
+     * @ORM\JoinTable(name="propose_trajet")
      */
     private $idUtilisateur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="trajetsReserves")
+     * @ORM\JoinTable(name="reserve_trajet")
+     */
+    private $idUser;
 
     
 
@@ -96,8 +100,8 @@ class Trajet
 
     public function __construct()
     {
-        $this->reserves = new ArrayCollection();
         $this->idUtilisateur = new ArrayCollection();
+        $this->idUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,37 +238,6 @@ class Trajet
     }
 
     
-
-    /**
-     * @return Collection|Reserve[]
-     */
-    public function getReserves(): Collection
-    {
-        return $this->reserves;
-    }
-
-    public function addReserf(Reserve $reserf): self
-    {
-        if (!$this->reserves->contains($reserf)) {
-            $this->reserves[] = $reserf;
-            $reserf->addIdTrajet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReserf(Reserve $reserf): self
-    {
-        if ($this->reserves->contains($reserf)) {
-            $this->reserves->removeElement($reserf);
-            $reserf->removeIdTrajet($this);
-        }
-
-        return $this;
-    }
-
-   
-
     /**
     * toString
     * @return string
@@ -307,6 +280,32 @@ class Trajet
    {
        if ($this->idUtilisateur->contains($idUtilisateur)) {
            $this->idUtilisateur->removeElement($idUtilisateur);
+       }
+
+       return $this;
+   }
+
+   /**
+    * @return Collection|User[]
+    */
+   public function getIdUser(): Collection
+   {
+       return $this->idUser;
+   }
+
+   public function addIdUser(User $idUser): self
+   {
+       if (!$this->idUser->contains($idUser)) {
+           $this->idUser[] = $idUser;
+       }
+
+       return $this;
+   }
+
+   public function removeIdUser(User $idUser): self
+   {
+       if ($this->idUser->contains($idUser)) {
+           $this->idUser->removeElement($idUser);
        }
 
        return $this;

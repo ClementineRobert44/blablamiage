@@ -40,10 +40,7 @@ class UserController extends AbstractController
         $trajetsPostes = $utilisateur->getTrajets();
 
 
-        $query = $em->createQuery(
-            'SELECT t FROM App:Trajet v WHERE v.idUtilisateur = :idUser'
-            )->setParameter('idUser', $userId);
-            $voiture = $query->getResult();
+        
 
 
 

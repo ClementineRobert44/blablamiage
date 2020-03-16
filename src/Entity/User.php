@@ -86,9 +86,15 @@ class User implements UserInterface
      */
     private $trajets;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trajet", mappedBy="idUser")
+     */
+    private $trajetsReserves;
+
     public function __construct()
     {
         $this->trajets = new ArrayCollection();
+        $this->trajetsReserves = new ArrayCollection();
     }
 
 
@@ -305,6 +311,34 @@ class User implements UserInterface
        if ($this->trajets->contains($trajet)) {
            $this->trajets->removeElement($trajet);
            $trajet->removeIdUtilisateur($this);
+       }
+
+       return $this;
+   }
+
+   /**
+    * @return Collection|Trajet[]
+    */
+   public function getTrajetsReserves(): Collection
+   {
+       return $this->trajetsReserves;
+   }
+
+   public function addTrajetsReserf(Trajet $trajetsReserf): self
+   {
+       if (!$this->trajetsReserves->contains($trajetsReserf)) {
+           $this->trajetsReserves[] = $trajetsReserf;
+           $trajetsReserf->addIdUser($this);
+       }
+
+       return $this;
+   }
+
+   public function removeTrajetsReserf(Trajet $trajetsReserf): self
+   {
+       if ($this->trajetsReserves->contains($trajetsReserf)) {
+           $this->trajetsReserves->removeElement($trajetsReserf);
+           $trajetsReserf->removeIdUser($this);
        }
 
        return $this;

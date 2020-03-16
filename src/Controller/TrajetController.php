@@ -88,9 +88,8 @@ class TrajetController extends AbstractController
     }
 
     /**
+    * Permet de mettre à jour le nombre de places dispo dans la voiture
     * @Route("/updateNbPlaces/{id}", name="updateNbPlaces")
-    * 
-    * 
     */
     public function update(int $id)
     {
@@ -102,5 +101,20 @@ class TrajetController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('trajet.list');
+    }
+
+    /**
+    * Reserver un trajet
+    * @Route("/reserve/{id}", name="reserveTrajet")
+    */
+    public function reserve(int $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $trajet = $entityManager->getRepository(Trajet::class)->find($id);
+        $user=$this->getUser();
+        $trajet->addIdUser($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('updateNbPlaces', ['id' => $id]);
     }
 }
