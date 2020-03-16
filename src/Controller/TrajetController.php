@@ -41,9 +41,13 @@ class TrajetController extends AbstractController
      * Afficher tous les trajets dispos sur le site
      * @Route("/trajet", name="trajet.list")
      */
-    public function list()
+    public function list(EntityManagerInterface $em)
     {
-        $trajets = $this->getDoctrine()->getRepository(Trajet::class)->findAll();
+        // Afficher seulement les trajets où il reste de la place
+        $query = $em->createQuery(
+            'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager'
+            )->setParameter('aucunPassager', 0);
+            $trajets = $query->getResult();
                
         return $this->render('trajet/list.html.twig', [
             'trajets' => $trajets,
@@ -70,12 +74,10 @@ class TrajetController extends AbstractController
             $user = $query->getResult();
             
             
-            $query = $em->createQuery(
-                'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
-                )->setParameter('idUser', $userId);
-                $voiture = $query->getResult();
-
-        
+        $query = $em->createQuery(
+            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
+            )->setParameter('idUser', $userId);
+            $voiture = $query->getResult();       
 
         
         return $this->render('trajet/show.html.twig', [
