@@ -40,17 +40,15 @@ class UserController extends AbstractController
         $trajetsPostes = $utilisateur->getTrajets();
 
 
-        
-
-
-
-
+        // Afficher les trajets reservé
+        $trajetsReserves = $utilisateur->getTrajetsReserves();
 
         // Afficher les trajets à venir
 
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
-            'trajetsPostes' => $trajetsPostes
+            'trajetsPostes' => $trajetsPostes,
+            'trajetsReserves' => $trajetsReserves
         ]);
     }
 

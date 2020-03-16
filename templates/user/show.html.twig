@@ -33,6 +33,13 @@
                 <strong>Mes trajets postés :</strong> {{ trajetPoste.id }}
             </p>
             {% endfor %}
+
+            {% for trajetReserve in trajetsReserves %}
+                <p>
+                <strong>Mes trajets reservés:</strong> {{ trajetReserve.id }}
+                </p>
+                <td><a href="{{ path('commentaire.new', {id:trajetReserve.id})}}">Commenter ce trajet</a></td>
+            {% endfor %}
             
             <div class="row">
                 <div class="col-sm-12 text-right">
