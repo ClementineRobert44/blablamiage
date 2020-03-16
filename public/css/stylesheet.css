@@ -1,12 +1,48 @@
+@font-face {
+	font-family: "GentleTouch";
+	src: url(AGentleTouch.ttf);
+}
+
+
 h1{
-    font-family: 'Oswald';
+    font-family: "GentleTouch";
+    font-size : 50px;
+}
+
+.titre{
+    font-family: "GentleTouch";
+    font-size : 40px;
 }
 
 .img-accueil img{
     width: 100%;
-    height: auto;
+    height: 25%;
 }
 
 .bienvenue{
     text-align: center;
 }
+
+.navbar-inverse {
+    border: none;
+    border-radius: 0%;
+    margin-bottom: 0;
+    color:white;
+}
+
+
+.container{
+    width: 100%;
+    padding: 0;
+}
+
+#conteneur_imgaccueil{
+ text-align: center;
+    position:absolute;
+    top:360px;
+    width:600px;
+    height:400px;
+    margin-left: 30%;
+    z-index:2;
+    font-size:200%
+    }

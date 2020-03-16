@@ -84,4 +84,21 @@ class TrajetController extends AbstractController
             'voiture' => $voiture
         ]);
     }
+
+    /**
+    * @Route("/updateNbPlaces/{id}", name="updateNbPlaces")
+    * 
+    * 
+    */
+    public function update(int $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $trajet = $entityManager->getRepository(Trajet::class)->find($id);
+
+        $nbPlaces = $trajet->getNbPassagers() - 1;
+        $trajet->setNbPassagers($nbPlaces);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('trajet.list');
+    }
 }

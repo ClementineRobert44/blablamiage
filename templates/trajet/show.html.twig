@@ -8,4 +8,8 @@
 {% for v in voiture %}
     <p>Marque voiture : {{v.marqueVoiture}}</p>
 {% endfor %}
+
+
+<a href="{{ path('reserve.create', {id : trajet.id})}}">Reserver ce trajet</a>
+
 {% endblock %}
