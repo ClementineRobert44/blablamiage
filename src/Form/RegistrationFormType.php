@@ -40,8 +40,9 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Prenom'
                 ])
             ->add('dateNaissance', BirthdayType::class, [
-                'format' => 'dd/MM/yyyy',
-                'label' => 'Date de naissance'
+                'label' => 'Date de naissance',
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker']
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Adresse mail'

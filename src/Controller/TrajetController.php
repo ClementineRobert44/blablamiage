@@ -157,4 +157,6 @@ class TrajetController extends AbstractController
 
         return $this->redirectToRoute('updateNbPlaces', ['id' => $id]);
     }
+
+    
 }

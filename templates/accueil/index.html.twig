@@ -22,8 +22,24 @@
 <button class="buttonAccueil">Inscription</button>
 <button class="buttonAccueil">Voir tous les trajets</button>
 
+</div>
+
+<div class="dernieresAnnonces">
+
+<h1>Dernières annonces postées</h1>
+
+{% for trajet in trajets %}
+
+<p>{{trajet.id}}</p>
+{% if trajet.nbPassagers == 0 %}
+
+<p>Trajet Complet </p>
 
 
+{% endif %}
+
+
+{% endfor %}
 
 </div>
 

@@ -36,7 +36,7 @@ class UserFixtures extends Fixture
         $admin->setEmail("clementine.robert@gmail.com");
         $admin->setPassword($this->passwordEncoder->encodePassword($user, 'monMotDePasse'));
         $admin->setNom("Robert");
-        $admin->setPrenom("Clémetine");
+        $admin->setPrenom("Clémentine");
         $admin->setDateNaissance(new \DateTime('1999-03-25'));
         $admin->setBio('Je suis étudiante et administrateur de ce site');
         $admin->setTel('0676789098');
