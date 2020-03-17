@@ -2,8 +2,11 @@
 
 {% block body %}
 
+<div class="containerAccueil">
+
 <div class="bienvenue">
-<h1>Bienvenue sur BlaBlaMiage
+
+<h1 class="h1Accueil">Bienvenue sur BlaBlaMiage
 
 {% if app.user.id is defined %}
   {{app.user.prenom}}</h1>
@@ -13,16 +16,17 @@
  {% endif %}
 
 
+</div>
+
+<button class="buttonAccueil">Connexion</button>
+<button class="buttonAccueil">Inscription</button>
+<button class="buttonAccueil">Voir tous les trajets</button>
+
+
+
 
 </div>
-<section class="img-accueil">
-<img src="{{asset('images/car.jpg')}}" alt="imageaccueil"/>
-<div id="conteneur_imgaccueil">
- 
-<p>Me Connecter</p>
-<a href="#">Plus d'infos</a>
-</div>
-</section>
+
 
 
 
