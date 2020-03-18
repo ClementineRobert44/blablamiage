@@ -24,19 +24,36 @@ class TrajetController extends AbstractController
 
     public function create(Request $request, EntityManagerInterface $em)
     {
-        $trajet = new Trajet();
-        $user = $this->getUser();
-        $trajet->addIdUtilisateur($user);
-        $form = $this->createForm(TrajetType::class, $trajet);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-        $em->persist($trajet);
-        $em->flush();
-        return $this->redirectToRoute('accueil');
-        }
-        return $this->render('trajet/create.html.twig', [
-        'form' => $form->createView(),
-        ]);
+        $user=$this->getUser();
+        $idUser = $user->getId();
+        $query = $em->createQuery(
+            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUtilisateur'
+            )
+            ->setParameter('idUtilisateur', $idUser);
+            $voiture = $query->getResult();
+
+            if($voiture == NULL){
+                $this->addFlash('pasDeVoiture', 'Vous devez ajouter une voiture pour pouvoir ajouter un trajet');
+                return $this->redirectToRoute('voiture.create');
+            }else{
+
+                $trajet = new Trajet();
+                $user = $this->getUser();
+                $trajet->addIdUtilisateur($user);
+                $form = $this->createForm(TrajetType::class, $trajet);
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                $em->persist($trajet);
+                $em->flush();
+                return $this->redirectToRoute('accueil');
+                }
+                return $this->render('trajet/create.html.twig', [
+                'form' => $form->createView(),
+                ]);
+
+            }
+
+        
     }
 
     /**
