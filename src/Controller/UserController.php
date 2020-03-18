@@ -9,6 +9,7 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\UtilisateurType;
+use DateTime;
 
 /*
  * @Route("/{_locale}, defaults={"_locale":"en"}, requirements={"_locale": "en|fr"})
@@ -36,19 +37,63 @@ class UserController extends AbstractController
      */
     public function show(User $utilisateur, EntityManagerInterface $em)
     {
-        // Afficher les trajets qu'il a posté
+        // Initiatilisations des variables
+
+        $trajetPostesExpires = NULL;
+        $trajetPostesAVenir = NULL;
+        $trajetReservesExpires = NULL;
+        $trajetReservesAVenir = NULL;
+        // Récupère les trajets qu'il a posté
         $trajetsPostes = $utilisateur->getTrajets();
 
+        // Récupère les trajets postés et expirés et ou a venir
+        foreach($trajetsPostes as $trajetPoste){
+            $idTrajet = $trajetPoste->getId();
 
-        // Afficher les trajets reservé
+            $query = $em->createQuery(
+                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart < :dateDuJour'
+                )
+                ->setParameter('idTrajet', $idTrajet)
+                ->setParameter('dateDuJour', new DateTime());
+                $trajetPostesExpires = $query->getResult();
+
+            $query = $em->createQuery(
+                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart >= :dateDuJour'
+                )
+                ->setParameter('idTrajet', $idTrajet)
+                ->setParameter('dateDuJour', new DateTime());
+                $trajetPostesAVenir = $query->getResult();
+        }
+
+
+        // Recupères les trajets reservé
         $trajetsReserves = $utilisateur->getTrajetsReserves();
+
+        // Récupère les trajets postés et expirés et ou a venir
+        foreach($trajetsReserves as $trajetReserve){
+            $idTrajet = $trajetReserve->getId();
+
+            $query = $em->createQuery(
+                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart < :dateDuJour'
+                )->setParameter('idTrajet', $idTrajet)
+                ->setParameter('idTrajet', new DateTime());
+                $trajetReservesExpires = $query->getResult();
+
+            $query = $em->createQuery(
+                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart >= :dateDuJour'
+                )->setParameter('idTrajet', $idTrajet)
+                ->setParameter('idTrajet', new DateTime());
+                $trajetReservesAVenir = $query->getResult();
+        }
 
         // Afficher les trajets à venir
 
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
-            'trajetsPostes' => $trajetsPostes,
-            'trajetsReserves' => $trajetsReserves
+            'trajetsPostesExpires' => $trajetPostesExpires,
+            'trajetsPostesAVenir' => $trajetPostesAVenir,
+            'trajetsReservesExpires' => $trajetReservesExpires,
+            'trajetsReservesAVenir' => $trajetReservesAVenir
         ]);
     }
 
