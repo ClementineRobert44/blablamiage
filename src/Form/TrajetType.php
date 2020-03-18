@@ -21,8 +21,9 @@ class TrajetType extends AbstractType
         $builder
         ->add('dateDepart', DateType::class, [
             'label' => 'Date départ',
-            'widget' => 'single_text',
-            'attr' => ['class' => 'js-datepicker']
+            'placeholder' => [
+                'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+            ]
             ])
             
 

@@ -27,7 +27,7 @@ class Voiture
     private $modeleVoiture;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
     private $anneeVoiture;
 
@@ -82,12 +82,12 @@ class Voiture
         return $this;
     }
 
-    public function getAnneeVoiture(): ?\DateTimeInterface
+    public function getAnneeVoiture(): ?int
     {
         return $this->anneeVoiture;
     }
 
-    public function setAnneeVoiture(\DateTimeInterface $anneeVoiture): self
+    public function setAnneeVoiture(int $anneeVoiture): self
     {
         $this->anneeVoiture = $anneeVoiture;
 

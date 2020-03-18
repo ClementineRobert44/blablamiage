@@ -29,8 +29,8 @@ class VoitureType extends AbstractType
             'label' => 'Couleur'
             ])
 
-        ->add('anneeVoiture', DateType::class, [
-            'label' => 'Année de la voiture'
+        ->add('anneeVoiture', NumberType::class, [
+            'label' => 'Année de la voiture',
             ])
 
         ->add('nbPlacesVoiture',ChoiceType::class, [
