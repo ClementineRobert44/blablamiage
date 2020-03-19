@@ -7,6 +7,7 @@ use App\Entity\Trajet;
 use App\Entity\User;
 use App\Form\PropertySearchType;
 use App\Form\TrajetType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,33 +75,38 @@ class TrajetController extends AbstractController
 
         if($search->getDateDepart()){
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager'
+                'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
                 )
                 ->setParameter('dateDepart', $search->getDateDepart())
-                ->setParameter('aucunPassager', 0);
+                ->setParameter('aucunPassager', 0)
+                ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
 
         }else if($search->getVilleDepart()){
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager'
+                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
                 )
                 ->setParameter('villeDepart', $search->getVilleDepart())
-                ->setParameter('aucunPassager', 0);
+                ->setParameter('aucunPassager', 0)
+                ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
 
         } else if($search->getVilleDepart() && $search->getDateDepart()){
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager'
+                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
                 )
                 ->setParameter('villeDepart', $search->getVilleDepart())
                 ->setParameter('dateDepart', $search->getDateDepart())
-                ->setParameter('aucunPassager', 0);
+                ->setParameter('aucunPassager', 0)
+                ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
         }else{
 
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager'
-                )->setParameter('aucunPassager', 0);
+                'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour OR t.heureDepart >= :heureDuJour'
+                )->setParameter('aucunPassager', 0)
+                ->setParameter('dateDuJour', new \DateTime())
+                ->setParameter('heureDuJour', new \DateTime());
                 $trajets = $query->getResult();
 
         }
@@ -120,6 +126,7 @@ class TrajetController extends AbstractController
     public function show(Trajet $trajet, EntityManagerInterface $em)
     {
         $users = $trajet->getIdUtilisateur();
+
         foreach($users as $user){
             $userId = $user->getId();
         }
@@ -174,6 +181,8 @@ class TrajetController extends AbstractController
 
         return $this->redirectToRoute('updateNbPlaces', ['id' => $id]);
     }
+
+    
 
     
 }
