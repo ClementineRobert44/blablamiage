@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Trajet;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\AST\Join;
 use Doctrine\ORM\Query\Expr\Join as ExprJoin;
 
@@ -13,6 +15,7 @@ use Doctrine\ORM\Query\Expr\Join as ExprJoin;
  * @method Trajet|null findOneBy(array $criteria, array $orderBy = null)
  * @method Trajet[]    findAll()
  * @method Trajet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Trajet[]|null    getTrajetsExpires(int $id)
  */
 class TrajetRepository extends ServiceEntityRepository
 {
@@ -49,6 +52,34 @@ class TrajetRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+    * @return Trajet[]
+    */
+
+    public function getTrajetsExpires(int $idTrajet){
+
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.id = :idTrajet')
+            ->andWhere('t.dateDepart <= :dateDuJour')
+            ->setParameter('idTrajet', $idTrajet)
+            ->setParameter('dateDuJour', new DateTime())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getTrajetsAVenir(int $idTrajet){
+
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.id = :idTrajet')
+            ->andWhere('t.dateDepart > :dateDuJour')
+            ->setParameter('idTrajet', $idTrajet)
+            ->setParameter('dateDuJour', new DateTime())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     
       

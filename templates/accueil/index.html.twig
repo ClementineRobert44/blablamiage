@@ -10,38 +10,140 @@
 
 {% if app.user.id is defined %}
   {{app.user.prenom}}</h1>
+  </div>
+
+  <div class="contenuAccueil">
+
+<div class="blocAccueil">
+
+  <h1>Dernières Annonces</h1>
+
+  <table class="table table-striped">
+  
+  <tbody>
+  {% for trajet in trajets %}
+    <tr>
+        <td>Le {{trajet.dateDepart |date('j/m')}}</td>
+        <td>{{trajet.heureDepart |date('H') }}h{{trajet.heureDepart |date('i') }}</td>
+        <td>{{trajet.villeDepart}}</td>
+        <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
+        <td> {{trajet.villeArrivee}}</td>
+        {% if trajet.nbPassagers == 0 %}
+        <td>Complet</td>
+        {% else %}
+        <td>{{trajet.nbPassagers}} places restantes</td>
+        {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="profil">
+    <div class="buttonAccueil">
+      <a href="{{ path('trajet.list')}}">Voir plus</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="blocAccueil">
+
+
+  <h1>Mon Profil</h1>
+
+
+  <div class="profil">
+    <div>
+      {% if nbNote != 0 %}
+      <p><span class="petitTitre">Ma note :</span>  {{ note }} </p>
+      {% else %}
+      <p>Aucune note pour l'instant</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="profil">
+    <div>
+      <p><i class="fas fa-smoking fa-3x"></i>  {{ utilisateur.cigarette }} </p>
+    </div>
+    
+    <div>
+      <p><i class="fas fa-paw fa-3x"></i> {{ utilisateur.animaux }} </p>
+    </div>
+  </div>
+
+  <div class="profil">
+    <div class="buttonAccueil">
+      <a href="{{ path('user.show', {slug:utilisateur.slug})}}">Plus de détails</a>
+    </div>
+  </div>
+  
+
+  
+
+</div>
+{% for voiture in voitures %}
+{% if voiture.id != NULL %}
+<div class="blocAccueil">
+
+  <h1>Ma Voiture</h1>
+
+  <div class="profil">
+    <div>
+      <p><span class="petitTitre">Marque :</span>  {{ voiture.marqueVoiture }} </p>
+    </div>
+    
+    <div>
+      <p><span class="petitTitre">Modèle :</span> {{ voiture.modeleVoiture }} </p>
+    </div>
+
+    <div>
+      <p><span class="petitTitre">Année :</span>  {{ voiture.anneeVoiture }} </p>
+    </div>
+  </div>
+
+  
+
+<div class="profil">
+    <div>
+      <p><span class="petitTitre">Nombre de places :</span>  {{ voiture.nbPlacesVoiture }} </p>
+    </div>
+
+    <div>
+      <p><span class="petitTitre">Taille Bagages :</span>  {{ voiture.tailleBagages }} </p>
+    </div>
+  </div>
+
+  <div class="profil">
+    <div class="buttonAccueil">
+      <a href="{{ path('user.show', {slug:utilisateur.slug})}}">Modifier ma voiture</a>
+    </div>
+  </div>
+
+</div>
+
+{% endif %}
+{% endfor %}
+
+
+
+</div>
+
+
+</div>
+
 
  {% else %}
  </h1>
+  <button class="buttonAccueil">Connexion</button>
+  <button class="buttonAccueil">Inscription</button>
+  <button class="buttonAccueil">Voir tous les trajets</button>
  {% endif %}
 
 
-</div>
-
-<button class="buttonAccueil">Connexion</button>
-<button class="buttonAccueil">Inscription</button>
-<button class="buttonAccueil">Voir tous les trajets</button>
 
 </div>
 
-<div class="dernieresAnnonces">
-
-<h1>Dernières annonces postées</h1>
-
-{% for trajet in trajets %}
-
-<p>{{trajet.id}}</p>
-{% if trajet.nbPassagers == 0 %}
-
-<p>Trajet Complet </p>
-
-
-{% endif %}
-
-
-{% endfor %}
-
-</div>
 
 
 

@@ -52,6 +52,10 @@
                 <p>
                 {{ trajetReserveExpire.id }}
                 </p>
+
+               <a href="{{ path('commentaire.new', {id: trajetReserveExpire.id})}}">Commenter ce trajet</a>
+
+                
             {% endfor %}
 
             <h2>A Venir</h2>

@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Trajet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Form\UtilisateurType;
 use DateTime;
 
 /*
@@ -46,23 +46,21 @@ class UserController extends AbstractController
         // Récupère les trajets qu'il a posté
         $trajetsPostes = $utilisateur->getTrajets();
 
+
         // Récupère les trajets postés et expirés et ou a venir
         foreach($trajetsPostes as $trajetPoste){
+            
             $idTrajet = $trajetPoste->getId();
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $trajetPostesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires($idTrajet);
+            
+        }
 
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart < :dateDuJour'
-                )
-                ->setParameter('idTrajet', $idTrajet)
-                ->setParameter('dateDuJour', new DateTime());
-                $trajetPostesExpires = $query->getResult();
-
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart >= :dateDuJour'
-                )
-                ->setParameter('idTrajet', $idTrajet)
-                ->setParameter('dateDuJour', new DateTime());
-                $trajetPostesAVenir = $query->getResult();
+        foreach($trajetsPostes as $trajetPoste){
+            $idTrajet = $trajetPoste->getId();
+            $entityManager = $this->getDoctrine()->getManager();
+            $trajetPostesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir($idTrajet); 
         }
 
 
@@ -76,13 +74,13 @@ class UserController extends AbstractController
             $query = $em->createQuery(
                 'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart < :dateDuJour'
                 )->setParameter('idTrajet', $idTrajet)
-                ->setParameter('idTrajet', new DateTime());
+                ->setParameter('dateDuJour', new DateTime());
                 $trajetReservesExpires = $query->getResult();
 
             $query = $em->createQuery(
                 'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart >= :dateDuJour'
                 )->setParameter('idTrajet', $idTrajet)
-                ->setParameter('idTrajet', new DateTime());
+                ->setParameter('dateDuJour', new DateTime());
                 $trajetReservesAVenir = $query->getResult();
         }
 
@@ -96,7 +94,6 @@ class UserController extends AbstractController
             'trajetsReservesAVenir' => $trajetReservesAVenir
         ]);
     }
-
     
 
     
