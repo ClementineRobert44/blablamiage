@@ -43,51 +43,70 @@ class UserController extends AbstractController
         $trajetPostesAVenir = NULL;
         $trajetReservesExpires = NULL;
         $trajetReservesAVenir = NULL;
+        
         // Récupère les trajets qu'il a posté
         $trajetsPostes = $utilisateur->getTrajets();
+        $i = 0;
+        foreach($trajetsPostes as $trajetPoste){
+            $dateDepart = $trajetPoste->getDateDepart();
+            if($dateDepart < new \DateTime()){
+                $trajetPostesExpires[$i] = $trajetPoste;
+            }else{
+                $trajetPostesAVenir[$i] = $trajetPoste;
+            } 
+            $i++;
+        }
 
+        // Récupère les trajets qu'il a reservés
+        $trajetsReserves = $utilisateur->getTrajetsReserves();
+        $i = 0;
+        foreach($trajetsReserves as $trajetReserve){
+            $dateDepart = $trajetReserve->getDateDepart();
+            if($dateDepart < new \DateTime()){
+                $trajetReservesExpires[$i] = $trajetReserve;
+            }else{
+                $trajetReservesAVenir[$i] = $trajetReserve;
+            } 
+            $i++;
+        }
+
+        
 
         // Récupère les trajets postés et expirés et ou a venir
-        foreach($trajetsPostes as $trajetPoste){
-            
-            $idTrajet = $trajetPoste->getId();
-            
+        
+        /*foreach($trajetsPostes as $trajetPoste){
             $entityManager = $this->getDoctrine()->getManager();
-            $trajetPostesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires($idTrajet);
-            
-        }
+            $trajetPostesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
+            $trajetPostesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
+        }*/
 
-        foreach($trajetsPostes as $trajetPoste){
-            $idTrajet = $trajetPoste->getId();
-            $entityManager = $this->getDoctrine()->getManager();
-            $trajetPostesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir($idTrajet); 
-        }
-
-
-        // Recupères les trajets reservé
+    
+        /*Recupères les trajets reservé
         $trajetsReserves = $utilisateur->getTrajetsReserves();
 
-        // Récupère les trajets postés et expirés et ou a venir
         foreach($trajetsReserves as $trajetReserve){
-            $idTrajet = $trajetReserve->getId();
+            $entityManager = $this->getDoctrine()->getManager();
+            $trajetReservesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
+            $trajetReservesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
+        }*/
 
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart < :dateDuJour'
-                )->setParameter('idTrajet', $idTrajet)
-                ->setParameter('dateDuJour', new DateTime());
-                $trajetReservesExpires = $query->getResult();
+        
 
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.id = :idTrajet AND t.dateDepart >= :dateDuJour'
-                )->setParameter('idTrajet', $idTrajet)
-                ->setParameter('dateDuJour', new DateTime());
-                $trajetReservesAVenir = $query->getResult();
-        }
+
+
+        $idUser = $utilisateur->getId();
+        $query = $em->createQuery(
+            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
+            )->setParameter('idUser', $idUser);
+            $voiture = $query->getResult();
+
+        
 
         // Afficher les trajets à venir
 
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
+            'voiture'=> $voiture,
             'trajetsPostesExpires' => $trajetPostesExpires,
             'trajetsPostesAVenir' => $trajetPostesAVenir,
             'trajetsReservesExpires' => $trajetReservesExpires,

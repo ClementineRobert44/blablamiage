@@ -37,8 +37,7 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    
+    flex-direction: column;    
 }
 
 .buttonAccueil{
@@ -104,6 +103,83 @@ a:hover, a:active{
     color: #65E3FF;
     font-size:20px;
 }
+
+.containerFlex{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.userBlanc{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    border-radius: 50px;
+    flex-direction: column;
+    padding: 10px 50px 10px 50px;
+}
+
+.myProfil{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    
+
+}
+
+.myProfil > div{
+    margin-right: 20px;
+}
+
+.picto{
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+
+.myProfil>a{
+    margin-left: 30px;
+}
+
+.myTrajets{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.allMyTrajets{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.myTitle{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.titleTrajets{
+    width: 50%;
+}
+
+.annonces{
+    text-align: center;
+    width: 50%;
+}
+
+.annonces>h2{
+    margin-top: 0;
+    font-family: 'A Gentle Touch';
+    color: #FF656E;
+}
+
 
 
 

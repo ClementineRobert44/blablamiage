@@ -57,29 +57,27 @@ class TrajetRepository extends ServiceEntityRepository
     * @return Trajet[]
     */
 
-    public function getTrajetsExpires(int $idTrajet){
+    public function getTrajetsExpires(){
 
         return $this->createQueryBuilder('t')
-            ->andWhere('t.id = :idTrajet')
-            ->andWhere('t.dateDepart <= :dateDuJour')
-            ->setParameter('idTrajet', $idTrajet)
+            ->andWhere('t.dateDepart < :dateDuJour')
             ->setParameter('dateDuJour', new DateTime())
             ->getQuery()
             ->getResult()
         ;
     }
 
-    public function getTrajetsAVenir(int $idTrajet){
+    public function getTrajetsAVenir(){
 
         return $this->createQueryBuilder('t')
-            ->andWhere('t.id = :idTrajet')
             ->andWhere('t.dateDepart > :dateDuJour')
-            ->setParameter('idTrajet', $idTrajet)
             ->setParameter('dateDuJour', new DateTime())
             ->getQuery()
             ->getResult()
         ;
     }
+
+    
 
     
       
