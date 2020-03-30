@@ -91,10 +91,24 @@ class User implements UserInterface
      */
     private $trajetsReserves;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Commentaire", mappedBy="idUtilisateurCommente")
+     */
+    private $commentairesRecus;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Commentaire", mappedBy="idUtilisateurQuiCommente")
+     */
+    private $commentairesPostes;
+
+    
+
     public function __construct()
     {
         $this->trajets = new ArrayCollection();
         $this->trajetsReserves = new ArrayCollection();
+        $this->commentairesRecus = new ArrayCollection();
+        $this->commentairesPostes = new ArrayCollection();
     }
 
 
@@ -343,4 +357,62 @@ class User implements UserInterface
 
        return $this;
    }
+
+   /**
+    * @return Collection|Commentaire[]
+    */
+   public function getCommentairesRecus(): Collection
+   {
+       return $this->commentairesRecus;
+   }
+
+   public function addCommentairesRecus(Commentaire $commentairesRecus): self
+   {
+       if (!$this->commentairesRecus->contains($commentairesRecus)) {
+           $this->commentairesRecus[] = $commentairesRecus;
+           $commentairesRecus->addIdUtilisateurCommente($this);
+       }
+
+       return $this;
+   }
+
+   public function removeCommentairesRecus(Commentaire $commentairesRecus): self
+   {
+       if ($this->commentairesRecus->contains($commentairesRecus)) {
+           $this->commentairesRecus->removeElement($commentairesRecus);
+           $commentairesRecus->removeIdUtilisateurCommente($this);
+       }
+
+       return $this;
+   }
+
+   /**
+    * @return Collection|Commentaire[]
+    */
+   public function getCommentairesPostes(): Collection
+   {
+       return $this->commentairesPostes;
+   }
+
+   public function addCommentairesPoste(Commentaire $commentairesPoste): self
+   {
+       if (!$this->commentairesPostes->contains($commentairesPoste)) {
+           $this->commentairesPostes[] = $commentairesPoste;
+           $commentairesPoste->addIdUtilisateurQuiCommente($this);
+       }
+
+       return $this;
+   }
+
+   public function removeCommentairesPoste(Commentaire $commentairesPoste): self
+   {
+       if ($this->commentairesPostes->contains($commentairesPoste)) {
+           $this->commentairesPostes->removeElement($commentairesPoste);
+           $commentairesPoste->removeIdUtilisateurQuiCommente($this);
+       }
+
+       return $this;
+   }
+
+   
 }

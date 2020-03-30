@@ -76,7 +76,7 @@
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
-                                    <td>Commenter ce trajet </td>
+                                    <td><a href="{{ path('commentaire.new', {id:tpe.id})}}">Commenter ce trajet</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -114,7 +114,7 @@
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
-                                <td>Commenter ce trajet </td>
+                                <td><a href="{{ path('commentaire.new', {id:tre.id})}}">Commenter ce trajet</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
