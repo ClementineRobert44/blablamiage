@@ -1,0 +1,186 @@
+@font-face {
+	font-family: "GentleTouch";
+	src: url(AGentleTouch.ttf);
+}
+
+    
+
+body{
+    background-color: #FF656E;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 15px;
+}
+.container{
+    height: 100%;
+    width: 100%;
+}
+h1{
+    font-family: "GentleTouch";
+}
+
+.h1Accueil{
+    font-family: "GentleTouch";
+    font-size : 50px;
+}
+
+.bienvenue{
+    color:white;
+}
+.navbar{
+    border-radius: 0;
+    background-color: white;
+    border: none;
+}
+
+
+.containerAccueil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+
+.buttonAccueil{
+    margin:20px;
+    border: none;
+    background-color: #65E3FF;
+    border-radius: 100px;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: white;
+}
+
+.contenuAccueil{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.blocAccueil{
+    
+    margin: 50px;
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    
+}
+
+
+.profil{
+    display: flex;
+    justify-content: center;
+}
+.profil > div{
+    margin: 20px;
+}
+
+.fas, .glyphicon {
+    color: #65E3FF !important;
+}
+
+a{
+    color: white;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+    color: white;
+
+}
+
+.blocAccueil>h1{
+    color : #65E3FF;
+    text-align: center;
+    font-size : 50px;
+}
+
+.petitTitre{
+    font-variant-caps: petite-caps;
+    color: #65E3FF;
+    font-size:20px;
+}
+
+.containerFlex{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.userBlanc{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    border-radius: 50px;
+    flex-direction: column;
+    padding: 10px 50px 10px 50px;
+}
+
+.myProfil{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    
+
+}
+
+.myProfil > div{
+    margin-right: 20px;
+}
+
+.picto{
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    
+}
+
+.myProfil>a{
+    margin-left: 30px;
+}
+
+.myTrajets{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.allMyTrajets{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.myTitle{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.titleTrajets{
+    width: 50%;
+}
+
+.annonces{
+    text-align: center;
+    width: 50%;
+}
+
+.annonces>h2{
+    margin-top: 0;
+    font-family: 'A Gentle Touch';
+    color: #FF656E;
+}
+
+
+
+
+

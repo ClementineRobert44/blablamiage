@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="containerFlex">
+   
+    <div class="userBlanc"> 
+
+        <div class="myProfil">
+
+            <img class="picto" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+
+            <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
+
+            <a href="#"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+
+
+        </div>
+
+        <div class="myProfil">
+            <div><b>Mail : </b>{{utilisateur.email}}</div>
+            <div><b>Date naissance : </b>{{utilisateur.dateNaissance | date("j/m/Y")}}</div>
+            <div><b>Numéro de téléphone : </b>0{{utilisateur.tel}}</div>
+            <div><b>Cigarette : </b>{{utilisateur.cigarette}}</div>
+            <div><b>Animaux : </b>{{utilisateur.animaux}}</div>
+        </div>
+
+        <div class="myProfil">
+            <div><b>Biographie : </b>{{utilisateur.bio}}</div>
+        </div>
+
+       
+        <div class="myProfil">
+            <img class="picto" src="{{ asset('images/carWoman.png') }}" alt="Pictogramme femme">
+            <h1>Ma Voiture</h1>   
+            <a href="#"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+
+        </div>
+
+        <div class="myProfil">
+        {% for v in voiture %}
+            <div><b>Marque : </b>{{v.marqueVoiture}}</div>
+            <div><b>Modèle : </b>{{v.modeleVoiture}}</div>
+            <div><b>Année : </b>{{v.anneeVoiture}}</div>
+            <div><b>Couleur : </b>{{v.couleurVoiture}}</div>
+            <div><b>Nombre de places : </b>{{v.nbPlacesVoiture}}</div>
+            <div><b>Taille bagages : </b>{{v.tailleBagages}}</div>
+
+        {% endfor %}
+        </div>
+
+        <div class="myTrajets">
+
+            <div class="myTitle">
+                <div class="titleTrajets">
+                    <h1>Mes annonces</h1>
+                </div>
+                
+
+                <h1>Mes réservations</h1>
+                
+                
+            </div>
+        
+            
+            <div class="allMyTrajets">
+
+                <div class="annonces">
+                    {% if trajetsPostesExpires != NULL %}
+                        <h2>Expirés</h2>
+                        <table class="table table-striped">
+                            <tbody>
+                            {% for tpe in trajetsPostesExpires %}
+                                <tr>
+                                    <td>{{tpe.dateDepart |date('j/m')}}</td>
+                                    <td>{{tpe.villeDepart}}</td>
+                                    <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
+                                    <td> {{tpe.villeArrivee}}</td>
+                                    <td><a href="{{ path('commentaire.new', {id:tpe.id})}}">Commenter ce trajet</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+
+                    {% if trajetsPostesAVenir != NULL %}
+                        <h2>A Venir</h2>
+                        <table class="table table-striped">
+                            <tbody>
+                            {% for tpav in trajetsPostesAVenir %}
+                                <tr>
+                                    <td>{{tpav.dateDepart |date('j/m')}}</td>
+                                    <td>{{tpav.villeDepart}}</td>
+                                    <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
+                                    <td> {{tpav.villeArrivee}}</td>
+                                    <td>Annuler ce trajet </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+                
+
+                <div class="annonces">
+
+                    {% if trajetsReservesExpires != NULL %}
+                    <h2>Expires</h2>
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for tre in trajetsReservesExpires %}
+                            <tr>
+                                <td>Le {{tre.dateDepart |date('j/m')}}</td>
+                                <td>{{tre.villeDepart}}</td>
+                                <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
+                                <td> {{tre.villeArrivee}}</td>
+                                <td><a href="{{ path('commentaire.new', {id:tre.id})}}">Commenter ce trajet</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+
+                
+                    {% if trajetsReservesAVenir != NULL %}
+                        <h2>A Venir</h2>
+                        <table class="table table-striped">
+                            <tbody>
+                            {% for trav in trajetsReservesAVenir %}
+                                <tr>
+                                    <td>{{trav.dateDepart |date('j/m')}}</td>
+                                    <td>{{trav.villeDepart}}</td>
+                                    <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
+                                    <td> {{trav.villeArrivee}}</td>
+                                    <td>Annuler ce trajet </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}        
+                </div>
+
+            </div>
+        </div>
+        
+
+        
+
+    </div>
+
+</div>
+{% endblock %}

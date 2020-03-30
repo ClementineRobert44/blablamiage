@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for u in user %}
+    <p>Nom du conducteur : {{u.nom}}</p>
+{% endfor %}
+
+{% for v in voiture %}
+    <p>Marque voiture : {{v.marqueVoiture}}</p>
+{% endfor %}
+{% for u in user %}
+{% if app.user.id != u.id %}
+<a href="{{ path('reserveTrajet', {id : trajet.id})}}">Reserver ce trajet</a>
+{% endif %}
+{% endfor %}
+
+
+{% endblock %}
