@@ -33,7 +33,7 @@ class AccueilController extends AbstractController
             ->setMaxResults(5);
             $trajets = $query->getResult();
 
-        $query = $em->createQuery(
+        /*$query = $em->createQuery(
             'SELECT c.note FROM App:Commentaire c WHERE c.idUtilisateurCommente = :idUser OR c.idUtilisateur = :idUser'
             )
             ->setParameter('idUser', $idUser);
@@ -49,7 +49,7 @@ class AccueilController extends AbstractController
 
         if($nbNotes != 0){
             $moyenne = $moyenne / $nbNotes;
-        }
+        }*/
 
         
         
@@ -60,8 +60,8 @@ class AccueilController extends AbstractController
             'trajets' => $trajets,
             'utilisateur' => $user,
             'voitures' => $voitures,
-            'nbNote' => $nbNotes,
-            'note' => $moyenne
+            //'nbNote' => $nbNotes,
+            //'note' => $moyenne
         ]);
 
         }else{
