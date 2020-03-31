@@ -14,7 +14,7 @@ class VoitureFixtures extends Fixture
     public function load(ObjectManager $manager)
     {     
         
-        /*************** Création des voitures ***************/ 
+        /*************** Création des voitures rouges***************/ 
         $voiture1 = new Voiture();
         $voiture1->setMarqueVoiture("Peugeot");
         $voiture1->setModeleVoiture("207");
