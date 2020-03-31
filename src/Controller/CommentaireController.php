@@ -24,7 +24,7 @@ class CommentaireController extends AbstractController
     {
         $commentaire = new Commentaire();
         $userEnLigne = $this->getUser();
-        $commentaire->setIdUtilisateur($userEnLigne);
+        $commentaire->addIdUtilisateurQuiCommente($userEnLigne);
 
         $entityManager = $this->getDoctrine()->getManager();
         $trajet = $entityManager->getRepository(Trajet::class)->find($id);
@@ -41,7 +41,7 @@ class CommentaireController extends AbstractController
             foreach($users as $user){
                 $user = $user->getId();
             }
-        $commentaire->setIdUtilisateurCommente($user);
+        $commentaire->addIdUtilisateurCommente($user);
         $commentaire->setIdTrajet($trajet);
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);

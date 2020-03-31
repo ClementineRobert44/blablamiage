@@ -33,12 +33,7 @@ class VoitureType extends AbstractType
             'label' => 'Année de la voiture',
             ])
 
-        ->add('nbPlacesVoiture',ChoiceType::class, [
-            'choices' => [
-            'Selectionné' => '', '1' => 1,'2' => 2, '3' => 3,'4' => 4,'5' => 5,'6' => 6],
-            'label' => 'Nombre de places dans la voiture (sans compter le conducteur)', 
-            'constraints' => [new NotBlank()]] 
-            )
+        
         ->add('tailleBagages',ChoiceType::class, [
             'choices' => [
             'Selectionné' => '', 'Petit' => 'Petit','Moyen' => 'Moyen', 'Grand' => 'Grand',],

@@ -36,10 +36,7 @@ class Voiture
      */
     private $couleurVoiture;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbPlacesVoiture;
+    
 
     /**
      * @ORM\Column(type="string", length=25)
@@ -106,17 +103,7 @@ class Voiture
         return $this;
     }
 
-    public function getNbPlacesVoiture(): ?int
-    {
-        return $this->nbPlacesVoiture;
-    }
-
-    public function setNbPlacesVoiture(int $nbPlacesVoiture): self
-    {
-        $this->nbPlacesVoiture = $nbPlacesVoiture;
-
-        return $this;
-    }
+    
 
     public function getTailleBagages(): ?string
     {
