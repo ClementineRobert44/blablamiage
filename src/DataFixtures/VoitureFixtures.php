@@ -14,7 +14,7 @@ class VoitureFixtures extends Fixture
     public function load(ObjectManager $manager)
     {     
         
-        /*************** Création des voitures rouges***************/ 
+        /*************** Création des voitures ***************/ 
         $voiture1 = new Voiture();
         $voiture1->setMarqueVoiture("Peugeot");
         $voiture1->setModeleVoiture("207");
@@ -23,6 +23,15 @@ class VoitureFixtures extends Fixture
         $voiture1->setTailleBagages("Moyen");
         $voiture1->setIdUtilisateur($manager->merge($this->getReference('admin-clementine')));        
         $manager->persist($voiture1);
+
+        $voiture2 = new Voiture();
+        $voiture2->setMarqueVoiture("Peugeot");
+        $voiture2->setModeleVoiture("206+");
+        $voiture2->setCouleurVoiture("Rouge");
+        $voiture2->setAnneeVoiture("2012");
+        $voiture2->setTailleBagages("Moyen");
+        $voiture2->setIdUtilisateur($manager->merge($this->getReference('admin-emma')));        
+        $manager->persist($voiture2);
 
         $manager->flush();   
     }
