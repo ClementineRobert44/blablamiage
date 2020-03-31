@@ -21,7 +21,7 @@ class VoitureFixtures extends Fixture
         $voiture1->setCouleurVoiture("Gris");
         $voiture1->setAnneeVoiture("2007");
         $voiture1->setTailleBagages("Moyen");
-        $voiture1->setIdUtilisateur($manager->merge($this->getReference('admin-clementine')));        
+        $voiture1->setIdUtilisateur($manager->merge($this->getReference('user-clementine')));        
         $manager->persist($voiture1);
 
         $voiture2 = new Voiture();
@@ -30,7 +30,7 @@ class VoitureFixtures extends Fixture
         $voiture2->setCouleurVoiture("Rouge");
         $voiture2->setAnneeVoiture("2012");
         $voiture2->setTailleBagages("Moyen");
-        $voiture2->setIdUtilisateur($manager->merge($this->getReference('admin-emma')));        
+        $voiture2->setIdUtilisateur($manager->merge($this->getReference('user-emma')));        
         $manager->persist($voiture2);
 
         $voiture3 = new Voiture();
@@ -43,5 +43,12 @@ class VoitureFixtures extends Fixture
         $manager->persist($voiture3);
 
         $manager->flush();   
+    }
+
+    public function getDependencies()
+    {
+        return array(
+            UserFixtures::class,
+        );
     }
 }

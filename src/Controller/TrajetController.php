@@ -103,10 +103,9 @@ class TrajetController extends AbstractController
         }else{
 
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour OR t.heureDepart >= :heureDuJour'
+                'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart'
                 )->setParameter('aucunPassager', 0)
-                ->setParameter('dateDuJour', new \DateTime())
-                ->setParameter('heureDuJour', new \DateTime());
+                ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
 
         }

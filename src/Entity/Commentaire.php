@@ -36,11 +36,7 @@ class Commentaire
      */
     private $note;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Trajet", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idTrajet;
+    
 
     
 
@@ -108,20 +104,6 @@ class Commentaire
     public function setNote(int $note): self
     {
         $this->note = $note;
-
-        return $this;
-    }
-
-    
-
-    public function getIdTrajet(): ?Trajet
-    {
-        return $this->idTrajet;
-    }
-
-    public function setIdTrajet(Trajet $idTrajet): self
-    {
-        $this->idTrajet = $idTrajet;
 
         return $this;
     }

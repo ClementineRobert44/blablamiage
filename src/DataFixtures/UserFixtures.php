@@ -90,12 +90,14 @@ class UserFixtures extends Fixture
         $manager->flush();
 
         /*************** Ajout des références ***************/ 
-        $this->addReference('admin-clementine', $admin1);
-        $this->addReference('admin-emma', $admin2);
-        $this->addReference('admin-test', $admin3);
+        $this->addReference('user-clementine', $admin1);
+        $this->addReference('user-emma', $admin2);
+        $this->addReference('user-test', $admin3);
         $this->addReference('user-jules', $user1);
         $this->addReference('user-jacques', $user2);
 
 
     }
+
+    
 }
