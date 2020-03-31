@@ -95,14 +95,11 @@ class Trajet
     private $idUser;
 
     
-
-    
-
     public function __construct()
     {
         $this->idUtilisateur = new ArrayCollection();
         $this->idUser = new ArrayCollection();
-    }
+    }    
 
     public function getId(): ?int
     {
@@ -310,6 +307,12 @@ class Trajet
 
        return $this;
    }
+
+   
+
+   
+
+   
 
    
 

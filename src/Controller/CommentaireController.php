@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commentaire;
 use App\Entity\Trajet;
+use App\Entity\User;
 use App\Form\CommentaireType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,35 +15,26 @@ class CommentaireController extends AbstractController
 {
     /**
      * Ecrire un commentaire.
-     * @Route("/nouveau-commentaire/{id}", name="commentaire.new")
+     * @Route("/nouveau-commentaire/{idTrajet}", name="commentaire.new")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
 
-    public function create(Request $request, EntityManagerInterface $em, int $id)
+    public function create(Request $request, EntityManagerInterface $em, int $idTrajet)
     {
         $commentaire = new Commentaire();
-        $userEnLigne = $this->getUser();
-        $commentaire->addIdUtilisateurQuiCommente($userEnLigne);
+        $userQuiCommente = $this->getUser();
+        $commentaire->addIdUtilisateurQuiCommente($userQuiCommente);
 
         $entityManager = $this->getDoctrine()->getManager();
-        $trajet = $entityManager->getRepository(Trajet::class)->find($id);
-        $users = $trajet->getIdUtilisateur();
-        $idTrajet =$trajet->getId();
-        foreach($users as $user){
-            $userId = $user->getId();
+        $trajet = $entityManager->getRepository(Trajet::class)->find($idTrajet);
+        $conducteurs = $trajet->getIdUtilisateur();
+        foreach($conducteurs as $conducteur){
+            $conduct = $conducteur;
         }
-        $query = $em->createQuery(
-            'SELECT u FROM App:User u WHERE u.id = :idUser'
-            )->setParameter('idUser', $userId);
-            $users = $query->getResult();
-
-            foreach($users as $user){
-                $user = $user->getId();
-            }
-        $commentaire->addIdUtilisateurCommente($user);
-        $commentaire->setIdTrajet($trajet);
+    
+        $commentaire->addIdUtilisateurCommente($conduct);
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

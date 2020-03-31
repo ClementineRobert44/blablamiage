@@ -70,39 +70,12 @@ class UserController extends AbstractController
             $i++;
         }
 
-        
-
-        // Récupère les trajets postés et expirés et ou a venir
-        
-        /*foreach($trajetsPostes as $trajetPoste){
-            $entityManager = $this->getDoctrine()->getManager();
-            $trajetPostesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
-            $trajetPostesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
-        }*/
-
-    
-        /*Recupères les trajets reservé
-        $trajetsReserves = $utilisateur->getTrajetsReserves();
-
-        foreach($trajetsReserves as $trajetReserve){
-            $entityManager = $this->getDoctrine()->getManager();
-            $trajetReservesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
-            $trajetReservesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
-        }*/
-
-        
-
-
-
         $idUser = $utilisateur->getId();
         $query = $em->createQuery(
             'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
             )->setParameter('idUser', $idUser);
             $voiture = $query->getResult();
 
-        
-
-        // Afficher les trajets à venir
 
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,

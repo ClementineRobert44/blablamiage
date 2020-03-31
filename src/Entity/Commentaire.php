@@ -35,11 +35,7 @@ class Commentaire
      * @ORM\Column(type="integer")
      */
     private $note;
-
     
-
-    
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="commentairesRecus")
      * @ORM\JoinTable(name="reçois_commentaire")
@@ -51,6 +47,7 @@ class Commentaire
      * @ORM\JoinTable(name="poste_commentaire")
      */
     private $idUtilisateurQuiCommente;
+
 
     public function __construct()
     {
@@ -161,6 +158,10 @@ class Commentaire
 
         return $this;
     }
+
+
+
+    
 
     
     
