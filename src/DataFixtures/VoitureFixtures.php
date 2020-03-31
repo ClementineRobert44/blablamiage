@@ -33,6 +33,15 @@ class VoitureFixtures extends Fixture
         $voiture2->setIdUtilisateur($manager->merge($this->getReference('admin-emma')));        
         $manager->persist($voiture2);
 
+        $voiture3 = new Voiture();
+        $voiture3->setMarqueVoiture("Volkswagen");
+        $voiture3->setModeleVoiture("Golf IV match");
+        $voiture3->setCouleurVoiture("Magic Black");
+        $voiture3->setAnneeVoiture("2002");
+        $voiture3->setTailleBagages("Grand");
+        $voiture3->setIdUtilisateur($manager->merge($this->getReference('user-jules')));        
+        $manager->persist($voiture3);
+
         $manager->flush();   
     }
 }
