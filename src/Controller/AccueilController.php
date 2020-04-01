@@ -16,52 +16,40 @@ class AccueilController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $em)
     {
-        
+        //Verifie que l'utilisateur est connecté
         if($user = $this->getUser()){
 
-            $idUser = $user->getId();
-
-        $query = $em->createQuery(
-            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
-            )
-            ->setParameter('idUser', $idUser);
-            $voitures = $query->getResult();
-
-        $query = $em->createQuery(
-            'SELECT t FROM App:Trajet t ORDER BY t.datePublication DESC'
-            )
-            ->setMaxResults(5);
+            //Récupère la voiture de l'utilisateur
+            $voiture = $user->getVoiture();
+                       
+            // Affiche les 5 derniers trajets postés, n'affiche pas les expirés
+            $query = $em->createQuery(
+                'SELECT t FROM App:Trajet t WHERE t.dateDepart >= :dateDuJour ORDER BY t.datePublication DESC'
+                )
+                ->setParameter('dateDuJour', new \DateTime())
+                ->setMaxResults(5); // Afficher au maximum 5 trajets
             $trajets = $query->getResult();
 
-        /*$query = $em->createQuery(
-            'SELECT c.note FROM App:Commentaire c WHERE c.idUtilisateurCommente = :idUser OR c.idUtilisateur = :idUser'
-            )
-            ->setParameter('idUser', $idUser);
-            $notes = $query->getResult();
+            // Récuperer la note de l'utilisateur connecté
+            $commentaires = $user->getCommentairesRecus();
 
             $nbNotes = 0;
-            $moyenne = 0;
-            
-        foreach($notes as $note){
-            $nbNotes = $nbNotes + 1;
-            $moyenne = $moyenne + $note['note'];
-        }
+            $note = 0;
+            foreach($commentaires as $commentaire){
+                $nbNotes++;
+                $note = $note + $commentaire->getNote();
+            }
 
-        if($nbNotes != 0){
-            $moyenne = $moyenne / $nbNotes;
-        }*/
-
-        
-        
-
+            // On récupère la moyenne de l'utilisateur
+            $note = $note / $nbNotes;     
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
             'trajets' => $trajets,
             'utilisateur' => $user,
-            'voitures' => $voitures,
-            //'nbNote' => $nbNotes,
-            //'note' => $moyenne
+            'voiture' => $voiture,
+            'nbNote' => $nbNotes,
+            'note' => $note
         ]);
 
         }else{

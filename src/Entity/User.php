@@ -101,6 +101,11 @@ class User implements UserInterface
      */
     private $commentairesPostes;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Voiture", mappedBy="idUtilisateur", cascade={"persist", "remove"})
+     */
+    private $voiture;
+
     
 
     public function __construct()
@@ -409,6 +414,23 @@ class User implements UserInterface
        if ($this->commentairesPostes->contains($commentairesPoste)) {
            $this->commentairesPostes->removeElement($commentairesPoste);
            $commentairesPoste->removeIdUtilisateurQuiCommente($this);
+       }
+
+       return $this;
+   }
+
+   public function getVoiture(): ?Voiture
+   {
+       return $this->voiture;
+   }
+
+   public function setVoiture(Voiture $voiture): self
+   {
+       $this->voiture = $voiture;
+
+       // set the owning side of the relation if necessary
+       if ($voiture->getIdUtilisateur() !== $this) {
+           $voiture->setIdUtilisateur($this);
        }
 
        return $this;

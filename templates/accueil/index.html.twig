@@ -16,14 +16,14 @@
 
 <div class="blocAccueil">
 
-  <h1>Dernières Annonces</h1>
+  <h1>Dernières annonces postées</h1>
 
   <table class="table table-striped">
   
   <tbody>
   {% for trajet in trajets %}
     <tr>
-        <td>Le {{trajet.dateDepart |date('j/m')}}</td>
+        <td>{{trajet.dateDepart |date('j/m')}}</td>
         <td>{{trajet.heureDepart |date('H') }}h{{trajet.heureDepart |date('i') }}</td>
         <td>{{trajet.villeDepart}}</td>
         <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
@@ -54,11 +54,11 @@
 
   <div class="profil">
     <div>
-      {#% if nbNote != 0 %}
-      <p><span class="petitTitre">Ma note :</span>  {{ note }} </p>
+      {% if nbNote != 0 %}
+      <p><span class="petitTitre">Ma note :</span>  <b>{{ note|number_format(1) }}</b> / 5 </p>
       {% else %}
       <p>Aucune note pour l'instant</p>
-      {% endif %#}
+      {% endif %}
     </div>
   </div>
 
@@ -82,7 +82,7 @@
   
 
 </div>
-{% for voiture in voitures %}
+
 {% if voiture.id != NULL %}
 <div class="blocAccueil">
 
@@ -120,7 +120,7 @@
 </div>
 
 {% endif %}
-{% endfor %}
+
 
 
 
