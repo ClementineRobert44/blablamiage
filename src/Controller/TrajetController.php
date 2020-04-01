@@ -9,6 +9,7 @@ use App\Form\PropertySearchType;
 use App\Form\TrajetType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Proxies\__CG__\App\Entity\User as EntityUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,15 +68,12 @@ class TrajetController extends AbstractController
         $form = $this->createForm(PropertySearchType::class, $search);
         $form->handleRequest($request);
 
-        // Afficher seulement les trajets où il reste de la place
-        /*$query = $em->createQuery(
-            'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager'
-            )->setParameter('aucunPassager', 0);
-            $trajets = $query->getResult();*/
-
+        // Quelque soit le mode d'affichage (recherche ou non) il faut que le(s) trajet(s) affiché(s) soi(en)t trié(s) dans l'ordre des dates de départ et pas complet
+        // Ce qui est fait si l'utilisateur saisie des info de recherche
         if($search->getDateDepart()){
+            // Recherche le trajet en fonction de la date de départ
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
+                'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart'
                 )
                 ->setParameter('dateDepart', $search->getDateDepart())
                 ->setParameter('aucunPassager', 0)
@@ -83,8 +81,9 @@ class TrajetController extends AbstractController
                 $trajets = $query->getResult();
 
         }else if($search->getVilleDepart()){
+            // Recherche le trajet en fonction de la ville de départ saisie
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
+                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart'
                 )
                 ->setParameter('villeDepart', $search->getVilleDepart())
                 ->setParameter('aucunPassager', 0)
@@ -92,22 +91,23 @@ class TrajetController extends AbstractController
                 $trajets = $query->getResult();
 
         } else if($search->getVilleDepart() && $search->getDateDepart()){
+            // Recherche les trajets en fonction de la ville de départ ET la date de départ
             $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour'
+                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart'
                 )
                 ->setParameter('villeDepart', $search->getVilleDepart())
                 ->setParameter('dateDepart', $search->getDateDepart())
                 ->setParameter('aucunPassager', 0)
                 ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
-        }else{
 
+        }else{
+            // Rien n'est saisi par l'utilisateur donc on affiche tous les trajets
             $query = $em->createQuery(
                 'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart'
                 )->setParameter('aucunPassager', 0)
                 ->setParameter('dateDuJour', new \DateTime());
                 $trajets = $query->getResult();
-
         }
                
         return $this->render('trajet/list.html.twig', [
@@ -124,24 +124,14 @@ class TrajetController extends AbstractController
      */
     public function show(Trajet $trajet, EntityManagerInterface $em)
     {
-        $users = $trajet->getIdUtilisateur();
+        $userCollection = $trajet->getIdUtilisateur(); // Retourne une collection, cependant il n'y a bien qu'un seul utilisateur qui poste 1 trajet
 
-        foreach($users as $user){
-            $userId = $user->getId();
-        }
+        //On doit donc faire un foreach pour récupérer les info de l'utilisateur
         
-
-        $query = $em->createQuery(
-            'SELECT u FROM App:User u WHERE u.id = :idUser'
-            )->setParameter('idUser', $userId);
-            $user = $query->getResult();
-            
-            
-        $query = $em->createQuery(
-            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
-            )->setParameter('idUser', $userId);
-            $voiture = $query->getResult();       
-
+        foreach($userCollection as $monUser){
+            $user = $monUser;
+            $voiture = $monUser->getVoiture();
+        }
         
         return $this->render('trajet/show.html.twig', [
             'trajet' => $trajet,
