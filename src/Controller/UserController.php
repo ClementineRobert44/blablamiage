@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
 
-/*
- * @Route("/{_locale}, defaults={"_locale":"en"}, requirements={"_locale": "en|fr"})
- */ 
+/**
+ * @Route("/{_locale}")
+ */
 class UserController extends AbstractController
 
 {

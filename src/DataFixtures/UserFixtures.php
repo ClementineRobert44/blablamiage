@@ -29,6 +29,8 @@ class UserFixtures extends Fixture
         $admin1->setDateNaissance(new \DateTime('1999-03-25'));
         $admin1->setBio('Je suis étudiante et administrateur de ce site');
         $admin1->setTel('0676789098');
+        $admin1->setSexe("Femme");
+        $admin1->setTheme("Rose");
         $admin1->setAnimaux('Non');
         $admin1->setCigarette('Non');
         $admin1->setRoles(['ROLE_ADMIN']);
@@ -39,9 +41,11 @@ class UserFixtures extends Fixture
         $admin2->setPassword($this->passwordEncoder->encodePassword($admin2, 'monMotDePasse'));
         $admin2->setNom("Bretaud");
         $admin2->setPrenom("Emma");
+        $admin2->setSexe("Femme");
         $admin2->setDateNaissance(new \DateTime('1998-10-15'));
         $admin2->setBio('Je suis étudiante et administrateur de ce site');
         $admin2->setTel('0656678789');
+        $admin2->setTheme("Rose");
         $admin2->setAnimaux('Oui');
         $admin2->setCigarette('Non');
         $admin2->setRoles(['ROLE_ADMIN']);
@@ -55,6 +59,8 @@ class UserFixtures extends Fixture
         $admin3->setDateNaissance(new \DateTime('1990-05-15'));
         $admin3->setBio('Je suis un administrateur test de ce site');
         $admin3->setTel('0102030405');
+        $admin3->setSexe("Homme");
+        $admin3->setTheme("Rose");
         $admin3->setAnimaux('Non');
         $admin3->setCigarette('Non');
         $admin3->setRoles(['ROLE_ADMIN']);
@@ -69,6 +75,8 @@ class UserFixtures extends Fixture
         $user1->setDateNaissance(new \DateTime('1999-12-15'));
         $user1->setBio('Je suis étudiant et je voudrais partager mes trajets');
         $user1->setTel('0745632569');
+        $user1->setSexe("Homme");
+        $user1->setTheme("Rose");
         $user1->setAnimaux('Non');
         $user1->setCigarette('Non');
         $user1->setRoles(['ROLE_USER']);
@@ -82,6 +90,8 @@ class UserFixtures extends Fixture
         $user2->setDateNaissance(new \DateTime('1965-07-01'));
         $user2->setBio("Je ne souhaite plus faire de trajets seuls, j'aime avoir de la compagnie.");
         $user2->setTel('0245566989');
+        $user2->setSexe("Homme");
+        $user2->setTheme("Rose");
         $user2->setAnimaux('Oui');
         $user2->setCigarette('Oui');
         $user2->setRoles(['ROLE_USER']);

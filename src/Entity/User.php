@@ -106,6 +106,16 @@ class User implements UserInterface
      */
     private $voiture;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private $sexe;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $theme;
+
     
 
     public function __construct()
@@ -432,6 +442,30 @@ class User implements UserInterface
        if ($voiture->getIdUtilisateur() !== $this) {
            $voiture->setIdUtilisateur($this);
        }
+
+       return $this;
+   }
+
+   public function getSexe(): ?string
+   {
+       return $this->sexe;
+   }
+
+   public function setSexe(string $sexe): self
+   {
+       $this->sexe = $sexe;
+
+       return $this;
+   }
+
+   public function getTheme(): ?string
+   {
+       return $this->theme;
+   }
+
+   public function setTheme(string $theme): self
+   {
+       $this->theme = $theme;
 
        return $this;
    }
