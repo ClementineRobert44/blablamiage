@@ -48,12 +48,18 @@ class Commentaire
      */
     private $idUtilisateurQuiCommente;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trajet", inversedBy="commentaires")
+     */
+    private $idTrajet;
+
 
     public function __construct()
     {
         
         $this->idUtilisateurCommente = new ArrayCollection();
         $this->idUtilisateurQuiCommente = new ArrayCollection();
+        $this->idTrajet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +160,32 @@ class Commentaire
     {
         if ($this->idUtilisateurQuiCommente->contains($idUtilisateurQuiCommente)) {
             $this->idUtilisateurQuiCommente->removeElement($idUtilisateurQuiCommente);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getIdTrajet(): Collection
+    {
+        return $this->idTrajet;
+    }
+
+    public function addIdTrajet(Trajet $idTrajet): self
+    {
+        if (!$this->idTrajet->contains($idTrajet)) {
+            $this->idTrajet[] = $idTrajet;
+        }
+
+        return $this;
+    }
+
+    public function removeIdTrajet(Trajet $idTrajet): self
+    {
+        if ($this->idTrajet->contains($idTrajet)) {
+            $this->idTrajet->removeElement($idTrajet);
         }
 
         return $this;
