@@ -15,38 +15,85 @@
 {{ form_end(form)}}
 
 </div>
-    <table class="table text-center">
-        <tr>
-            <th class="active text-center">Date Départ</th>
-            <th class="active text-center">Heure Départ</th>
-            <th class="active text-center">Adresse Départ</th>
-            <th class="active text-center">Code postal Départ</th>
-            <th class="active text-center">Ville départ</th>
-            <th class="active text-center">Adresse arrivée</th>
-            <th class="active text-center">Code Postal arrivée</th>
-            <th class="active text-center">Ville arrivée</th>
-            <th class="active text-center">Nombre de passager</th>
-            <th class="active text-center">Prix</th>
-            <th class="active text-center">Détails</th>
-        </tr>
+
+<div class="containerFlex">
+    <div class="containerFlexTrajet">
 
         {% for trajet in trajets %}
-            <tr>
-                <td>{{ trajet.dateDepart |date('d-m-Y') }}</td>
-                <td>{{ trajet.heureDepart |date('H:i') }}</td>
-                <td>{{ trajet.adresseDepart }}</td>
-                <td>{{ trajet.codePostalDepart }}</td>
-                <td>{{ trajet.villeDepart }}</td>
-                <td>{{ trajet.adresseArrivee }}</td>
-                <td>{{ trajet.codePostalArrivee }}</td>
-                <td>{{ trajet.villeArrivee }}</td>
-                <td>{{ trajet.nbPassagers }}</td>
-                <td>{{ trajet.prixTrajet }}€</td>
-                <td><a href="{{ path('trajet.show', {id: trajet.id})}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-    
-            </tr>
+        {% set users = trajet.idUtilisateur %}
+            {% for user in users %}
+                <div class="containerTrajet">
+                    <div class="containerInfosTrajet">
+
+                        <div class="infosTrajet">
+
+                            <div class="titrePrixTrajet">
+                                <h1>{{ trajet.villeDepart }} <span class="glyphicon glyphicon-arrow-right"></span> {{ trajet.villeArrivee }}</h1>
+                                <div class="rondPrix">{{ trajet.prixTrajet }}€</div>
+                            </div>
+
+                            <div>{{ trajet.dateDepart |date('d/m/Y') }} à {{trajet.heureDepart |date('H') }}h{{trajet.heureDepart |date('i') }}  </div>
+
+                            <div class="villes">
+                                
+                                    <div><span class="titleDepartArrivee">Départ : </span> </div>
+                                    <div>{{ trajet.adresseDepart }}, {{ trajet.codePostalDepart }} - {{ trajet.villeDepart }}</div>
+                                
+                            
+                                    <div><span class="titleDepartArrivee">Arrivée : </span> </div>
+                                    <div>{{ trajet.adresseArrivee }}, {{ trajet.codePostalArrivee }} - {{ trajet.villeArrivee }}</div>
+                            
+
+                            </div>
+
+                            <div class="nbPlacesRestantes"><span class="nbPlaces">{{ trajet.nbPassagers }} </span> places restantes </div>    
+                            
+                        </div>
+                        
+
+                        <div class="infosTrajet">
+                            <h1>Proposé par</h1>
+
+                            <div class="userTrajet">
+                                <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                                <h2> {{user.prenom}} {{user.nom}} </h2>
+                            </div>
+                            
+                            {% set commentaires = user.commentairesRecus %}
+                            {% set nbNotes = 0 %}
+                            {% set note = 0 %}
+
+                            {% for commentaire in commentaires %}
+                                {% set nbNotes = nbNotes + 1 %}
+                                {% set note = note + commentaire.note %}
+                            {% endfor %}
+
+                            {% set note = note / nbNotes %}
+                            
+                            <div class="userTrajet">
+                                <div><span class="titleDepartArrivee">Note Globale</span></div>
+                                <div>{{ note|number_format(1) }} / 5</div>
+                            </div>
+
+                            <button class="buttonComm" onclick="window.location.href = '#';">Voir tous ses commentaires</button>
+
+
+                            
+                            
+                        </div>
+
+                        
+                        <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+
+                        
+                    </div>
+
+                </div>
+            {% endfor %}
         {% endfor %}
-    </table>
+    </div>
+</div>
+    
 
    
 {% endblock %}

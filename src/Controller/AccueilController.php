@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/{_locale}")
- * 
  */
 
 class AccueilController extends AbstractController
