@@ -76,7 +76,21 @@
                                 <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous ses commentaires</button>
                                 </div>
                                 
+                                <!-- Vérifier si cet utilisateur n'a pas déjà reserver ce trajet -->
+                                {% set usersReserves = trajet.idUser %}
+                                {% set resa = false %}
+                                {% for userResa in usersReserves %}
+                                    {% if app.user.id == userResa.id %}
+                                    <!-- Cet utilisateur a déjà reservé ce trajet -->
+                                        {% set resa = true %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if resa == true %}
+                                <button class="buttonResa" onclick="window.location.href = '#';">Annuler ma réservation</button>
+                                {% else %}
                                 <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+                                {% endif %}
                             {% else %}
                                 <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous mes commentaires</button>
                                 </div>
