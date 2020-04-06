@@ -8,7 +8,11 @@
 
         <div class="myProfil">
 
+            {% if utilisateur.sexe == "Femme" %}
             <img class="picto" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+            {% else %}
+            <img class="picto" src="{{ asset('images/man.png') }}" alt="Pictogramme homme">
+            {% endif %}
 
             <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
 
@@ -21,8 +25,8 @@
             <div><b>Mail : </b>{{utilisateur.email}}</div>
             <div><b>Date naissance : </b>{{utilisateur.dateNaissance | date("j/m/Y")}}</div>
             <div><b>Numéro de téléphone : </b>0{{utilisateur.tel}}</div>
-            <div><b>Cigarette : </b>{{utilisateur.cigarette}}</div>
-            <div><b>Animaux : </b>{{utilisateur.animaux}}</div>
+            <div><b>Cigarette : </b>{% if utilisateur.cigarette %}Oui{% else %}Non{% endif %}</div>
+            <div><b>Animaux : </b>{% if utilisateur.animaux %}Oui{% else %}Non{% endif %}</div>
         </div>
 
         <div class="myProfil">
@@ -31,21 +35,26 @@
 
        
         <div class="myProfil">
-            <img class="picto" src="{{ asset('images/carWoman.png') }}" alt="Pictogramme femme">
+            {% if utilisateur.sexe == "Femme" %}
+            <img class="picto" src="{{ asset('images/carWoman.png') }}" alt="Pictogramme voiture femme">
+            {% else %}
+            <img class="picto" src="{{ asset('images/carMan.png') }}" alt="Pictogramme voiture homme">
+            {% endif %}
+            
             <h1>Ma Voiture</h1>   
-            <a href="#"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
 
         </div>
 
         <div class="myProfil">
-        {% for v in voiture %}
-            <div><b>Marque : </b>{{v.marqueVoiture}}</div>
-            <div><b>Modèle : </b>{{v.modeleVoiture}}</div>
-            <div><b>Année : </b>{{v.anneeVoiture}}</div>
-            <div><b>Couleur : </b>{{v.couleurVoiture}}</div>
-            <div><b>Taille bagages : </b>{{v.tailleBagages}}</div>
+        
+            <div><b>Marque : </b>{{voiture.marqueVoiture}}</div>
+            <div><b>Modèle : </b>{{voiture.modeleVoiture}}</div>
+            <div><b>Année : </b>{{voiture.anneeVoiture}}</div>
+            <div><b>Couleur : </b>{{voiture.couleurVoiture}}</div>
+            <div><b>Taille bagages : </b>{{voiture.tailleBagages}}</div>
 
-        {% endfor %}
+        
         </div>
 
         <div class="myTrajets">
@@ -92,7 +101,17 @@
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet </td>
+                                    <td>Annuler ce trajet</td>
+                                    {% set usersResa = tpav.idUser %}
+                                    {% set cptResa = 0 %}
+                                    {% for userResa in usersResa %}
+                                        {% set cptResa = cptResa + 1 %}
+                                    {% endfor %}
+                                    {% if cptResa == 0 %}
+                                    <td><a href="{{ path('trajet.edit', {id:tpav.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a></td>
+                                    {% else %}
+                                    <td>Non modifiable</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -131,7 +150,7 @@
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet </td>
+                                    <td>Annuler ma réservation </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Trajet;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -80,7 +81,7 @@ class TrajetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Trajet::class,
         ]);
     }
 }

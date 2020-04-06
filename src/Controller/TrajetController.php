@@ -167,6 +167,29 @@ class TrajetController extends AbstractController
         return $this->redirectToRoute('updateNbPlaces', ['id' => $id]);
     }
 
+    /**
+     * Modifier un trajet.
+     * @Route("trajet/{id}/edit", name="trajet.edit")
+     * @param Request $request
+     * @param Trajet $trajet
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse|Response
+     */
+    
+    public function edit(Request $request, Trajet $trajet, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(TrajetType::class, $trajet);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('user.show', ['slug' => $user->getSlug()]);
+        }
+        return $this->render('trajet/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     
 
     

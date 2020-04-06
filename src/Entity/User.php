@@ -65,16 +65,6 @@ class User implements UserInterface
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private $animaux;
-
-    /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private $cigarette;
-
-    /**
      * @var string
      * @Gedmo\Slug(fields={"nom"})
      * @ORM\Column(type="string", length=128, unique=true)
@@ -115,6 +105,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=25)
      */
     private $theme;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $animaux;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $cigarette;
 
     
 
@@ -266,29 +266,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAnimaux(): ?string
-    {
-        return $this->animaux;
-    }
-
-    public function setAnimaux(string $animaux): self
-    {
-        $this->animaux = $animaux;
-
-        return $this;
-    }
-
-    public function getCigarette(): ?string
-    {
-        return $this->cigarette;
-    }
-
-    public function setCigarette(string $cigarette): self
-    {
-        $this->cigarette = $cigarette;
-
-        return $this;
-    }
+    
 
     /**
      * @return string|null
@@ -466,6 +444,30 @@ class User implements UserInterface
    public function setTheme(string $theme): self
    {
        $this->theme = $theme;
+
+       return $this;
+   }
+
+   public function getAnimaux(): ?bool
+   {
+       return $this->animaux;
+   }
+
+   public function setAnimaux(bool $animaux): self
+   {
+       $this->animaux = $animaux;
+
+       return $this;
+   }
+
+   public function getCigarette(): ?bool
+   {
+       return $this->cigarette;
+   }
+
+   public function setCigarette(bool $cigarette): self
+   {
+       $this->cigarette = $cigarette;
 
        return $this;
    }
