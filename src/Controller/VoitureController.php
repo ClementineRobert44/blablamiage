@@ -51,5 +51,28 @@ class VoitureController extends AbstractController
         ]);
     }
 
+    /**
+     * Modifier une voiture.
+     * @Route("voiture/{id}/edit", name="voiture.edit")
+     * @param Request $request
+     * @param Voiture $voiture
+     * @param EntityManagerInterface $em
+     * @return RedirectResponse|Response
+     */
+    
+    public function edit(Request $request, Voiture $voiture, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(VoitureType::class, $voiture);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('user.show', ['slug' => $user->getSlug()]);
+        }
+        return $this->render('voiture/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
    
 }

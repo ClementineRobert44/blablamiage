@@ -31,8 +31,8 @@ class UserFixtures extends Fixture
         $admin1->setTel('0676789098');
         $admin1->setSexe("Femme");
         $admin1->setTheme("Rose");
-        $admin1->setAnimaux('Non');
-        $admin1->setCigarette('Non');
+        $admin1->setAnimaux(false);
+        $admin1->setCigarette(false);
         $admin1->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin1);
 
@@ -46,8 +46,8 @@ class UserFixtures extends Fixture
         $admin2->setBio('Je suis étudiante et administrateur de ce site');
         $admin2->setTel('0656678789');
         $admin2->setTheme("Rose");
-        $admin2->setAnimaux('Oui');
-        $admin2->setCigarette('Non');
+        $admin2->setAnimaux(true);
+        $admin2->setCigarette(false);
         $admin2->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin2);
 
@@ -61,8 +61,8 @@ class UserFixtures extends Fixture
         $admin3->setTel('0102030405');
         $admin3->setSexe("Homme");
         $admin3->setTheme("Rose");
-        $admin3->setAnimaux('Non');
-        $admin3->setCigarette('Non');
+        $admin3->setAnimaux(false);
+        $admin3->setCigarette(false);
         $admin3->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin3);
 
@@ -77,8 +77,8 @@ class UserFixtures extends Fixture
         $user1->setTel('0745632569');
         $user1->setSexe("Homme");
         $user1->setTheme("Rose");
-        $user1->setAnimaux('Non');
-        $user1->setCigarette('Non');
+        $user1->setAnimaux(false);
+        $user1->setCigarette(false);
         $user1->setRoles(['ROLE_USER']);
         $manager->persist($user1);
 
@@ -92,8 +92,8 @@ class UserFixtures extends Fixture
         $user2->setTel('0245566989');
         $user2->setSexe("Homme");
         $user2->setTheme("Rose");
-        $user2->setAnimaux('Oui');
-        $user2->setCigarette('Oui');
+        $user2->setAnimaux(true);
+        $user2->setCigarette(true);
         $user2->setRoles(['ROLE_USER']);
         $manager->persist($user2);
 

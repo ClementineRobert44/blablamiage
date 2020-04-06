@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UpdateUserFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
@@ -75,7 +76,7 @@ class UserController extends AbstractController
         $query = $em->createQuery(
             'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
             )->setParameter('idUser', $idUser);
-            $voiture = $query->getResult();
+            $voiture = $query->getSingleResult();
 
 
         return $this->render('user/show.html.twig', [
@@ -102,13 +103,13 @@ class UserController extends AbstractController
     
     public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
-        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
+        $form = $this->createForm(UpdateUserFormType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            return $this->redirectToRoute('utilisateur.list');
+            return $this->redirectToRoute('user.show', ['slug' => $utilisateur->getSlug()]);
         }
-        return $this->render('user/create.html.twig', [
+        return $this->render('user/update.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Mise à jour</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.marqueVoiture) }}
+        {{ form_row(form.modeleVoiture) }}
+        {{ form_row(form.couleurVoiture) }}
+        {{ form_row(form.anneeVoiture) }}
+        {{ form_row(form.tailleBagages) }}
+
+        <button class="btn">Mettre à jour</button>
+    {{ form_end(form) }}
+{% endblock %}

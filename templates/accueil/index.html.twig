@@ -64,11 +64,21 @@
 
   <div class="profil">
     <div>
-      <p><i class="fas fa-smoking fa-3x"></i>  {{ utilisateur.cigarette }} </p>
+      <p><i class="fas fa-smoking fa-3x"></i>  
+      {% if utilisateur.cigarette %}
+      Oui </p>
+      {% else %}
+      Non </p>
+      {% endif %}
     </div>
     
     <div>
-      <p><i class="fas fa-paw fa-3x"></i> {{ utilisateur.animaux }} </p>
+      <p><i class="fas fa-paw fa-3x"></i> 
+      {% if utilisateur.animaux %}
+      Oui </p>
+      {% else %}
+      Non </p>
+      {% endif %}
     </div>
   </div>
 
