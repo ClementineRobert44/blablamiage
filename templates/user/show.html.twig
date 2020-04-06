@@ -4,7 +4,7 @@
 
 <div class="containerFlex">
    
-    <div class="userBlanc"> 
+    <div class="containerUser"> 
 
         <div class="myProfil">
 
@@ -12,7 +12,7 @@
 
             <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
 
-            <a href="#"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('user.edit', {slug:utilisateur.slug})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
 
 
         </div>
@@ -43,7 +43,6 @@
             <div><b>Modèle : </b>{{v.modeleVoiture}}</div>
             <div><b>Année : </b>{{v.anneeVoiture}}</div>
             <div><b>Couleur : </b>{{v.couleurVoiture}}</div>
-            <div><b>Nombre de places : </b>{{v.nbPlacesVoiture}}</div>
             <div><b>Taille bagages : </b>{{v.tailleBagages}}</div>
 
         {% endfor %}
@@ -76,7 +75,7 @@
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
-                                    <td><a href="{{ path('commentaire.new', {id:tpe.id})}}">Commenter ce trajet</a></td>
+                                    
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -114,7 +113,7 @@
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
-                                <td><a href="{{ path('commentaire.new', {id:tre.id})}}">Commenter ce trajet</a></td>
+                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id})}}">Commenter ce trajet</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

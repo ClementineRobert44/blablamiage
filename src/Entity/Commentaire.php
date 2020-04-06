@@ -35,15 +35,7 @@ class Commentaire
      * @ORM\Column(type="integer")
      */
     private $note;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Trajet", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idTrajet;
-
     
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="commentairesRecus")
      * @ORM\JoinTable(name="reçois_commentaire")
@@ -56,11 +48,18 @@ class Commentaire
      */
     private $idUtilisateurQuiCommente;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trajet", inversedBy="commentaires")
+     */
+    private $idTrajet;
+
+
     public function __construct()
     {
         
         $this->idUtilisateurCommente = new ArrayCollection();
         $this->idUtilisateurQuiCommente = new ArrayCollection();
+        $this->idTrajet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,20 +107,6 @@ class Commentaire
     public function setNote(int $note): self
     {
         $this->note = $note;
-
-        return $this;
-    }
-
-    
-
-    public function getIdTrajet(): ?Trajet
-    {
-        return $this->idTrajet;
-    }
-
-    public function setIdTrajet(Trajet $idTrajet): self
-    {
-        $this->idTrajet = $idTrajet;
 
         return $this;
     }
@@ -179,6 +164,36 @@ class Commentaire
 
         return $this;
     }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getIdTrajet(): Collection
+    {
+        return $this->idTrajet;
+    }
+
+    public function addIdTrajet(Trajet $idTrajet): self
+    {
+        if (!$this->idTrajet->contains($idTrajet)) {
+            $this->idTrajet[] = $idTrajet;
+        }
+
+        return $this;
+    }
+
+    public function removeIdTrajet(Trajet $idTrajet): self
+    {
+        if ($this->idTrajet->contains($idTrajet)) {
+            $this->idTrajet->removeElement($idTrajet);
+        }
+
+        return $this;
+    }
+
+
+
+    
 
     
     

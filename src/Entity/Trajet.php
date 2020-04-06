@@ -94,15 +94,18 @@ class Trajet
      */
     private $idUser;
 
-    
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Commentaire", mappedBy="idTrajet")
+     */
+    private $commentaires;
 
     
-
     public function __construct()
     {
         $this->idUtilisateur = new ArrayCollection();
         $this->idUser = new ArrayCollection();
-    }
+        $this->commentaires = new ArrayCollection();
+    }    
 
     public function getId(): ?int
     {
@@ -310,6 +313,40 @@ class Trajet
 
        return $this;
    }
+
+   /**
+    * @return Collection|Commentaire[]
+    */
+   public function getCommentaires(): Collection
+   {
+       return $this->commentaires;
+   }
+
+   public function addCommentaire(Commentaire $commentaire): self
+   {
+       if (!$this->commentaires->contains($commentaire)) {
+           $this->commentaires[] = $commentaire;
+           $commentaire->addIdTrajet($this);
+       }
+
+       return $this;
+   }
+
+   public function removeCommentaire(Commentaire $commentaire): self
+   {
+       if ($this->commentaires->contains($commentaire)) {
+           $this->commentaires->removeElement($commentaire);
+           $commentaire->removeIdTrajet($this);
+       }
+
+       return $this;
+   }
+
+   
+
+   
+
+   
 
    
 

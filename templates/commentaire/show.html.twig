@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="containerCommentaires">
+
+        <div class="commentaireInfoUser">
+            <div class="containFlexComUser"> 
+                {% if user.sexe == "Femme" %} 
+                    <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                {% else %}
+                    <img class="pictoTrajet" src="{{ asset('images/man.png') }}" alt="Pictogramme femme">
+                {% endif %}
+                <h2> {{user.prenom}} {{user.nom}} </h2>
+            </div>
+
+            <div class="containFlexComUser">
+                <div><span class="petitTitre">Note : </span> <b>{{note|number_format(1)}}</b> / 5</div>
+            </div>
+
+            <div class="containFlexComUser">
+                <div><span class="petitTitre">Age : </span> 20 ans</div>
+                <div><span class="petitTitre">Cigarette : </span>{{user.cigarette}}</div>
+                <div><span class="petitTitre">Animaux : </span>{{user.animaux}}</div>
+            </div>
+
+            <div class="containFlexComUser">
+                <div>"{{user.bio}}"</div>
+            </div>
+        </div>
+
+        <div class="allCommentaires">
+            {% for commentaire in commentaires %}
+                {% set users = commentaire.idUtilisateurQuiCommente %}
+                    {% for user in users %}
+
+                        <div class="contenuCommentaire">
+                            <div class="titleCommentaire">
+                                {% if user.sexe == "Femme" %} 
+                                    <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                                {% else %}
+                                    <img class="pictoTrajet" src="{{ asset('images/man.png') }}" alt="Pictogramme homme">
+                                {% endif %}
+                                <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
+                                <div><span class="petitTitre">Note attribuée : </span> <span class="texteCom">{{ commentaire.note }}</span> </div>
+                            </div>
+
+                            <div class="comm">
+                                <div>" <span class="texteCom">{{ commentaire.contenuCom}} </span>"</div>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}        
+
+
+            {% endfor %}
+
+
+        </div>
+    
+    
+</div>
+
+    
+
+   
+{% endblock %}

@@ -7,13 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response;
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
 
-/*
- * @Route("/{_locale}, defaults={"_locale":"en"}, requirements={"_locale": "en|fr"})
- */ 
+/**
+ * @Route("/{_locale}")
+ */
 class UserController extends AbstractController
 
 {
@@ -70,39 +71,12 @@ class UserController extends AbstractController
             $i++;
         }
 
-        
-
-        // Récupère les trajets postés et expirés et ou a venir
-        
-        /*foreach($trajetsPostes as $trajetPoste){
-            $entityManager = $this->getDoctrine()->getManager();
-            $trajetPostesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
-            $trajetPostesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
-        }*/
-
-    
-        /*Recupères les trajets reservé
-        $trajetsReserves = $utilisateur->getTrajetsReserves();
-
-        foreach($trajetsReserves as $trajetReserve){
-            $entityManager = $this->getDoctrine()->getManager();
-            $trajetReservesExpires = $entityManager->getRepository(Trajet::class)->getTrajetsExpires();
-            $trajetReservesAVenir = $entityManager->getRepository(Trajet::class)->getTrajetsAvenir(); 
-        }*/
-
-        
-
-
-
         $idUser = $utilisateur->getId();
         $query = $em->createQuery(
             'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
             )->setParameter('idUser', $idUser);
             $voiture = $query->getResult();
 
-        
-
-        // Afficher les trajets à venir
 
         return $this->render('user/show.html.twig', [
             'utilisateur' => $utilisateur,
@@ -121,13 +95,14 @@ class UserController extends AbstractController
      * Modifier un Utilisateur.
      * @Route("user/{slug}/edit", name="user.edit")
      * @param Request $request
+     * @param User $utilisateur
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
-    /*
+    
     public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
@@ -136,7 +111,7 @@ class UserController extends AbstractController
         return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
-    }*/
+    }
 
     /**
      * Supprimer un Utilisateur.
