@@ -101,7 +101,17 @@
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet </td>
+                                    <td>Annuler ce trajet</td>
+                                    {% set usersResa = tpav.idUser %}
+                                    {% set cptResa = 0 %}
+                                    {% for userResa in usersResa %}
+                                        {% set cptResa = cptResa + 1 %}
+                                    {% endfor %}
+                                    {% if cptResa == 0 %}
+                                    <td><a href="{{ path('trajet.edit', {id:tpav.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a></td>
+                                    {% else %}
+                                    <td>Non modifiable</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -140,7 +150,7 @@
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet </td>
+                                    <td>Annuler ma réservation </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
