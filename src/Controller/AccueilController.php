@@ -44,7 +44,10 @@ class AccueilController extends AbstractController
             }
 
             // On récupère la moyenne de l'utilisateur
-            $note = $note / $nbNotes;     
+            if($nbNotes != 0){
+                $note = $note / $nbNotes;    
+            }
+             
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',

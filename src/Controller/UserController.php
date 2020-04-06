@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\BrowserKit\Response;
 use App\Entity\User;
+use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
@@ -94,13 +95,14 @@ class UserController extends AbstractController
      * Modifier un Utilisateur.
      * @Route("user/{slug}/edit", name="user.edit")
      * @param Request $request
+     * @param User $utilisateur
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
-    /*
+    
     public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
@@ -109,7 +111,7 @@ class UserController extends AbstractController
         return $this->render('user/create.html.twig', [
             'form' => $form->createView(),
         ]);
-    }*/
+    }
 
     /**
      * Supprimer un Utilisateur.

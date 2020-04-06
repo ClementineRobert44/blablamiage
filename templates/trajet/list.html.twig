@@ -2,8 +2,6 @@
 
 {% block body %}
 
-
-
 <div>
 {{ form_start(form)}}
 {{ form_widget(form) }}
@@ -56,7 +54,7 @@
 
                             <div class="userTrajet">
                                 <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
-                                <h2> {{user.prenom}} {{user.nom}} </h2>
+                                <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
                             </div>
                             
                             {% set commentaires = user.commentairesRecus %}
@@ -74,17 +72,20 @@
                                 <div><span class="titleDepartArrivee">Note Globale</span></div>
                                 <div>{{ note|number_format(1) }} / 5</div>
                             </div>
+                            {% if user.id != app.user.id %}
+                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous ses commentaires</button>
+                                </div>
+                                
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+                            {% else %}
+                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous mes commentaires</button>
+                                </div>
+                                <button class="buttonResa" onclick="window.location.href = '#';">Détails de mon trajet</button>
 
-                            <button class="buttonComm" onclick="window.location.href = '#';">Voir tous ses commentaires</button>
-
+                            {% endif %}
 
                             
-                            
-                        </div>
-
-                        
-                        <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
-
+            
                         
                     </div>
 

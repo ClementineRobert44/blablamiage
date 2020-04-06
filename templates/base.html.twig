@@ -7,10 +7,28 @@
 
     {% block stylesheets %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">{% endblock %} <!--Changer avec un paramètre pour changer de template-->
-    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    
+    {% if app.user.id is defined %} 
+        {% if app.user.theme == "Rose" %}
+          <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">
+          {% else %}
+            {% if app.user.theme == "Clair" %}
+              <link href="{{ asset('css/stylesheetClair.css') }}" type="text/css" rel="stylesheet">
+            {% else %}
+              <link href="{{ asset('css/stylesheetSombre.css') }}" type="text/css" rel="stylesheet">
+
+            {% endif %}
+        {% endif %}
+      {% else %}
+        <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">
+    {% endif %}
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+    {% endblock %}
     {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -52,8 +70,12 @@ app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{local
       <span class="glyphicon glyphicon-user"></span> Mon Compte<span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a href="#">Détails de mon compte</a></li>
-        <li><a href="#">Modifier mon profil</a></li>
+        <li><a href="{{ path('user.edit', {slug:app.user.slug})}}">Modifier mon profil</a></li>
+        {% if app.user.voiture != NULL %}
         <li><a href="#">Modifier ma voiture</a></li>
+        {% else %}
+          <li><a href="#">Ajouter une voiture</a></li>
+        {% endif %}
         <li><a href="#">Mes annonces</a></li>
         <li><a href="#">Mes réservation</a></li>
       </ul>

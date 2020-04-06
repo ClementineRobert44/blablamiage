@@ -137,30 +137,6 @@ class TrajetController extends AbstractController
     }
 
     /**
-     * Afficher un trajet spécifique.
-     * @Route("/trajet/{id}", name="trajet.show")
-     * @param Trajet $trajet
-     * @return Response
-     */
-    public function show(Trajet $trajet, EntityManagerInterface $em)
-    {
-        $userCollection = $trajet->getIdUtilisateur(); // Retourne une collection, cependant il n'y a bien qu'un seul utilisateur qui poste 1 trajet
-
-        //On doit donc faire un foreach pour récupérer les info de l'utilisateur
-        
-        foreach($userCollection as $monUser){
-            $user = $monUser;
-            $voiture = $monUser->getVoiture();
-        }
-        
-        return $this->render('trajet/show.html.twig', [
-            'trajet' => $trajet,
-            'user' => $user,
-            'voiture' => $voiture
-        ]);
-    }
-
-    /**
     * Permet de mettre à jour le nombre de places dispo dans la voiture
     * @Route("/updateNbPlaces/{id}", name="updateNbPlaces")
     */

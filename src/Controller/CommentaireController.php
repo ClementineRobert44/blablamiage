@@ -51,4 +51,31 @@ class CommentaireController extends AbstractController
         'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Afficher tous les comentaires d'un utilisateur.
+     * @Route("/commentaire/{slug}", name="commentaire.show")
+     * @param User $user
+     * @return Response
+     */
+    public function show(User $user)
+    {        
+        $commentaires = $user->getCommentairesRecus();
+        $note = 0;
+        $nbNote = 0;
+
+        foreach($commentaires as $commentaire){
+            $note = $note + $commentaire->getNote();
+            $nbNote++;
+        }
+
+        $note = $note / $nbNote;
+
+        return $this->render('commentaire/show.html.twig', [
+            'user' => $user,
+            'commentaires' => $commentaires,
+            'note' => $note,
+            
+        ]);
+    }
 }
