@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Trajet;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -69,7 +67,7 @@ class TrajetType extends AbstractType
 
         ->add('nbPassagers',ChoiceType::class, [
             'choices' => [
-            'Selectionné' => '', '1' => 1,'2' => 2, '3' => 3,'4' => 4,'5' => 5,'6' => 6],
+            '1' => 1,'2' => 2, '3' => 3,'4' => 4,'5' => 5,'6' => 6],
             'label' => 'Nombre de places dans la voiture (sans compter le conducteur)', 
             'constraints' => [new NotBlank()]] 
             )

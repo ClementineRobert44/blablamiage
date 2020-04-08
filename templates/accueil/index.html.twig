@@ -2,6 +2,8 @@
 
 {% block body %}
 
+
+
 <div class="containerAccueil">
 
 <div class="bienvenue">
@@ -20,7 +22,8 @@
 
   <table class="table table-striped">
   
-  <tbody>
+
+  
   {% for trajet in trajets %}
     <tr>
         <td>{{trajet.dateDepart |date('j/m')}}</td>
@@ -123,7 +126,7 @@
 
   <div class="profil">
     <div class="buttonAccueil">
-      <a href="{{ path('user.show', {slug:utilisateur.slug})}}">Modifier ma voiture</a>
+      <a href="{{ path('voiture.edit', {id:voiture.id})}}">Modifier ma voiture</a>
     </div>
   </div>
 

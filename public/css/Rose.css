@@ -12,6 +12,10 @@ body{
     height: 100%;
     width: 100%;
 }
+
+
+
+
 h1{
     font-family: "GentleTouch";
 }
@@ -285,6 +289,7 @@ a:hover, a:active{
 .annonces{
     text-align: center;
     width: 50%;
+    margin-right: 20px;
 }
 
 .annonces>h2{
@@ -375,6 +380,9 @@ a:hover, a:active{
 .texteCom{
     font-size: 20px;
 }
+
+
+
 
 
 

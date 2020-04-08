@@ -285,6 +285,7 @@ a:hover, a:active{
 .annonces{
     text-align: center;
     width: 50%;
+    margin-right: 20px;
 }
 
 .annonces>h2{

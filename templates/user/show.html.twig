@@ -50,7 +50,7 @@
             <div><b>Biographie : </b>{{utilisateur.bio}}</div>
         </div>
 
-       
+       {% if voiture != NULL %}
         <div class="myProfil">
             {% if utilisateur.sexe == "Femme" %}
                 {% if utilisateur.theme == "Rose" %}
@@ -74,6 +74,7 @@
                 {% endif %}
             {% endif %}
             
+            
             <h1>Ma Voiture</h1>   
             <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>
             <a href="{{ path('voiture.delete', {id:voiture.id})}}"><span class="glyphicon glyphicon-trash" style="font-size:25px;"></span></a>     
@@ -87,9 +88,11 @@
             <div><b>Année : </b>{{voiture.anneeVoiture}}</div>
             <div><b>Couleur : </b>{{voiture.couleurVoiture}}</div>
             <div><b>Taille bagages : </b>{{voiture.tailleBagages}}</div>
-
-        
         </div>
+
+       
+
+        {% endif %}
 
         <div class="myTrajets">
 

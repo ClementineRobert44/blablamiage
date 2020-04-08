@@ -76,7 +76,7 @@ class UserController extends AbstractController
         $query = $em->createQuery(
             'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
             )->setParameter('idUser', $idUser);
-            $voiture = $query->getSingleResult();
+            $voiture = $query->getOneOrNullResult();
 
 
         return $this->render('user/show.html.twig', [

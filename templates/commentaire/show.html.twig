@@ -1,14 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 <div class="containerCommentaires">
 
         <div class="commentaireInfoUser">
             <div class="containFlexComUser"> 
-                {% if user.sexe == "Femme" %} 
-                    <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                {% if user.sexe == "Femme" %}
+                    {% if app.user.theme == "Rose" %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                    {% else %}
+                    {% if app.user.theme == "Clair" %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                    {% else %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                    {% endif %}
+                    {% endif %}
+
                 {% else %}
-                    <img class="pictoTrajet" src="{{ asset('images/man.png') }}" alt="Pictogramme femme">
+
+                    {% if app.user.theme == "Rose" %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme homme">
+                    {% else %}
+                    {% if app.user.theme == "Clair" %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme homme">
+                    {% else %}
+                        <img class="pictoTrajet" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme homme">
+                    {% endif %}
+                    {% endif %}
+
+
                 {% endif %}
                 <h2> {{user.prenom}} {{user.nom}} </h2>
             </div>
@@ -35,11 +56,31 @@
 
                         <div class="contenuCommentaire">
                             <div class="titleCommentaire">
-                                {% if user.sexe == "Femme" %} 
-                                    <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
-                                {% else %}
-                                    <img class="pictoTrajet" src="{{ asset('images/man.png') }}" alt="Pictogramme homme">
-                                {% endif %}
+                                {% if user.sexe == "Femme" %}
+                        {% if app.user.theme == "Rose" %}
+                            <img class="pictoTrajet" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                        {% else %}
+                        {% if app.user.theme == "Clair" %}
+                            <img class="pictoTrajet" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                        {% else %}
+                            <img class="pictoTrajet" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                        {% endif %}
+                        {% endif %}
+
+                        {% else %}
+
+                            {% if app.user.theme == "Rose" %}
+                                <img class="pictoTrajet" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme homme">
+                            {% else %}
+                            {% if app.user.theme == "Clair" %}
+                                <img class="pictoTrajet" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme homme">
+                            {% else %}
+                                <img class="pictoTrajet" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme homme">
+                            {% endif %}
+                            {% endif %}
+
+
+                        {% endif %}
                                 <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
                                 <div><span class="petitTitre">Note attribuée : </span> <span class="texteCom">{{ commentaire.note }}</span> </div>
                             </div>
@@ -60,6 +101,7 @@
     
     
 </div>
+
 
     
 
