@@ -9,9 +9,26 @@
         <div class="myProfil">
 
             {% if utilisateur.sexe == "Femme" %}
-            <img class="picto" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                {% endif %}
+                {% endif %}
+            
             {% else %}
-            <img class="picto" src="{{ asset('images/man.png') }}" alt="Pictogramme homme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme femme">
+                {% endif %}
+                {% endif %}
             {% endif %}
 
             <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
@@ -36,13 +53,30 @@
        
         <div class="myProfil">
             {% if utilisateur.sexe == "Femme" %}
-            <img class="picto" src="{{ asset('images/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% endif %}
+                {% endif %}
             {% else %}
-            <img class="picto" src="{{ asset('images/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% endif %}
+                {% endif %}
             {% endif %}
             
             <h1>Ma Voiture</h1>   
-            <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>
+            <a href="{{ path('voiture.delete', {id:voiture.id})}}"><span class="glyphicon glyphicon-trash" style="font-size:25px;"></span></a>     
 
         </div>
 

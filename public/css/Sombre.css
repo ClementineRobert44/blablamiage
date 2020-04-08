@@ -1,0 +1,385 @@
+@font-face {
+	font-family: "GentleTouch";
+	src: url(AGentleTouch.ttf);
+}
+
+body{
+    background-color: #3C3C3C;
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 16px;
+}
+.container{
+    height: 100%;
+    width: 100%;
+}
+h1{
+    font-family: "GentleTouch";
+}
+
+.h1Accueil{
+    font-family: "GentleTouch";
+    font-size : 50px;
+}
+
+.bienvenue{
+    color:white;
+}
+.navbar{
+    border-radius: 0;
+    background-color: white;
+    border: none;
+}
+
+
+.containerAccueil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+
+.buttonAccueil{
+    margin:20px;
+    border: none;
+    background-color: #65E3FF;
+    border-radius: 100px;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: white;
+}
+
+.contenuAccueil{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.blocAccueil{
+    
+    margin: 50px;
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    
+}
+
+
+.profil{
+    display: flex;
+    justify-content: center;
+}
+.profil > div{
+    margin: 20px;
+}
+
+.fas, .glyphicon {
+    color: #65E3FF !important;
+}
+
+a{
+    color: white;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+    color: white;
+
+}
+
+.blocAccueil>h1{
+    color : #65E3FF;
+    text-align: center;
+    font-size : 50px;
+}
+
+.petitTitre{
+    font-variant-caps: petite-caps;
+    color: #65E3FF;
+    font-size:23px;
+}
+
+.containerFlex{
+    display: flex;
+    justify-content: center; 
+}
+
+.containerFlexTrajet{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.containerUser{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    border-radius: 50px;
+    flex-direction: column;
+    padding: 10px 50px 10px 50px;
+    width: 70%;
+}
+
+.containerTrajet{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    border-radius: 50px;
+    flex-direction: column;
+    margin: 10px;
+    width: 45%;
+}
+
+.myProfil{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.containerInfosTrajet{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.titrePrixTrajet{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.titrePrixTrajet > h1{
+    margin-right: 20px;
+}
+
+.infosTrajet{
+    width: 50%;
+    text-align: center;
+}
+
+.villes{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+
+.myProfil > div{
+    margin-right: 20px;
+}
+
+.departArrivee{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.rondPrix{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #65E3FF;
+    font-family: 'A Gentle Touch';
+    color: white;
+    font-size: 30px;
+    
+}
+
+.titleDepartArrivee{
+    font-family: 'A Gentle Touch';
+    font-size: 35px;
+    color: #65E3FF;
+    margin-right: 8px;
+}
+
+.buttonResa{
+    margin-bottom:20px;
+    border: none;
+    background-color: #65E3FF;
+    border-radius: 100px;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: white;
+    width: 30%;
+}
+
+.buttonComm{
+    margin-bottom:20px;
+    border: none;
+    background-color:#3C3C3C;
+    border-radius: 100px;
+    font-size: 15px;
+    padding: 9px 9px;
+    color: white;
+}
+
+.nbPlaces{
+    font-family: 'A Gentle Touch';
+    font-size: 30px;
+    color: #65E3FF;
+}
+
+.userTrajet{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.nbPlacesRestantes{
+    font-size: 20px;
+}
+
+.picto{
+    width: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px; 
+}
+
+.pictoTrajet{
+    width: 70px;
+    margin-right: 15px;
+}
+
+.myProfil>a{
+    margin-left: 30px;
+}
+
+.myTrajets{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.allMyTrajets{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.myTitle{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.titleTrajets{
+    width: 50%;
+}
+
+.annonces{
+    text-align: center;
+    width: 50%;
+}
+
+.annonces>h2{
+    margin-top: 0;
+    font-family: 'A Gentle Touch';
+    color: #3C3C3C;
+}
+
+
+/* Css de la partie commentaires */
+
+.containerCommentaires{
+    display: flex;
+    flex-direction: column; 
+}
+
+.commentaireInfoUser{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 100px;
+    margin-right: 25%;
+    margin-left: 25%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.containFlexComUser{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.containFlexComUser>h2{
+    font-family : 'A Gentle Touch';
+    font-size: 40px;
+}
+
+.containFlexComUser>div{
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.allCommentaires{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.contenuCommentaire{
+    width: 45%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 10px;;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.contenuCommentaire::nth-child(2){
+    text-align: center;
+}
+
+.titleCommentaire{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.titleCommentaire>div{
+    margin-right: 20px;;
+}
+
+.titleNom{
+    font-family : 'A Gentle Touch';
+    font-size: 30px;
+}
+
+.comm{
+    display: flex;
+    justify-content: center;
+}
+
+.texteCom{
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+

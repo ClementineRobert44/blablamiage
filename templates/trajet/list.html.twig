@@ -53,7 +53,32 @@
                             <h1>Proposé par</h1>
 
                             <div class="userTrajet">
-                                <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                            {% if user.sexe == "Femme" %}
+                                {% if app.user.theme == "Rose" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                                {% else %}
+                                {% if app.user.theme == "Clair" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                                {% else %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                                {% endif %}
+                                {% endif %}
+
+                            {% else %}
+
+                                {% if app.user.theme == "Rose" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme homme">
+                                {% else %}
+                                {% if app.user.theme == "Clair" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme homme">
+                                {% else %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme homme">
+                                {% endif %}
+                                {% endif %}
+
+
+                            {% endif %}
+                                
                                 <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
                             </div>
                             

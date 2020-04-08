@@ -10,12 +10,12 @@
     
     {% if app.user.id is defined %} 
         {% if app.user.theme == "Rose" %}
-          <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">
+          <link href="{{ asset('css/Rose.css') }}" type="text/css" rel="stylesheet">
           {% else %}
             {% if app.user.theme == "Clair" %}
-              <link href="{{ asset('css/stylesheetClair.css') }}" type="text/css" rel="stylesheet">
+              <link href="{{ asset('css/Clair.css') }}" type="text/css" rel="stylesheet">
             {% else %}
-              <link href="{{ asset('css/stylesheetSombre.css') }}" type="text/css" rel="stylesheet">
+              <link href="{{ asset('css/Sombre.css') }}" type="text/css" rel="stylesheet">
 
             {% endif %}
         {% endif %}
