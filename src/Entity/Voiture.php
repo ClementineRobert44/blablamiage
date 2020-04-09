@@ -44,7 +44,7 @@ class Voiture
     private $tailleBagages;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="voiture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="voiture", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUtilisateur;

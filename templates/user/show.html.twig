@@ -34,6 +34,7 @@
             <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
 
             <a href="{{ path('user.edit', {slug:utilisateur.slug})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('user.delete', {slug:utilisateur.slug})}}"><span class="glyphicon glyphicon-trash" style="font-size:25px;"></span></a>     
 
 
         </div>
@@ -117,7 +118,7 @@
                             <tbody>
                             {% for tpe in trajetsPostesExpires %}
                                 <tr>
-                                    <td>{{tpe.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpe.id})}}">{{tpe.dateDepart |date('j/m')}}</td>
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
@@ -134,7 +135,7 @@
                             <tbody>
                             {% for tpav in trajetsPostesAVenir %}
                                 <tr>
-                                    <td>{{tpav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpav.id})}}">{{tpav.dateDepart |date('j/m')}}</td>
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
@@ -165,7 +166,7 @@
                         <tbody>
                         {% for tre in trajetsReservesExpires %}
                             <tr>
-                                <td>Le {{tre.dateDepart |date('j/m')}}</td>
+                                <td><a href="{{ path('trajet.show', {id:tre.id})}}">{{tre.dateDepart |date('j/m')}}</td>
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
@@ -183,7 +184,7 @@
                             <tbody>
                             {% for trav in trajetsReservesAVenir %}
                                 <tr>
-                                    <td>{{trav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:trav.id})}}">{{trav.dateDepart |date('j/m')}}</td>
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>

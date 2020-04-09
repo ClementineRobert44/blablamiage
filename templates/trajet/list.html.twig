@@ -14,6 +14,7 @@
 
 </div>
 
+{% if users != NULL %}
 
 <div class="containerFlex">
     <div class="containerFlexTrajet">
@@ -113,14 +114,14 @@
                                 {% endfor %}
 
                                 {% if resa == true %}
-                                <button class="buttonResa" onclick="window.location.href = '#';">Annuler ma réservation</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('reservation.delete', {id : trajet.id})}}';">Annuler ma réservation</button>
                                 {% else %}
                                 <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
                                 {% endif %}
                             {% else %}
                                 <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous mes commentaires</button>
                                 </div>
-                                <button class="buttonResa" onclick="window.location.href = '#';">Détails de mon trajet</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails de mon trajet</button>
 
                             {% endif %}
 
@@ -135,6 +136,10 @@
     </div>
 </div>
 </div>
+{% else %}
+
+<h1 style="text-align: center">Aucun Résultat</h1>
+{% endif %}
     
 
    
