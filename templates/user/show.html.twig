@@ -118,10 +118,11 @@
                             <tbody>
                             {% for tpe in trajetsPostesExpires %}
                                 <tr>
-                                    <td><a href="{{ path('trajet.show', {id:tpe.id})}}">{{tpe.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpe.id})}}">{{tpe.dateDepart |date('j/m')}}</a></td>
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
+                                    <td><a href="{{ path('commentaire.new', {idTrajet:tpe.id, statut:"Conducteur"})}}">Commenter ce trajet</a></td>
                                     
                                 </tr>
                             {% endfor %}
@@ -135,11 +136,11 @@
                             <tbody>
                             {% for tpav in trajetsPostesAVenir %}
                                 <tr>
-                                    <td><a href="{{ path('trajet.show', {id:tpav.id})}}">{{tpav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpav.id})}}">{{tpav.dateDepart |date('j/m')}}</a></td>
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet</td>
+                                    <td><a href="{{ path('trajet.delete', {id:tpav.id})}}">Annuler ce trajet</a></td>
                                     {% set usersResa = tpav.idUser %}
                                     {% set cptResa = 0 %}
                                     {% for userResa in usersResa %}
@@ -166,11 +167,11 @@
                         <tbody>
                         {% for tre in trajetsReservesExpires %}
                             <tr>
-                                <td><a href="{{ path('trajet.show', {id:tre.id})}}">{{tre.dateDepart |date('j/m')}}</td>
+                                <td><a href="{{ path('trajet.show', {id:tre.id})}}">{{tre.dateDepart |date('j/m')}}</a></td>
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
-                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id})}}">Commenter ce trajet</a></td>
+                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id, statut:"Passager"})}}">Commenter ce trajet</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -184,11 +185,11 @@
                             <tbody>
                             {% for trav in trajetsReservesAVenir %}
                                 <tr>
-                                    <td><a href="{{ path('trajet.show', {id:trav.id})}}">{{trav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:trav.id})}}">{{trav.dateDepart |date('j/m')}}</a></td>
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>
-                                    <td>Annuler ma réservation </td>
+                                    <td><a href="{{ path('reservation.delete', {id : trav.id})}}">Annuler ma reservation</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>

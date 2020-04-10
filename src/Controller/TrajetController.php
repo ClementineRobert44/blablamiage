@@ -265,6 +265,36 @@ class TrajetController extends AbstractController
         return $this->redirectToRoute('trajet.list');
     }
 
+    /**
+     * Supprimer un trajet posté.
+     * @Route("trajet/delete/{id}", name="trajet.delete")
+     * @param Request $request
+     * @param Trajet $trajet
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function delete(Request $request,  Trajet $trajet, EntityManagerInterface $em)
+    {
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('trajet.delete', ['id' => $trajet->getId()]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('trajet/delete.html.twig', [
+                'trajet' => $trajet,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        $em->remove($trajet);
+        $em->flush();
+
+
+
+        return $this->redirectToRoute('user.show', ['slug' => $this->getUser()->getSlug()]);
+    }
+
     
 
     

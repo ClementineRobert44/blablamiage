@@ -129,8 +129,8 @@ class TrajetFixtures extends Fixture implements DependentFixtureInterface
         $trajet1->setCodePostalArrivee("82000");
         $trajet1->setVilleArrivee("Montauban");
         $trajet1->setAdresseDepart("44 rue Goya");
-        $trajet1->setCodePostalDepart("94170");  
-        $trajet1->setVilleDepart("Le Perreux-Sur-Marne");
+        $trajet1->setCodePostalDepart("94000");  
+        $trajet1->setVilleDepart("Créteil");
         $trajet1->setPrixTrajet("63");
         $trajet1->setNbPassagers("3"); // 4 places de bases mais il en reste 3 car il y a eu 1 reservation
         $trajet1->setDatePublication(new \DateTime("2020/03/31"));
@@ -162,8 +162,8 @@ class TrajetFixtures extends Fixture implements DependentFixtureInterface
         $trajet3->setCodePostalArrivee("82000");
         $trajet3->setVilleArrivee("Montauban");
         $trajet3->setAdresseDepart("44 rue Goya");
-        $trajet3->setCodePostalDepart("94170");  
-        $trajet3->setVilleDepart("Le Perreux-Sur-Marne");
+        $trajet3->setCodePostalDepart("94000");  
+        $trajet3->setVilleDepart("Créteil");
         $trajet3->setPrixTrajet("63");
         $trajet3->setNbPassagers("3"); // 4 places de bases mais il en reste 3 car il y a eu 1 reservation
         $trajet3->setDatePublication(new \DateTime("2020/03/31"));

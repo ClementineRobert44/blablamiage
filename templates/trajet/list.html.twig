@@ -115,6 +115,7 @@
 
                                 {% if resa == true %}
                                 <button class="buttonResa" onclick="window.location.href = '{{ path('reservation.delete', {id : trajet.id})}}';">Annuler ma réservation</button>
+                                <button class="buttonResa" style="margin-left: 5px" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails du trajet</button>
                                 {% else %}
                                 <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
                                 {% endif %}

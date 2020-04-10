@@ -45,6 +45,21 @@
 
     </div>
 
+     <!-- Vérifier si cet utilisateur n'a pas déjà reserver ce trajet -->
+    {% set usersReserves = trajet.idUser %}
+    {% set resa = false %}
+    {% for userResa in usersReserves %}
+        {% if app.user.id == userResa.id %}
+        <!-- Cet utilisateur a déjà reservé ce trajet -->
+            {% set resa = true %}
+        {% endif %}
+    {% endfor %}
+
+    
+
+    {% if app.user.id != userPoste.id and resa == false and trajet.nbPassagers != 0 %}
+    <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+    {% endif %}
 
 
 

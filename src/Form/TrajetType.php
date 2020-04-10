@@ -20,6 +20,7 @@ class TrajetType extends AbstractType
         $builder
         ->add('dateDepart', DateType::class, [
             'label' => 'Date départ',
+            'widget' => 'single_text',
             'placeholder' => [
                 'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
             ]
@@ -27,6 +28,7 @@ class TrajetType extends AbstractType
             
 
         ->add('heureDepart', TypeTimeType::class, [
+            'widget' => 'single_text',
             'label' => 'Heure de départ'                
         ])
         

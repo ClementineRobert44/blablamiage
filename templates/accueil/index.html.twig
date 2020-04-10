@@ -26,7 +26,7 @@
   
   {% for trajet in trajets %}
     <tr>
-        <td>{{trajet.dateDepart |date('j/m')}}</td>
+        <td><a href="{{ path('trajet.show', {id:trajet.id})}}">{{trajet.dateDepart |date('j/m')}}</a></td>
         <td>{{trajet.heureDepart |date('H') }}h{{trajet.heureDepart |date('i') }}</td>
         <td>{{trajet.villeDepart}}</td>
         <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
