@@ -10,17 +10,17 @@
     
     {% if app.user.id is defined %} 
         {% if app.user.theme == "Rose" %}
-          <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">
+          <link href="{{ asset('css/Rose.css') }}" type="text/css" rel="stylesheet">
           {% else %}
             {% if app.user.theme == "Clair" %}
-              <link href="{{ asset('css/stylesheetClair.css') }}" type="text/css" rel="stylesheet">
+              <link href="{{ asset('css/Clair.css') }}" type="text/css" rel="stylesheet">
             {% else %}
-              <link href="{{ asset('css/stylesheetSombre.css') }}" type="text/css" rel="stylesheet">
+              <link href="{{ asset('css/Sombre.css') }}" type="text/css" rel="stylesheet">
 
             {% endif %}
         {% endif %}
       {% else %}
-        <link href="{{ asset('css/stylesheet.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/Rose.css') }}" type="text/css" rel="stylesheet">
     {% endif %}
     
     
@@ -48,21 +48,21 @@
     
     
     <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown">
- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
- <span class="glyphicon glyphicon-globe"></span> <span class="caret"></span></a>
- <ul class="dropdown-menu">
- {% for key,locale in locales %}
-<li><a href="{{ path(app.request.get('_route'),
-app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{locale}}</a></li>
- {% endfor %}
- </ul>
-</li>
 
     {% if app.user.id is defined %}
-    <li><a href="{{path('trajet.create')}}">Proposer un trajet</a></li>
-    <li><a href="{{path('trajet.list')}}">Voir tous les trajets</a></li>
+    <li><a href="{{path('trajet.create')}}"><span class="glyphicon glyphicon-plus"></span>   Proposer un trajet</a></li>
+    <li><a href="{{path('trajet.list')}}"><span class="glyphicon glyphicon-th-list"></span>    Voir tous les trajets</a></li>
     <li><a href="{{path('user.list')}}">{{'utilisateur.voir'|trans}}</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-globe"></span> Langue<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+      {% for key,locale in locales %}
+      <li><a href="{{ path(app.request.get('_route'),
+      app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{locale}}</a></li>
+      {% endfor %}
+      </ul>
+    </li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
       <span class="glyphicon glyphicon-user"></span> Mon Compte<span class="caret"></span></a>
@@ -70,12 +70,10 @@ app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{local
         <li><a href="{{ path('user.show', {slug:app.user.slug})}}">Détails de mon compte</a></li>
         <li><a href="{{ path('user.edit', {slug:app.user.slug})}}">Modifier mon profil</a></li>
         {% if app.user.voiture != NULL %}
-        <li><a href="#">Modifier ma voiture</a></li>
+        <li><a href="{{ path('voiture.edit', {id:app.user.voiture.id})}}">Modifier ma voiture</a></li>
         {% else %}
           <li><a href="{{path('voiture.create')}}">Ajouter une voiture</a></li>
         {% endif %}
-        <li><a href="#">Mes annonces</a></li>
-        <li><a href="#">Mes réservation</a></li>
         <li><a href="{{ path('commentaire.show', {slug : app.user.slug})}}">Mes commentaires</a></li>
       </ul>
     </li>
@@ -86,11 +84,21 @@ app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{local
 
     {% else %}
 
-    
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-globe"></span> Langue<span class="caret"></span></a>
+      <ul class="dropdown-menu">
+      {% for key,locale in locales %}
+      <li><a href="{{ path(app.request.get('_route'),
+      app.request.attributes.get('_route_params')|merge({'_locale': key})) }}">{{locale}}</a></li>
+      {% endfor %}
+      </ul>
+    </li>
     <li><a href="{{path('app_register')}}"><span class="glyphicon glyphicon-user"></span>  Inscription</a></li>
     <li><a href="{{path('app_login')}}"><span class="glyphicon glyphicon-log-in"></span>  Connexion</a></li>
 
     {% endif %}
+    
     </ul>
   </div>
 </nav>

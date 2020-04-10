@@ -9,14 +9,32 @@
         <div class="myProfil">
 
             {% if utilisateur.sexe == "Femme" %}
-            <img class="picto" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                {% endif %}
+                {% endif %}
+            
             {% else %}
-            <img class="picto" src="{{ asset('images/man.png') }}" alt="Pictogramme homme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme femme">
+                {% endif %}
+                {% endif %}
             {% endif %}
 
             <h1>{{utilisateur.prenom}} {{utilisateur.nom}}</h1>
 
             <a href="{{ path('user.edit', {slug:utilisateur.slug})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('user.delete', {slug:utilisateur.slug})}}"><span class="glyphicon glyphicon-trash" style="font-size:25px;"></span></a>     
 
 
         </div>
@@ -33,16 +51,34 @@
             <div><b>Biographie : </b>{{utilisateur.bio}}</div>
         </div>
 
-       
+       {% if voiture != NULL %}
         <div class="myProfil">
             {% if utilisateur.sexe == "Femme" %}
-            <img class="picto" src="{{ asset('images/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/carWoman.png') }}" alt="Pictogramme voiture femme">
+                {% endif %}
+                {% endif %}
             {% else %}
-            <img class="picto" src="{{ asset('images/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% if utilisateur.theme == "Rose" %}
+                    <img class="picto" src="{{ asset('images/themeRose/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% else %}
+                {% if utilisateur.theme == "Clair" %}
+                    <img class="picto" src="{{ asset('images/themeClair/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% else %}
+                    <img class="picto" src="{{ asset('images/themeSombre/carMan.png') }}" alt="Pictogramme voiture homme">
+                {% endif %}
+                {% endif %}
             {% endif %}
             
+            
             <h1>Ma Voiture</h1>   
-            <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>     
+            <a href="{{ path('voiture.edit', {id:voiture.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a>
+            <a href="{{ path('voiture.delete', {id:voiture.id})}}"><span class="glyphicon glyphicon-trash" style="font-size:25px;"></span></a>     
 
         </div>
 
@@ -53,9 +89,11 @@
             <div><b>Année : </b>{{voiture.anneeVoiture}}</div>
             <div><b>Couleur : </b>{{voiture.couleurVoiture}}</div>
             <div><b>Taille bagages : </b>{{voiture.tailleBagages}}</div>
-
-        
         </div>
+
+       
+
+        {% endif %}
 
         <div class="myTrajets">
 
@@ -80,10 +118,11 @@
                             <tbody>
                             {% for tpe in trajetsPostesExpires %}
                                 <tr>
-                                    <td>{{tpe.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpe.id})}}">{{tpe.dateDepart |date('j/m')}}</a></td>
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
+                                    <td><a href="{{ path('commentaire.new', {idTrajet:tpe.id, statut:"Conducteur"})}}">Commenter ce trajet</a></td>
                                     
                                 </tr>
                             {% endfor %}
@@ -97,11 +136,11 @@
                             <tbody>
                             {% for tpav in trajetsPostesAVenir %}
                                 <tr>
-                                    <td>{{tpav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:tpav.id})}}">{{tpav.dateDepart |date('j/m')}}</a></td>
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
-                                    <td>Annuler ce trajet</td>
+                                    <td><a href="{{ path('trajet.delete', {id:tpav.id})}}">Annuler ce trajet</a></td>
                                     {% set usersResa = tpav.idUser %}
                                     {% set cptResa = 0 %}
                                     {% for userResa in usersResa %}
@@ -128,11 +167,11 @@
                         <tbody>
                         {% for tre in trajetsReservesExpires %}
                             <tr>
-                                <td>Le {{tre.dateDepart |date('j/m')}}</td>
+                                <td><a href="{{ path('trajet.show', {id:tre.id})}}">{{tre.dateDepart |date('j/m')}}</a></td>
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
-                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id})}}">Commenter ce trajet</a></td>
+                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id, statut:"Passager"})}}">Commenter ce trajet</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -146,11 +185,11 @@
                             <tbody>
                             {% for trav in trajetsReservesAVenir %}
                                 <tr>
-                                    <td>{{trav.dateDepart |date('j/m')}}</td>
+                                    <td><a href="{{ path('trajet.show', {id:trav.id})}}">{{trav.dateDepart |date('j/m')}}</a></td>
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>
-                                    <td>Annuler ma réservation </td>
+                                    <td><a href="{{ path('reservation.delete', {id : trav.id})}}">Annuler ma reservation</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>

@@ -24,9 +24,8 @@ class PropertySearchType extends AbstractType
 
         ->add('villeDepart', TextType::class, [
             'required' => false,
-            'label' => false,
             'attr' => [
-                'placeholder' => 'Ville Départ'
+                'placeholder' => 'Nantes'
             ]
             ])
         ;

@@ -114,20 +114,13 @@ class TrajetController extends AbstractController
                 $trajets = $query->getResult();
         }
 
+        $usersTrajets = NULL;
         $i = 0;
         foreach($trajets as $trajet){
             $user = $trajet->getIdUtilisateur();
             $usersTrajets[$i] = $user;
             $i++;
-        }
-
-        
-        
-
-        
-
-        
-        
+        }           
         
         return $this->render('trajet/list.html.twig', [
             'trajets' => $trajets,
@@ -156,8 +149,18 @@ class TrajetController extends AbstractController
     * Reserver un trajet
     * @Route("/reserve/{id}", name="reserveTrajet")
     */
-    public function reserve(int $id)
+    public function reserve(int $id, Request $request)
     {
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('reserveTrajet', ['id' => $id]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('Trajet/reserve.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $trajet = $entityManager->getRepository(Trajet::class)->find($id);
         $user=$this->getUser();
@@ -188,6 +191,108 @@ class TrajetController extends AbstractController
         return $this->render('trajet/update.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Afficher les détails d'un trajet.
+     * @Route("/trajet/show/{id}", name="trajet.show", requirements={"id" = "\d+"})
+     * @param Trajet $trajet
+     * @return Response
+     */
+    public function show(Trajet $trajet, EntityManagerInterface $em)
+    {
+        $user = $trajet->getIdUtilisateur();
+        $usersReservation = $trajet->getIdUser();
+        $commentairesRecus = $trajet->getCommentaires();
+        
+       
+
+        //Comme c'est une collection on fait un for
+        foreach($user as $userPoste){
+            $utilisateurPoste = $userPoste;
+        }
+
+
+        return $this->render('trajet/show.html.twig', [
+            'trajet' => $trajet,
+            'userPoste' => $utilisateurPoste,
+            'usersResa' => $usersReservation,
+            'commentairesRecus' => $commentairesRecus
+            
+        ]);
+    }
+
+    /**
+     * Supprimer une reservation.
+     * @Route("trajet/deleteResa/{id}", name="reservation.delete")
+     * @param Request $request
+     * @param Trajet $trajet
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function deleteResa(Request $request,  Trajet $trajet, EntityManagerInterface $em)
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('reservation.delete', ['id' => $trajet->getId()]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('trajet/annuleResa.html.twig', [
+                'trajet' => $trajet,
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        
+        
+        $user->removeTrajetsReserf($trajet);
+        
+        $trajet->removeIdUser($user);
+
+
+        $nbPlaces = $trajet->getNbPassagers();
+        $nbPlaces++;
+        $trajet->setNbPassagers($nbPlaces);
+
+        $em->flush();
+
+
+
+        return $this->redirectToRoute('trajet.list');
+    }
+
+    /**
+     * Supprimer un trajet posté.
+     * @Route("trajet/delete/{id}", name="trajet.delete")
+     * @param Request $request
+     * @param Trajet $trajet
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function delete(Request $request,  Trajet $trajet, EntityManagerInterface $em)
+    {
+
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('trajet.delete', ['id' => $trajet->getId()]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('trajet/delete.html.twig', [
+                'trajet' => $trajet,
+                'form' => $form->createView(),
+            ]);
+        }
+
+        $em->remove($trajet);
+        $em->flush();
+
+
+
+        return $this->redirectToRoute('user.show', ['slug' => $this->getUser()->getSlug()]);
     }
 
     

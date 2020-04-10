@@ -12,6 +12,7 @@ use App\Form\UpdateUserFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/{_locale}")
@@ -76,7 +77,7 @@ class UserController extends AbstractController
         $query = $em->createQuery(
             'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
             )->setParameter('idUser', $idUser);
-            $voiture = $query->getSingleResult();
+            $voiture = $query->getOneOrNullResult();
 
 
         return $this->render('user/show.html.twig', [
@@ -124,6 +125,8 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
+
+        
         $form = $this->createFormBuilder()
             ->setAction($this->generateUrl('user.delete', ['slug' => $utilisateur->getSlug()]))
             ->getForm();
@@ -134,9 +137,49 @@ class UserController extends AbstractController
                 'form' => $form->createView(),
             ]);
         }
+
         $em = $this->getDoctrine()->getManager();
+        
+
+        $trajetsPostes = $utilisateur->getTrajets();
+        $trajetsReserves = $utilisateur->getTrajetsReserves();
+        $commentairesRecus = $utilisateur->getCommentairesRecus();
+        $commentairesPostes = $utilisateur->getCommentairesPostes();
+
+        
+
+        foreach($trajetsPostes as $trajetPoste){
+            $utilisateur->removeTrajet($trajetPoste);
+            $em->remove($trajetPoste);
+            $em->flush();
+        }
+
+        foreach($trajetsReserves as $trajetReserve){
+            $utilisateur->removeTrajetsReserf($trajetReserve);
+        }
+
+        foreach($commentairesRecus as $commRecu){
+            $utilisateur->removeCommentairesRecus($commRecu);
+            $em->remove($commRecu);
+            $em->flush();
+        }
+
+        foreach($commentairesPostes as $CommPoste){
+            $utilisateur->removeCommentairesPoste($CommPoste);
+            $em->remove($CommPoste);
+            $em->flush();
+        }
+
+        
         $em->remove($utilisateur);
         $em->flush();
-        return $this->redirectToRoute('user.list');
+        
+        // Pour que l'utilisateur connecté soit supprimé on doit supprimer sa session pour que la redirection fonctionne
+        $session = new Session();
+        $session->invalidate();
+
+        return $this->redirectToRoute('accueil');
     }
+
+    
 }

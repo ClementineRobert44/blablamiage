@@ -74,5 +74,31 @@ class VoitureController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprimer une voiture.
+     * @Route("voiture/{id}/delete", name="voiture.delete")
+     * @param Request $request
+     * @param Voiture $voiture
+     * @param EntityManagerInterface $em
+     * @return Response
+     */
+    public function delete(Request $request, Voiture $voiture, EntityManagerInterface $em)
+    {
+        $form = $this->createFormBuilder()
+            ->setAction($this->generateUrl('voiture.delete', ['id' => $voiture->getId()]))
+            ->getForm();
+        $form->handleRequest($request);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('voiture/delete.html.twig', [
+                'voiture' => $voiture,
+                'form' => $form->createView(),
+            ]);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($voiture);
+        $em->flush();
+        return $this->redirectToRoute('accueil');
+    }
+
    
 }

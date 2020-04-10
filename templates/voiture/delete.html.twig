@@ -3,12 +3,12 @@
 {% block body %}
 
     <div class="alert alert-danger">
-        <strong>Avertissement !</strong> Vous êtes sur le point de supprimer votre compte
+        <strong>Avertissement !</strong> Vous êtes en train de supprimer votre voiture
     </div>
     <div class="collapse navbar-collapse">
     {{ form_start(form, {'attr': {'class': 'navbar-form navbar-left'}}) }}
     {{ form_widget(form) }}
-        <a href="{{ path('user.list') }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Annuler</a>
+        <a href="{{ path('accueil') }}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>Annuler</a>
         <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes vous sûr ??')">
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         Supprimer

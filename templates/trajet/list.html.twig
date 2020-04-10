@@ -14,6 +14,8 @@
 
 </div>
 
+{% if users != NULL %}
+
 <div class="containerFlex">
     <div class="containerFlexTrajet">
 
@@ -53,7 +55,32 @@
                             <h1>Proposé par</h1>
 
                             <div class="userTrajet">
-                                <img class="pictoTrajet" src="{{ asset('images/woman.png') }}" alt="Pictogramme femme">
+                            {% if user.sexe == "Femme" %}
+                                {% if app.user.theme == "Rose" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeRose/woman.png') }}" alt="Pictogramme femme">
+                                {% else %}
+                                {% if app.user.theme == "Clair" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeClair/woman.png') }}" alt="Pictogramme femme">
+                                {% else %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeSombre/woman.png') }}" alt="Pictogramme femme">
+                                {% endif %}
+                                {% endif %}
+
+                            {% else %}
+
+                                {% if app.user.theme == "Rose" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeRose/man.png') }}" alt="Pictogramme homme">
+                                {% else %}
+                                {% if app.user.theme == "Clair" %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeClair/man.png') }}" alt="Pictogramme homme">
+                                {% else %}
+                                    <img class="pictoTrajet" src="{{ asset('images/themeSombre/man.png') }}" alt="Pictogramme homme">
+                                {% endif %}
+                                {% endif %}
+
+
+                            {% endif %}
+                                
                                 <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
                             </div>
                             
@@ -87,14 +114,15 @@
                                 {% endfor %}
 
                                 {% if resa == true %}
-                                <button class="buttonResa" onclick="window.location.href = '#';">Annuler ma réservation</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('reservation.delete', {id : trajet.id})}}';">Annuler ma réservation</button>
+                                <button class="buttonResa" style="margin-left: 5px" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails du trajet</button>
                                 {% else %}
                                 <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
                                 {% endif %}
                             {% else %}
                                 <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous mes commentaires</button>
                                 </div>
-                                <button class="buttonResa" onclick="window.location.href = '#';">Détails de mon trajet</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails de mon trajet</button>
 
                             {% endif %}
 
@@ -108,6 +136,11 @@
         {% endfor %}
     </div>
 </div>
+</div>
+{% else %}
+
+<h1 style="text-align: center">Aucun Résultat</h1>
+{% endif %}
     
 
    
