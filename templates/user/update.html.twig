@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{'maj'|trans}}{% endblock %}
 
 {% block body %}
-    <h1>Mise à jour</h1>
+    <h1>{{'mettreAJour'|trans}}</h1>
 
     {{ form_start(form) }}
         {{ form_row(form.email) }}
@@ -17,6 +17,6 @@
         {{ form_row(form.cigarette) }}
         {{ form_row(form.theme) }}
 
-        <button class="btn">Mettre à jour</button>
+        <button class="btn">{{'mettreAJour'|trans}}</button>
     {{ form_end(form) }}
 {% endblock %}

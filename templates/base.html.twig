@@ -50,12 +50,11 @@
     <ul class="nav navbar-nav navbar-right">
 
     {% if app.user.id is defined %}
-    <li><a href="{{path('trajet.create')}}"><span class="glyphicon glyphicon-plus"></span>   Proposer un trajet</a></li>
-    <li><a href="{{path('trajet.list')}}"><span class="glyphicon glyphicon-th-list"></span>    Voir tous les trajets</a></li>
-    <li><a href="{{path('user.list')}}">{{'utilisateur.voir'|trans}}</a></li>
+    <li><a href="{{path('trajet.create')}}"><span class="glyphicon glyphicon-plus"></span>   {{'trajet.propose'|trans}}</a></li>
+    <li><a href="{{path('trajet.list')}}"><span class="glyphicon glyphicon-th-list"></span>    {{'trajet.voirTout'|trans}}</a></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
-      <span class="glyphicon glyphicon-globe"></span> Langue<span class="caret"></span></a>
+      <span class="glyphicon glyphicon-globe"></span> {{'langue'|trans}}<span class="caret"></span></a>
       <ul class="dropdown-menu">
       {% for key,locale in locales %}
       <li><a href="{{ path(app.request.get('_route'),
@@ -65,19 +64,19 @@
     </li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
-      <span class="glyphicon glyphicon-user"></span> Mon Compte<span class="caret"></span></a>
+      <span class="glyphicon glyphicon-user"></span> {{'monCompte'|trans}}<span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('user.show', {slug:app.user.slug})}}">Détails de mon compte</a></li>
-        <li><a href="{{ path('user.edit', {slug:app.user.slug})}}">Modifier mon profil</a></li>
+        <li><a href="{{ path('user.show', {slug:app.user.slug})}}">{{'monCompte.details'|trans}}</a></li>
+        <li><a href="{{ path('user.edit', {slug:app.user.slug})}}">{{'profil.modifier'|trans}}</a></li>
         {% if app.user.voiture != NULL %}
-        <li><a href="{{ path('voiture.edit', {id:app.user.voiture.id})}}">Modifier ma voiture</a></li>
+        <li><a href="{{ path('voiture.edit', {id:app.user.voiture.id})}}">{{'voiture.modifier'|trans}}</a></li>
         {% else %}
-          <li><a href="{{path('voiture.create')}}">Ajouter une voiture</a></li>
+          <li><a href="{{path('voiture.create')}}">{{'voiture.ajouter'|trans}}</a></li>
         {% endif %}
-        <li><a href="{{ path('commentaire.show', {slug : app.user.slug})}}">Mes commentaires</a></li>
+        <li><a href="{{ path('commentaire.show', {slug : app.user.slug})}}">{{'mesCommentaires'|trans}}</a></li>
       </ul>
     </li>
-    <li><a href="{{path('app_logout')}}"><span class="glyphicon glyphicon-off"></span>  Deconnexion</a></li>
+    <li><a href="{{path('app_logout')}}"><span class="glyphicon glyphicon-off"></span>  {{'deconnexion'|trans}}</a></li>
 
 
     
@@ -86,7 +85,7 @@
 
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ariahaspopup="true" aria-expanded="false">
-      <span class="glyphicon glyphicon-globe"></span> Langue<span class="caret"></span></a>
+      <span class="glyphicon glyphicon-globe"></span> {{'langue'|trans}}<span class="caret"></span></a>
       <ul class="dropdown-menu">
       {% for key,locale in locales %}
       <li><a href="{{ path(app.request.get('_route'),
@@ -94,8 +93,8 @@
       {% endfor %}
       </ul>
     </li>
-    <li><a href="{{path('app_register')}}"><span class="glyphicon glyphicon-user"></span>  Inscription</a></li>
-    <li><a href="{{path('app_login')}}"><span class="glyphicon glyphicon-log-in"></span>  Connexion</a></li>
+    <li><a href="{{path('app_register')}}"><span class="glyphicon glyphicon-user"></span>  {{'inscription'|trans}}</a></li>
+    <li><a href="{{path('app_login')}}"><span class="glyphicon glyphicon-log-in"></span>  {{'connexion'|trans}}</a></li>
 
     {% endif %}
     

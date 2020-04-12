@@ -1,1 +1,81 @@
-utilisateur.voir: 'See all the users'
+trajet.propose: 'Add a trip'
+trajet.voirTout: 'See all trips'
+langue: Language
+monCompte: 'My account'
+monCompte.details: 'My account details'
+profil.modifier: 'Edit my profile'
+voiture.modifier: 'Edit my car'
+voiture.ajouter: 'Add a car'
+mesCommentaires: 'My comments'
+deconnexion: Logout
+inscription: 'Sign Up'
+connexion: 'Sign In'
+bienvenue: 'Welcome on BlaBlaMiage'
+dernieresAnnoncesPostee: 'Last trips posted'
+complet: Complete
+placesRestantes: 'remaining places'
+voirPlus: 'See more'
+monProfil: 'My Profile'
+maNote: 'My grade'
+aucuneNotePourLinstant: 'No notes at this time'
+plusDetails: 'More details'
+maVoiture: 'My car'
+marque: Brand
+modele: Model
+annee: Year
+taillesBagages: 'Baggage Sizes'
+commentaire.new: 'Add a comment'
+commentaire.valider: Post
+note: Grade
+age: Age
+cigarette: Cigarette
+animaux: Animals
+noteAttribuee: 'Rating awarded'
+mdp: Password
+pointDanuller: 'You are about to cancel your reservation for the '
+de: ' from'
+vers: ' to'
+annuler: Cancel
+annulerLaReservation: 'Cancel the booking'
+ajouterNouveauTrajet: 'Add a new trip'
+ajouter: Add
+pointDanullerTrajet: 'You''re about to cancel the trip'
+du: ' for the'
+annulerTrajet: 'Cancel the trip'
+rechercher: Search
+depart: Departure
+arrivee: Arrival
+proposePar: 'Proposed by'
+noteGlobale: 'Overall grade'
+voirTousSesCom: 'See all his comments'
+annulerMaResa: 'Cancel my reservation'
+detailsDuTrajet: 'Trip details'
+reserver: Book
+voirTousMesCom: 'See all my comments'
+detailsDeMonTrajet: 'Details of my trip'
+pointDeReserver: 'You are about to book this trip'
+departLe: 'Departure the'
+postePar: 'Posted by'
+reservePar: 'Booked by'
+commentaires: Comments
+maj: Update
+mettreAJour: Update
+pointSupprimerCompte: 'You are about to delete your account'
+supprimer: Delete
+dateNaissance: 'Date of birth'
+tel: 'Phone number'
+oui: 'Yes'
+non: 'No'
+bio: Biography
+couleur: Color
+mesAnnonces: 'My trips'
+mesReservations: 'My reservations'
+expires: Expired
+commenterCeTrajet: 'Comment on this trip'
+aVenir: 'Coming Soon'
+annulerCeTrajet: 'Cancel this trip'
+nonModifiable: 'Not modifiable'
+annulerMaReservation: 'Cancel my reservation'
+nouvelleVoiture: 'Add a new car'
+ajouterLaVoiture: 'Add my new car'
+pointSupprimerVoiture: 'You are about to delete your car'

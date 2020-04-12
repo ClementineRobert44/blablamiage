@@ -1,1 +1,81 @@
-utilisateur.voir: 'Voir tous les utilsiateurs'
+trajet.propose: 'Ajouter un trajet'
+trajet.voirTout: 'Voir tous les trajets'
+langue: Langue
+monCompte: 'Mon compte'
+monCompte.details: 'Détails de mon compte'
+profil.modifier: 'Modifier mon profil'
+voiture.modifier: 'Modifier ma voiture'
+voiture.ajouter: 'Ajouter une voiture'
+mesCommentaires: 'Mes commentaires'
+deconnexion: Déconnexion
+inscription: 'S''inscrire'
+connexion: 'Se connecter'
+bienvenue: 'Bienvenue sur BlaBlaMiage'
+dernieresAnnoncesPostee: 'Dernières annonces postées'
+complet: Complet
+placesRestantes: ' places restantes'
+voirPlus: 'Voir plus'
+monProfil: 'Mon Profil'
+maNote: 'Ma note'
+aucuneNotePourLinstant: 'Aucune note pour le moment'
+plusDetails: 'Plus de détails'
+maVoiture: 'Ma Voiture'
+marque: Marque
+modele: Modèle
+annee: Année
+taillesBagages: 'Taille des bagages'
+commentaire.new: 'Ajouter un commentaire'
+commentaire.valider: Poster
+note: Note
+age: Age
+cigarette: Cigarette
+animaux: Animaux
+noteAttribuee: 'Note attribuée'
+mdp: 'Mot de passe'
+pointDanuller: 'Vous êtes sur le point d''annuler votre réservation du '
+de: ' de'
+vers: ' vers'
+annuler: Annuler
+annulerLaReservation: 'Annuler la réservation'
+ajouterNouveauTrajet: 'Ajouter un nouveau trajet'
+ajouter: Ajouter
+pointDanullerTrajet: 'Vous êtes sur le point d''annuler le trajet'
+du: du
+annulerTrajet: 'Annuler le trajet'
+rechercher: Rechercher
+depart: Départ
+arrivee: Arriée
+proposePar: 'Proposé par'
+noteGlobale: 'Note globale'
+voirTousSesCom: 'Voir tous ses commentaires'
+annulerMaResa: 'Annuler ma réservation'
+detailsDuTrajet: 'Détails du trajet'
+reserver: Réserver
+voirTousMesCom: 'Voir tous mes commentaires'
+detailsDeMonTrajet: 'Détails de mon trajet'
+pointDeReserver: 'Vous êtes sur le point de réserver ce trajet'
+departLe: 'Départ le'
+postePar: 'Posté par'
+reservePar: 'Réserver par'
+commentaires: Commentaires
+maj: 'Mise à jour'
+mettreAJour: 'Mettre à jour'
+pointSupprimerCompte: 'Vous êtes sur le point de supprimer votre compte'
+supprimer: Supprimer
+dateNaissance: 'Date de naissance'
+tel: 'Numéro de téléphone'
+oui: Oui
+non: Non
+bio: Biographie
+couleur: Couleur
+mesAnnonces: 'Mes annonces'
+mesReservations: 'Mes réservations'
+expires: Expirés
+commenterCeTrajet: 'Commenter ce trajet'
+aVenir: 'A Venir'
+annulerCeTrajet: 'Annuler ce trajet'
+nonModifiable: 'Non modifiable'
+annulerMaReservation: 'Annuler ma réservation'
+nouvelleVoiture: 'Ajouter une nouvelle voiture'
+ajouterLaVoiture: 'Ajouter ma nouvelle voiture'
+pointSupprimerVoiture: 'Vous êtes sur le point de supprimer votre voiture'
