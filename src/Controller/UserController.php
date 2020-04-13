@@ -24,13 +24,13 @@ class UserController extends AbstractController
      * Afficher tous les utilisateurs isncrits sur le site
      * @Route("/user", name="user.list")
      */
-    public function list()
+    /*public function list()
     {
         $utilisateurs = $this->getDoctrine()->getRepository(User::class)->findAll();
         return $this->render('user/list.html.twig', [
             'utilisateurs' => $utilisateurs,
         ]);
-    }
+    }*/
 
     /**
      * Afficher un utilisateur spécifique avec toutes ses données.
@@ -40,54 +40,66 @@ class UserController extends AbstractController
      */
     public function show(User $utilisateur, EntityManagerInterface $em)
     {
-        // Initiatilisations des variables
+        if($this->getUser()){
 
-        $trajetPostesExpires = NULL;
-        $trajetPostesAVenir = NULL;
-        $trajetReservesExpires = NULL;
-        $trajetReservesAVenir = NULL;
         
-        // Récupère les trajets qu'il a posté
-        $trajetsPostes = $utilisateur->getTrajets();
-        $i = 0;
-        foreach($trajetsPostes as $trajetPoste){
-            $dateDepart = $trajetPoste->getDateDepart();
-            if($dateDepart < new \DateTime()){
-                $trajetPostesExpires[$i] = $trajetPoste;
+            // On vérifie que l'utilisateur ne puisse pas accéder au profil d'un autre utilisateur
+            if($utilisateur == $this->getUser()){
+                // Initiatilisations des variables
+
+            $trajetPostesExpires = NULL;
+            $trajetPostesAVenir = NULL;
+            $trajetReservesExpires = NULL;
+            $trajetReservesAVenir = NULL;
+            
+            // Récupère les trajets qu'il a posté
+            $trajetsPostes = $utilisateur->getTrajets();
+            $i = 0;
+            foreach($trajetsPostes as $trajetPoste){
+                $dateDepart = $trajetPoste->getDateDepart();
+                if($dateDepart < new \DateTime()){
+                    $trajetPostesExpires[$i] = $trajetPoste;
+                }else{
+                    $trajetPostesAVenir[$i] = $trajetPoste;
+                } 
+                $i++;
+            }
+
+            // Récupère les trajets qu'il a reservés
+            $trajetsReserves = $utilisateur->getTrajetsReserves();
+            $i = 0;
+            foreach($trajetsReserves as $trajetReserve){
+                $dateDepart = $trajetReserve->getDateDepart();
+                if($dateDepart < new \DateTime()){
+                    $trajetReservesExpires[$i] = $trajetReserve;
+                }else{
+                    $trajetReservesAVenir[$i] = $trajetReserve;
+                } 
+                $i++;
+            }
+
+            $idUser = $utilisateur->getId();
+            $query = $em->createQuery(
+                'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
+                )->setParameter('idUser', $idUser);
+                $voiture = $query->getOneOrNullResult();
+
+
+            return $this->render('user/show.html.twig', [
+                'utilisateur' => $utilisateur,
+                'voiture'=> $voiture,
+                'trajetsPostesExpires' => $trajetPostesExpires,
+                'trajetsPostesAVenir' => $trajetPostesAVenir,
+                'trajetsReservesExpires' => $trajetReservesExpires,
+                'trajetsReservesAVenir' => $trajetReservesAVenir
+            ]);
             }else{
-                $trajetPostesAVenir[$i] = $trajetPoste;
-            } 
-            $i++;
+                return $this->redirectToRoute('accueil');
+            }
+        } else {
+            return $this->redirectToRoute('app_login');
         }
-
-        // Récupère les trajets qu'il a reservés
-        $trajetsReserves = $utilisateur->getTrajetsReserves();
-        $i = 0;
-        foreach($trajetsReserves as $trajetReserve){
-            $dateDepart = $trajetReserve->getDateDepart();
-            if($dateDepart < new \DateTime()){
-                $trajetReservesExpires[$i] = $trajetReserve;
-            }else{
-                $trajetReservesAVenir[$i] = $trajetReserve;
-            } 
-            $i++;
-        }
-
-        $idUser = $utilisateur->getId();
-        $query = $em->createQuery(
-            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUser'
-            )->setParameter('idUser', $idUser);
-            $voiture = $query->getOneOrNullResult();
-
-
-        return $this->render('user/show.html.twig', [
-            'utilisateur' => $utilisateur,
-            'voiture'=> $voiture,
-            'trajetsPostesExpires' => $trajetPostesExpires,
-            'trajetsPostesAVenir' => $trajetPostesAVenir,
-            'trajetsReservesExpires' => $trajetReservesExpires,
-            'trajetsReservesAVenir' => $trajetReservesAVenir
-        ]);
+        
     }
     
 
@@ -104,6 +116,11 @@ class UserController extends AbstractController
     
     public function edit(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
+        if($this->getUser()){
+
+        
+            // On vérifie que l'utilisateur ne puisse pas accéder au profil d'un autre utilisateur
+            if($utilisateur == $this->getUser()){
         $form = $this->createForm(UpdateUserFormType::class, $utilisateur);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -113,6 +130,12 @@ class UserController extends AbstractController
         return $this->render('user/update.html.twig', [
             'form' => $form->createView(),
         ]);
+            }else{
+                return $this->redirectToRoute('accueil');
+            }
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
     }
 
     /**
@@ -125,6 +148,12 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $utilisateur, EntityManagerInterface $em)
     {
+
+        if($this->getUser()){
+
+        
+            // On vérifie que l'utilisateur ne puisse pas accéder au profil d'un autre utilisateur
+            if($utilisateur == $this->getUser()){
 
         
         $form = $this->createFormBuilder()
@@ -179,6 +208,12 @@ class UserController extends AbstractController
         $session->invalidate();
 
         return $this->redirectToRoute('accueil');
+    }else{
+        return $this->redirectToRoute('accueil');
+    }
+}else{
+    return $this->redirectToRoute('app_login');
+}
     }
 
     

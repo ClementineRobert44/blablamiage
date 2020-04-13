@@ -30,19 +30,15 @@ class TrajetController extends AbstractController
 
     public function create(Request $request, EntityManagerInterface $em)
     {
-        $user=$this->getUser();
-        $idUser = $user->getId();
-        $query = $em->createQuery(
-            'SELECT v FROM App:Voiture v WHERE v.idUtilisateur = :idUtilisateur'
-            )
-            ->setParameter('idUtilisateur', $idUser);
-            $voiture = $query->getResult();
-
+        if($this->getUser()){
+            $user=$this->getUser();
+            $voiture = $user->getVoiture();
+            
+            // Si l'utilisateur ne possède pas de voiture il doit ajouter une voiture avant de pouvoir ajouter un trajet
             if($voiture == NULL){
                 $this->addFlash('pasDeVoiture', 'Vous devez ajouter une voiture pour pouvoir ajouter un trajet');
                 return $this->redirectToRoute('voiture.create');
             }else{
-
                 $trajet = new Trajet();
                 $user = $this->getUser();
                 $trajet->addIdUtilisateur($user);
@@ -58,6 +54,10 @@ class TrajetController extends AbstractController
                 ]);
 
             }
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
+        
 
         
     }
@@ -68,65 +68,70 @@ class TrajetController extends AbstractController
      */
     public function list(Request $request, EntityManagerInterface $em)
     {
-        $search = new PropertySearch();
-        $form = $this->createForm(PropertySearchType::class, $search);
-        $form->handleRequest($request);
+        if($this->getUser()){
+            $search = new PropertySearch();
+            $form = $this->createForm(PropertySearchType::class, $search);
+            $form->handleRequest($request);
 
-        // Quelque soit le mode d'affichage (recherche ou non) il faut que le(s) trajet(s) affiché(s) soi(en)t trié(s) dans l'ordre des dates de départ et pas complet
-        // Ce qui est fait si l'utilisateur saisie des info de recherche
-        if($search->getDateDepart()){
-            // Recherche le trajet en fonction de la date de départ
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
-                )
-                ->setParameter('dateDepart', $search->getDateDepart())
-                ->setParameter('aucunPassager', 0)
-                ->setParameter('dateDuJour', new \DateTime());
-                $trajets = $query->getResult();
+            // Quelque soit le mode d'affichage (recherche ou non) il faut que le(s) trajet(s) affiché(s) soi(en)t trié(s) dans l'ordre des dates de départ et pas complet
+            // Ce qui est fait si l'utilisateur saisie des info de recherche
+            if($search->getDateDepart()){
+                // Recherche le trajet en fonction de la date de départ
+                $query = $em->createQuery(
+                    'SELECT t FROM App:Trajet t WHERE t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
+                    )
+                    ->setParameter('dateDepart', $search->getDateDepart())
+                    ->setParameter('aucunPassager', 0)
+                    ->setParameter('dateDuJour', new \DateTime());
+                    $trajets = $query->getResult();
 
-        }else if($search->getVilleDepart()){
-            // Recherche le trajet en fonction de la ville de départ saisie
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
-                )
-                ->setParameter('villeDepart', $search->getVilleDepart())
-                ->setParameter('aucunPassager', 0)
-                ->setParameter('dateDuJour', new \DateTime());
-                $trajets = $query->getResult();
+            }else if($search->getVilleDepart()){
+                // Recherche le trajet en fonction de la ville de départ saisie
+                $query = $em->createQuery(
+                    'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
+                    )
+                    ->setParameter('villeDepart', $search->getVilleDepart())
+                    ->setParameter('aucunPassager', 0)
+                    ->setParameter('dateDuJour', new \DateTime());
+                    $trajets = $query->getResult();
 
-        } else if($search->getVilleDepart() && $search->getDateDepart()){
-            // Recherche les trajets en fonction de la ville de départ ET la date de départ
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
-                )
-                ->setParameter('villeDepart', $search->getVilleDepart())
-                ->setParameter('dateDepart', $search->getDateDepart())
-                ->setParameter('aucunPassager', 0)
-                ->setParameter('dateDuJour', new \DateTime());
-                $trajets = $query->getResult();
+            } else if($search->getVilleDepart() && $search->getDateDepart()){
+                // Recherche les trajets en fonction de la ville de départ ET la date de départ
+                $query = $em->createQuery(
+                    'SELECT t FROM App:Trajet t WHERE t.villeDepart = :villeDepart AND t.dateDepart = :dateDepart AND t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
+                    )
+                    ->setParameter('villeDepart', $search->getVilleDepart())
+                    ->setParameter('dateDepart', $search->getDateDepart())
+                    ->setParameter('aucunPassager', 0)
+                    ->setParameter('dateDuJour', new \DateTime());
+                    $trajets = $query->getResult();
 
+            }else{
+                // Rien n'est saisi par l'utilisateur donc on affiche tous les trajets
+                $query = $em->createQuery(
+                    'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
+                    )->setParameter('aucunPassager', 0)
+                    ->setParameter('dateDuJour', new \DateTime());
+                    $trajets = $query->getResult();
+            }
+
+            $usersTrajets = NULL;
+            $i = 0;
+            foreach($trajets as $trajet){
+                $user = $trajet->getIdUtilisateur();
+                $usersTrajets[$i] = $user;
+                $i++;
+            }           
+            
+            return $this->render('trajet/list.html.twig', [
+                'trajets' => $trajets,
+                'users' => $usersTrajets,
+                'form' => $form->createView()
+            ]);
         }else{
-            // Rien n'est saisi par l'utilisateur donc on affiche tous les trajets
-            $query = $em->createQuery(
-                'SELECT t FROM App:Trajet t WHERE t.nbPassagers > :aucunPassager AND t.dateDepart >= :dateDuJour ORDER BY t.dateDepart ASC'
-                )->setParameter('aucunPassager', 0)
-                ->setParameter('dateDuJour', new \DateTime());
-                $trajets = $query->getResult();
+            return $this->redirectToRoute('app_login');
         }
-
-        $usersTrajets = NULL;
-        $i = 0;
-        foreach($trajets as $trajet){
-            $user = $trajet->getIdUtilisateur();
-            $usersTrajets[$i] = $user;
-            $i++;
-        }           
         
-        return $this->render('trajet/list.html.twig', [
-            'trajets' => $trajets,
-            'users' => $usersTrajets,
-            'form' => $form->createView()
-        ]);
     }
 
     /**
@@ -181,16 +186,21 @@ class TrajetController extends AbstractController
     
     public function edit(Request $request, Trajet $trajet, EntityManagerInterface $em)
     {
-        $user = $this->getUser();
-        $form = $this->createForm(TrajetType::class, $trajet);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            return $this->redirectToRoute('user.show', ['slug' => $user->getSlug()]);
+        if($this->getUser()){
+            $user = $this->getUser();
+            $form = $this->createForm(TrajetType::class, $trajet);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->flush();
+                return $this->redirectToRoute('user.show', ['slug' => $user->getSlug()]);
+            }
+            return $this->render('trajet/update.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }else{
+            return $this->redirectToRoute('app_login');
         }
-        return $this->render('trajet/update.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        
     }
 
     /**
@@ -201,25 +211,29 @@ class TrajetController extends AbstractController
      */
     public function show(Trajet $trajet, EntityManagerInterface $em)
     {
-        $user = $trajet->getIdUtilisateur();
-        $usersReservation = $trajet->getIdUser();
-        $commentairesRecus = $trajet->getCommentaires();
-        
-       
-
-        //Comme c'est une collection on fait un for
-        foreach($user as $userPoste){
-            $utilisateurPoste = $userPoste;
-        }
-
-
-        return $this->render('trajet/show.html.twig', [
-            'trajet' => $trajet,
-            'userPoste' => $utilisateurPoste,
-            'usersResa' => $usersReservation,
-            'commentairesRecus' => $commentairesRecus
+        if($this->getUser()){
+            $user = $trajet->getIdUtilisateur();
+            $usersReservation = $trajet->getIdUser();
+            $commentairesRecus = $trajet->getCommentaires();
             
-        ]);
+        
+
+            //Comme c'est une collection on fait un for
+            foreach($user as $userPoste){
+                $utilisateurPoste = $userPoste;
+            }
+
+
+            return $this->render('trajet/show.html.twig', [
+                'trajet' => $trajet,
+                'userPoste' => $utilisateurPoste,
+                'usersResa' => $usersReservation,
+                'commentairesRecus' => $commentairesRecus
+                
+            ]);
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
     }
 
     /**
