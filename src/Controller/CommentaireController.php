@@ -19,13 +19,13 @@ class CommentaireController extends AbstractController
 {
     /**
      * Ecrire un commentaire.
-     * @Route("/nouveau-commentaire/{idTrajet}/{statut}", name="commentaire.new")
+     * @Route("/nouveau-commentaire/{idTrajet}/", name="commentaire.new")
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return RedirectResponse|Response
      */
 
-    public function create(Request $request, EntityManagerInterface $em, int $idTrajet, String $statut)
+    public function create(Request $request, EntityManagerInterface $em, int $idTrajet)
     {
         // Accessible seulement si on est connecté
         if($this->getUser()){
@@ -40,21 +40,9 @@ class CommentaireController extends AbstractController
             // Car c'est une collection
             foreach($conducteurs as $conducteur){
                 $conduct = $conducteur;
-            }
+            }     
 
-            $passagers = $trajet->getIdUser();
-            foreach($passagers as $pass){
-                if($pass->getId() == $this->getUser()->getId()){
-                    $passager = $pass;
-                }
-            }
-
-        
-            if($statut == "Passager"){
-                $commentaire->addIdUtilisateurCommente($passager);
-            }else{
-                $commentaire->addIdUtilisateurCommente($conduct);
-            }
+            $commentaire->addIdUtilisateurCommente($conduct);
             
         
             
