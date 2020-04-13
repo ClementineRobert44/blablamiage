@@ -35,13 +35,13 @@
             </div>
 
             <div class="containFlexComUser">
-                <div><span class="petitTitre">Note : </span> <b>{{note|number_format(1)}}</b> / 5</div>
+                <div><span class="petitTitre">{{'note'|trans}} : </span> <b>{{note|number_format(1)}}</b> / 5</div>
             </div>
 
             <div class="containFlexComUser">
-                <div><span class="petitTitre">Age : </span> 20 ans</div>
-                <div><span class="petitTitre">Cigarette : </span>{% if user.cigarette %}Oui{% else %}Non{% endif %}</div>
-                <div><span class="petitTitre">Animaux : </span>{% if user.animaux %}Oui{% else %}Non{% endif %}</div>
+                <div><span class="petitTitre">{{'age'|trans}} : </span> 20 ans</div>
+                <div><span class="petitTitre">{{'cigarette'|trans}} : </span>{% if user.cigarette == false %} Non {% else %} Oui {% endif %}</div>
+                <div><span class="petitTitre">{{'animaux'|trans}} : </span>{% if user.animaux == false %} Non {% else %} Oui {% endif %}</div>
             </div>
 
             <div class="containFlexComUser">
@@ -82,7 +82,7 @@
 
                         {% endif %}
                                 <div class="titleNom">{{user.prenom}} {{user.nom}}</div>
-                                <div><span class="petitTitre">Note attribuée : </span> <span class="texteCom">{{ commentaire.note }}</span> </div>
+                                <div><span class="petitTitre">{{'noteAttribuee'|trans}} : </span> <span class="texteCom">{{ commentaire.note }}</span> </div>
                             </div>
 
                             <div class="comm">

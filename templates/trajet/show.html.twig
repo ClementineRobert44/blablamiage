@@ -6,8 +6,8 @@
 
     <div class="informationTrajet">
         <div class="titleDepartArrivee">{{trajet.villeDepart}} --> {{trajet.villeArrivee}}</div>
-        <div>Départ le <span class="petitTitre"> {{trajet.dateDepart | date('d/m/Y')}}</span></div>
-        <div>Posté par <span class="petitTitre">{{userPoste.prenom}} {{userPoste.nom}}</span> </div>
+        <div{{'departLe'|trans}} <span class="petitTitre"> {{trajet.dateDepart | date('d/m/Y')}}</span></div>
+        <div>{{'postePar'|trans}} <span class="petitTitre">{{userPoste.prenom}} {{userPoste.nom}}</span> </div>
 
 
     </div>
@@ -16,7 +16,7 @@
     <!-- Reserver par & Commentaires -->    
     <div class="resaCom">
         <div class="resa">
-            <div class="titleDepartArrivee">Réservé par</div>
+            <div class="titleDepartArrivee">{{'reservePar'|trans}}</div>
             {% for userResa in usersResa %}
                 <div>{{userResa.prenom}} {{ userResa.nom}} </div>
             {% endfor %}
@@ -26,12 +26,12 @@
         {% if commentairesRecus is not empty %}
 
         <div class="com">
-            <div class="titleDepartArrivee">Commentaires</div>
+            <div class="titleDepartArrivee">{{'commentaires'|trans}}</div>
             
             {% for commRecu in commentairesRecus %}
                 {% set users = commRecu.idUtilisateurQuiCommente %}
                 {% for user in users %}
-                <div><span class="petitTitre">{{user.prenom}} {{user.nom}}</span> - {{commRecu.dateCom | date("d/m/Y")}} - Note {{commRecu.note}} / 5 :</div>
+                <div><span class="petitTitre">{{user.prenom}} {{user.nom}}</span> - {{commRecu.dateCom | date("d/m/Y")}} - {{'note'|trans}} {{commRecu.note}} / 5 :</div>
                 <div><i>"{{commRecu.contenuCom}}"</i></div>
                 
                 {% endfor %}
@@ -58,7 +58,7 @@
     
 
     {% if app.user.id != userPoste.id and resa == false and trajet.nbPassagers != 0 %}
-    <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+    <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">{{'reserver'|trans}}</button>
     {% endif %}
 
 

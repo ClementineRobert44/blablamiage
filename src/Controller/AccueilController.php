@@ -60,10 +60,7 @@ class AccueilController extends AbstractController
 
         }else{
 
-            return $this->render('accueil/index.html.twig', [
-                'controller_name' => 'AccueilController'
-                
-            ]);
+            return $this->render('accueil/index.html.twig');
 
         }
         

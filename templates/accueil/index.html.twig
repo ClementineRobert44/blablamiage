@@ -8,7 +8,7 @@
 
 <div class="bienvenue">
 
-<h1 class="h1Accueil">Bienvenue sur BlaBlaMiage
+<h1 class="h1Accueil">{{'bienvenue'|trans}}
 
 {% if app.user.id is defined %}
   {{app.user.prenom}}</h1>
@@ -18,7 +18,7 @@
 
 <div class="blocAccueil">
 
-  <h1>Dernières annonces postées</h1>
+  <h1>{{'dernieresAnnoncesPostee'|trans}}</h1>
 
   <table class="table table-striped">
   
@@ -32,9 +32,9 @@
         <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
         <td> {{trajet.villeArrivee}}</td>
         {% if trajet.nbPassagers == 0 %}
-        <td>Complet</td>
+        <td>{{'complet'|trans}}</td>
         {% else %}
-        <td>{{trajet.nbPassagers}} places restantes</td>
+        <td>{{trajet.nbPassagers}} {{'placesRestantes'|trans}}</td>
         {% endif %}
     </tr>
   {% endfor %}
@@ -43,7 +43,7 @@
 
 <div class="profil">
     <div class="buttonAccueil">
-      <a href="{{ path('trajet.list')}}">Voir plus</a>
+      <a href="{{ path('trajet.list')}}">{{'voirPlus'|trans}}</a>
     </div>
   </div>
 
@@ -52,15 +52,15 @@
 <div class="blocAccueil">
 
 
-  <h1>Mon Profil</h1>
+  <h1>{{'monProfil'|trans}}</h1>
 
 
   <div class="profil">
     <div>
       {% if nbNote != 0 %}
-      <p><span class="petitTitre">Ma note :</span>  <b>{{ note|number_format(1) }}</b> / 5 </p>
+      <p><span class="petitTitre">{{'maNote'|trans}} :</span>  <b>{{ note|number_format(1) }}</b> / 5 </p>
       {% else %}
-      <p>Aucune note pour l'instant</p>
+      <p>{{'aucuneNotePourLinstant'|trans}}</p>
       {% endif %}
     </div>
   </div>
@@ -87,7 +87,7 @@
 
   <div class="profil">
     <div class="buttonAccueil">
-      <a href="{{ path('user.show', {slug:utilisateur.slug})}}">Plus de détails</a>
+      <a href="{{ path('user.show', {slug:utilisateur.slug})}}">{{'plusDetails'|trans}}</a>
     </div>
   </div>
   
@@ -99,19 +99,19 @@
 {% if voiture != NULL %}
 <div class="blocAccueil">
 
-  <h1>Ma Voiture</h1>
+  <h1>{{'maVoiture'|trans}}</h1>
 
   <div class="profil">
     <div>
-      <p><span class="petitTitre">Marque :</span>  {{ voiture.marqueVoiture }} </p>
+      <p><span class="petitTitre">{{'marque'|trans}} :</span>  {{ voiture.marqueVoiture }} </p>
     </div>
     
     <div>
-      <p><span class="petitTitre">Modèle :</span> {{ voiture.modeleVoiture }} </p>
+      <p><span class="petitTitre">{{'modele'|trans}} :</span> {{ voiture.modeleVoiture }} </p>
     </div>
 
     <div>
-      <p><span class="petitTitre">Année :</span>  {{ voiture.anneeVoiture }} </p>
+      <p><span class="petitTitre">{{'annee'|trans}} :</span>  {{ voiture.anneeVoiture }} </p>
     </div>
   </div>
 
@@ -120,13 +120,13 @@
 <div class="profil">
 
     <div>
-      <p><span class="petitTitre">Taille Bagages :</span>  {{ voiture.tailleBagages }} </p>
+      <p><span class="petitTitre">{{'taillesBagages'|trans}} :</span>  {{ voiture.tailleBagages }} </p>
     </div>
   </div>
 
   <div class="profil">
     <div class="buttonAccueil">
-      <a href="{{ path('voiture.edit', {id:voiture.id})}}">Modifier ma voiture</a>
+      <a href="{{ path('voiture.edit', {id:voiture.id})}}">{{'voiture.modifier'|trans}}</a>
     </div>
   </div>
 
@@ -145,9 +145,9 @@
 
  {% else %}
  </h1>
-  <button class="buttonAccueil">Connexion</button>
-  <button class="buttonAccueil">Inscription</button>
-  <button class="buttonAccueil">Voir tous les trajets</button>
+  <button class="buttonAccueil">{{'connexion'|trans}}</button>
+  <button class="buttonAccueil">{{'inscription'|trans}}</button>
+  <button class="buttonAccueil">{{'trajet.voirTout'|trans}}</button>
  {% endif %}
 
 

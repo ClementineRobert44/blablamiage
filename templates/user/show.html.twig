@@ -41,14 +41,14 @@
 
         <div class="myProfil">
             <div><b>Mail : </b>{{utilisateur.email}}</div>
-            <div><b>Date naissance : </b>{{utilisateur.dateNaissance | date("j/m/Y")}}</div>
-            <div><b>Numéro de téléphone : </b>0{{utilisateur.tel}}</div>
-            <div><b>Cigarette : </b>{% if utilisateur.cigarette %}Oui{% else %}Non{% endif %}</div>
-            <div><b>Animaux : </b>{% if utilisateur.animaux %}Oui{% else %}Non{% endif %}</div>
+            <div><b>{{'dateNaissance'|trans}} : </b>{{utilisateur.dateNaissance | date("j/m/Y")}}</div>
+            <div><b>{{'tel'|trans}} : </b>0{{utilisateur.tel}}</div>
+            <div><b>{{'cigarette'|trans}} : </b>{% if utilisateur.cigarette %}{{'oui'|trans}}{% else %}{{'non'|trans}}{% endif %}</div>
+            <div><b>{{'animaux'|trans}} : </b>{% if utilisateur.animaux %}{{'oui'|trans}}{% else %}{{'non'|trans}}{% endif %}</div>
         </div>
 
         <div class="myProfil">
-            <div><b>Biographie : </b>{{utilisateur.bio}}</div>
+            <div><b>{{'bio'|trans}} : </b>{{utilisateur.bio}}</div>
         </div>
 
        {% if voiture != NULL %}
@@ -84,11 +84,11 @@
 
         <div class="myProfil">
         
-            <div><b>Marque : </b>{{voiture.marqueVoiture}}</div>
-            <div><b>Modèle : </b>{{voiture.modeleVoiture}}</div>
-            <div><b>Année : </b>{{voiture.anneeVoiture}}</div>
-            <div><b>Couleur : </b>{{voiture.couleurVoiture}}</div>
-            <div><b>Taille bagages : </b>{{voiture.tailleBagages}}</div>
+            <div><b>{{'marque'|trans}} : </b>{{voiture.marqueVoiture}}</div>
+            <div><b>{{'modele'|trans}} : </b>{{voiture.modeleVoiture}}</div>
+            <div><b>{{'annee'|trans}} : </b>{{voiture.anneeVoiture}}</div>
+            <div><b>{{'couleur'|trans}} : </b>{{voiture.couleurVoiture}}</div>
+            <div><b>{{'taillesBagages'|trans}} : </b>{{voiture.tailleBagages}}</div>
         </div>
 
        
@@ -99,11 +99,11 @@
 
             <div class="myTitle">
                 <div class="titleTrajets">
-                    <h1>Mes annonces</h1>
+                    <h1>{{'mesAnnonces'|trans}}</h1>
                 </div>
                 
 
-                <h1>Mes réservations</h1>
+                <h1>{{'mesReservations'|trans}}</h1>
                 
                 
             </div>
@@ -113,7 +113,7 @@
 
                 <div class="annonces">
                     {% if trajetsPostesExpires != NULL %}
-                        <h2>Expirés</h2>
+                        <h2>{{'expires'|trans}}</h2>
                         <table class="table table-striped">
                             <tbody>
                             {% for tpe in trajetsPostesExpires %}
@@ -122,7 +122,7 @@
                                     <td>{{tpe.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpe.villeArrivee}}</td>
-                                    <td><a href="{{ path('commentaire.new', {idTrajet:tpe.id, statut:"Conducteur"})}}">Commenter ce trajet</a></td>
+                                    <td><a href="{{ path('commentaire.new', {idTrajet:tpe.id, statut:"Conducteur"})}}">{{'commenterCeTrajet'|trans}}</a></td>
                                     
                                 </tr>
                             {% endfor %}
@@ -131,7 +131,7 @@
                     {% endif %}
 
                     {% if trajetsPostesAVenir != NULL %}
-                        <h2>A Venir</h2>
+                        <h2>{{'aVenir'|trans}}</h2>
                         <table class="table table-striped">
                             <tbody>
                             {% for tpav in trajetsPostesAVenir %}
@@ -140,7 +140,7 @@
                                     <td>{{tpav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{tpav.villeArrivee}}</td>
-                                    <td><a href="{{ path('trajet.delete', {id:tpav.id})}}">Annuler ce trajet</a></td>
+                                    <td><a href="{{ path('trajet.delete', {id:tpav.id})}}">{{'annulerCeTrajet'|trans}}</a></td>
                                     {% set usersResa = tpav.idUser %}
                                     {% set cptResa = 0 %}
                                     {% for userResa in usersResa %}
@@ -149,7 +149,7 @@
                                     {% if cptResa == 0 %}
                                     <td><a href="{{ path('trajet.edit', {id:tpav.id})}}"><span class="glyphicon glyphicon-pencil" style="font-size:25px;"></span></a></td>
                                     {% else %}
-                                    <td>Non modifiable</td>
+                                    <td>{{'nonModifiable'|trans}}</td>
                                     {% endif %}
                                 </tr>
                             {% endfor %}
@@ -162,7 +162,7 @@
                 <div class="annonces">
 
                     {% if trajetsReservesExpires != NULL %}
-                    <h2>Expires</h2>
+                    <h2>{{'expires'|trans}}</h2>
                     <table class="table table-striped">
                         <tbody>
                         {% for tre in trajetsReservesExpires %}
@@ -171,7 +171,7 @@
                                 <td>{{tre.villeDepart}}</td>
                                 <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                 <td> {{tre.villeArrivee}}</td>
-                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id, statut:"Passager"})}}">Commenter ce trajet</a></td>
+                                <td><a href="{{ path('commentaire.new', {idTrajet:tre.id, statut:"Passager"})}}">{{'commenterCeTrajet'|trans}}</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -180,7 +180,7 @@
 
                 
                     {% if trajetsReservesAVenir != NULL %}
-                        <h2>A Venir</h2>
+                        <h2>{{'aVenir'|trans}}</h2>
                         <table class="table table-striped">
                             <tbody>
                             {% for trav in trajetsReservesAVenir %}
@@ -189,7 +189,7 @@
                                     <td>{{trav.villeDepart}}</td>
                                     <td> <span class="glyphicon glyphicon-arrow-right"> </span></td>
                                     <td> {{trav.villeArrivee}}</td>
-                                    <td><a href="{{ path('reservation.delete', {id : trav.id})}}">Annuler ma reservation</a></td>
+                                    <td><a href="{{ path('reservation.delete', {id : trav.id})}}">{{'annulerMaReservation'|trans}}</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>

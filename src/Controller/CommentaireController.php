@@ -27,57 +27,63 @@ class CommentaireController extends AbstractController
 
     public function create(Request $request, EntityManagerInterface $em, int $idTrajet, String $statut)
     {
-        $commentaire = new Commentaire();
-        $userQuiCommente = $this->getUser();
-        $commentaire->addIdUtilisateurQuiCommente($userQuiCommente);
+        // Accessible seulement si on est connecté
+        if($this->getUser()){
+            $commentaire = new Commentaire();
+            $userQuiCommente = $this->getUser();
+            $commentaire->addIdUtilisateurQuiCommente($userQuiCommente);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $trajet = $entityManager->getRepository(Trajet::class)->find($idTrajet);
-        
-        $conducteurs = $trajet->getIdUtilisateur();
-        // Car c'est une collection
-        foreach($conducteurs as $conducteur){
-            $conduct = $conducteur;
-        }
-
-        $passagers = $trajet->getIdUser();
-        foreach($passagers as $pass){
-            if($pass->getId() == $this->getUser()->getId()){
-                $passager = $pass;
-            }
-        }
-
-    
-        if($statut == "Passager"){
-            $commentaire->addIdUtilisateurCommente($passager);
-        }else{
-            $commentaire->addIdUtilisateurCommente($conduct);
-        }
-        
-    
-        
-        $form = $this->createForm(CommentaireType::class, $commentaire);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $trajet = $entityManager->getRepository(Trajet::class)->find($idTrajet);
             
-        $em->persist($commentaire);
-        $em->flush();
-        return $this->redirectToRoute('user.show', ['slug' => $this->getUser()->getSlug()]);
+            $conducteurs = $trajet->getIdUtilisateur();
+            // Car c'est une collection
+            foreach($conducteurs as $conducteur){
+                $conduct = $conducteur;
+            }
+
+            $passagers = $trajet->getIdUser();
+            foreach($passagers as $pass){
+                if($pass->getId() == $this->getUser()->getId()){
+                    $passager = $pass;
+                }
+            }
+
+        
+            if($statut == "Passager"){
+                $commentaire->addIdUtilisateurCommente($passager);
+            }else{
+                $commentaire->addIdUtilisateurCommente($conduct);
+            }
+            
+        
+            
+            $form = $this->createForm(CommentaireType::class, $commentaire);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('user.show', ['slug' => $this->getUser()->getSlug()]);
+            }
+            return $this->render('commentaire/create.html.twig', [
+            'form' => $form->createView(),
+            ]);
+        }else{
+            return $this->redirectToRoute('app_login');
         }
-        return $this->render('commentaire/create.html.twig', [
-        'form' => $form->createView(),
-        ]);
     }
 
     /**
-     * Afficher tous les comentaires d'un utilisateur.
+     * Afficher tous les comentaires d'un utilisateur. 
      * @Route("/commentaire/{slug}", name="commentaire.show")
      * @param User $user
      * @return Response
      */
     public function show(User $user)
-    {        
-        $commentaires = $user->getCommentairesRecus();
+    {   
+        if($this->getUser()){
+            $commentaires = $user->getCommentairesRecus();
         $note = 0;
         $nbNote = 0;
 
@@ -94,5 +100,10 @@ class CommentaireController extends AbstractController
             'note' => $note,
             
         ]);
+        }else{
+            return $this->redirectToRoute('app_login');
+        }
+
+        
     }
 }

@@ -7,7 +7,7 @@
 {{ form_widget(form) }}
 <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Rechercher</button>
+            <button type="submit" class="btn btn-default">{{'rechercher'|trans}}</button>
         </div>
     </div>
 {{ form_end(form)}}
@@ -36,23 +36,23 @@
 
                             <div class="villes">
                                 
-                                    <div><span class="titleDepartArrivee">Départ : </span> </div>
+                                    <div><span class="titleDepartArrivee">{{'depart'|trans}} : </span> </div>
                                     <div>{{ trajet.adresseDepart }}, {{ trajet.codePostalDepart }} - {{ trajet.villeDepart }}</div>
                                 
                             
-                                    <div><span class="titleDepartArrivee">Arrivée : </span> </div>
+                                    <div><span class="titleDepartArrivee">{{'arrivee'|trans}} : </span> </div>
                                     <div>{{ trajet.adresseArrivee }}, {{ trajet.codePostalArrivee }} - {{ trajet.villeArrivee }}</div>
                             
 
                             </div>
 
-                            <div class="nbPlacesRestantes"><span class="nbPlaces">{{ trajet.nbPassagers }} </span> places restantes </div>    
+                            <div class="nbPlacesRestantes"><span class="nbPlaces">{{ trajet.nbPassagers }} </span> {{'placesRestantes'|trans}} </div>    
                             
                         </div>
                         
 
                         <div class="infosTrajet">
-                            <h1>Proposé par</h1>
+                            <h1>{{'proposePar'|trans}}</h1>
 
                             <div class="userTrajet">
                             {% if user.sexe == "Femme" %}
@@ -96,11 +96,11 @@
                             {% set note = note / nbNotes %}
                             
                             <div class="userTrajet">
-                                <div><span class="titleDepartArrivee">Note Globale</span></div>
+                                <div><span class="titleDepartArrivee">{{'noteGlobale'|trans}}</span></div>
                                 <div>{{ note|number_format(1) }} / 5</div>
                             </div>
                             {% if user.id != app.user.id %}
-                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous ses commentaires</button>
+                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">{{'voirTousSesCom'|trans}}</button>
                                 </div>
                                 
                                 <!-- Vérifier si cet utilisateur n'a pas déjà reserver ce trajet -->
@@ -114,15 +114,15 @@
                                 {% endfor %}
 
                                 {% if resa == true %}
-                                <button class="buttonResa" onclick="window.location.href = '{{ path('reservation.delete', {id : trajet.id})}}';">Annuler ma réservation</button>
-                                <button class="buttonResa" style="margin-left: 5px" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails du trajet</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('reservation.delete', {id : trajet.id})}}';">{{'annulerMaResa'|trans}}</button>
+                                <button class="buttonResa" style="margin-left: 5px" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">{{'detailsDuTrajet'|trans}}</button>
                                 {% else %}
-                                <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">Réserver</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('reserveTrajet', {id : trajet.id})}}';">{{'reserver'|trans}}</button>
                                 {% endif %}
                             {% else %}
-                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">Voir tous mes commentaires</button>
+                                <button class="buttonComm" onclick="window.location.href = '{{ path('commentaire.show', {slug : user.slug})}}';">{{'voirTousMesCom'|trans}}</button>
                                 </div>
-                                <button class="buttonResa" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">Détails de mon trajet</button>
+                                <button class="buttonResa" onclick="window.location.href = '{{ path('trajet.show', {id : trajet.id})}}';">{{'detailsDeMonTrajet'|trans}}</button>
 
                             {% endif %}
 

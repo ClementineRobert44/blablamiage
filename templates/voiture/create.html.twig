@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Inscription :</h1>
+    <h1>{{'nouvelleVoiture'|trans}}</h1>
     {% for message in app.flashes('pasDeVoiture') %}
             <div class="alert alert-success">
                 {{ message }}
@@ -14,7 +14,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Ajouterl la voiture</button>
+            <button type="submit" class="btn btn-default">{{'ajouterLaVoiture'|trans}}</button>
         </div>
     </div>
     {{ form_end(form) }}
