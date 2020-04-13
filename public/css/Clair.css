@@ -204,14 +204,14 @@ a:hover, a:active{
     height: 60px;
     border-radius: 30px;
     background-color: #65E3FF;
-    font-family: 'A Gentle Touch';
+    font-family: 'GentleTouch';
     color: white;
     font-size: 30px;
     
 }
 
 .titleDepartArrivee{
-    font-family: 'A Gentle Touch';
+    font-family: 'GentleTouch';
     font-size: 35px;
     color: #65E3FF;
     margin-right: 8px;
@@ -239,7 +239,7 @@ a:hover, a:active{
 }
 
 .nbPlaces{
-    font-family: 'A Gentle Touch';
+    font-family: 'GentleTouch';
     font-size: 30px;
     color: #65E3FF;
 }
@@ -307,7 +307,7 @@ a:hover, a:active{
 
 .annonces>h2{
     margin-top: 0;
-    font-family: 'A Gentle Touch';
+    font-family: 'GentleTouch';
     color: #E4E4E4;
 }
 
@@ -338,7 +338,7 @@ a:hover, a:active{
     justify-content: center;
 }
 .containFlexComUser>h2{
-    font-family : 'A Gentle Touch';
+    font-family : 'GentleTouch';
     font-size: 40px;
 }
 
@@ -381,7 +381,7 @@ a:hover, a:active{
 }
 
 .titleNom{
-    font-family : 'A Gentle Touch';
+    font-family : 'GentleTouch';
     font-size: 30px;
 }
 
