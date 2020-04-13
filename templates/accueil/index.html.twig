@@ -145,9 +145,9 @@
 
  {% else %}
  </h1>
-  <button class="buttonAccueil">{{'connexion'|trans}}</button>
-  <button class="buttonAccueil">{{'inscription'|trans}}</button>
-  <button class="buttonAccueil">{{'trajet.voirTout'|trans}}</button>
+  <button class="buttonAccueil" onclick="window.location.href = '{{ path('app_login')}}';">{{'connexion'|trans}}</button>
+  <button class="buttonAccueil" onclick="window.location.href = '{{path('app_register')}}';">{{'inscription'|trans}}</button>
+  
  {% endif %}
 
 
