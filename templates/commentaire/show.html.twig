@@ -40,8 +40,8 @@
 
             <div class="containFlexComUser">
                 <div><span class="petitTitre">Age : </span> 20 ans</div>
-                <div><span class="petitTitre">Cigarette : </span>{{user.cigarette}}</div>
-                <div><span class="petitTitre">Animaux : </span>{{user.animaux}}</div>
+                <div><span class="petitTitre">Cigarette : </span>{% if user.cigarette %}Oui{% else %}Non{% endif %}</div>
+                <div><span class="petitTitre">Animaux : </span>{% if user.animaux %}Oui{% else %}Non{% endif %}</div>
             </div>
 
             <div class="containFlexComUser">
