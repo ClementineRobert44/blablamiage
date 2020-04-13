@@ -80,7 +80,10 @@ class CommentaireController extends AbstractController
             $nbNote++;
         }
 
-        $note = $note / $nbNote;
+        if($note != 0 ){
+            $note = $note / $nbNote;
+        }
+        
 
         return $this->render('commentaire/show.html.twig', [
             'user' => $user,
