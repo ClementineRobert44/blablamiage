@@ -156,18 +156,19 @@ class TrajetFixtures extends Fixture implements DependentFixtureInterface
         $trajet2->addIdUser($manager->merge($this->getReference('user-jules'))); // Jules reserve ce trajet
         $manager->persist($trajet2);
 
+        // Trajet à modifier
         $trajet3 = new Trajet();
-        $trajet3->setHeureDepart(new \DateTime("15:00"));
-        $trajet3->setAdresseArrivee("91 rue Bonneterie");
-        $trajet3->setCodePostalArrivee("82000");
-        $trajet3->setVilleArrivee("Montauban");
-        $trajet3->setAdresseDepart("44 rue Goya");
-        $trajet3->setCodePostalDepart("94000");  
-        $trajet3->setVilleDepart("Créteil");
-        $trajet3->setPrixTrajet("63");
+        $trajet3->setHeureDepart(new \DateTime("19:00"));
+        $trajet3->setAdresseArrivee("95 Rue Joseph Vernet");
+        $trajet3->setCodePostalArrivee("92220");
+        $trajet3->setVilleArrivee("Bagneux");
+        $trajet3->setAdresseDepart("18 Place du Jeu de Paume");
+        $trajet3->setCodePostalDepart("38200");  
+        $trajet3->setVilleDepart("Vienne");
+        $trajet3->setPrixTrajet("83");
         $trajet3->setNbPassagers("3"); // 4 places de bases mais il en reste 3 car il y a eu 1 reservation
         $trajet3->setDatePublication(new \DateTime("2020/03/31"));
-        $trajet3->setDateDepart(new \DateTime("2020/07/26"));
+        $trajet3->setDateDepart(new \DateTime("2020/07/23"));
         $trajet3->addIdUtilisateur($manager->merge($this->getReference('user-clementine'))); // Clémentine propose de trajet
         $trajet3->addIdUser($manager->merge($this->getReference('user-jacques'))); // Jacques reserve ce trajet
         $manager->persist($trajet3);
