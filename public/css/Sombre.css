@@ -12,6 +12,7 @@ body{
     height: 100%;
     width: 100%;
 }
+
 h1{
     font-family: "GentleTouch";
 }
@@ -41,7 +42,7 @@ h1{
 .buttonAccueil{
     margin:20px;
     border: none;
-    background-color: #65E3FF;
+    background-color: #FFb741;
     border-radius: 100px;
     font-size: 20px;
     padding: 10px 20px;
@@ -67,6 +68,22 @@ h1{
     
 }
 
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus,
+.navbar .navbar-nav > .active > a:hover,
+.navbar .navbar-nav > .active > a:focus,
+.navbar .navbar-header > a:hover {
+    color: #C4C4C4;
+}
+
+.navbar .navbar-nav > li.open > a:hover,
+.navbar .navbar-nav > li.open > a:focus {
+  background-color: white;
+  color: #C4C4C4;
+}
+
+
+
 
 .profil{
     display: flex;
@@ -77,7 +94,7 @@ h1{
 }
 
 .fas, .glyphicon {
-    color: #65E3FF !important;
+    color: #FFb741 !important;
 }
 
 a{
@@ -86,19 +103,19 @@ a{
 
 a:hover, a:active{
     text-decoration: none;
-    color: white;
+    color: #EEEEEE;
 
 }
 
 .blocAccueil>h1{
-    color : #65E3FF;
+    color : #FFb741;
     text-align: center;
     font-size : 50px;
 }
 
 .petitTitre{
     font-variant-caps: petite-caps;
-    color: #65E3FF;
+    color: #FFb741;
     font-size:23px;
 }
 
@@ -186,7 +203,7 @@ a:hover, a:active{
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    background-color: #65E3FF;
+    background-color: #FFb741;
     font-family: 'A Gentle Touch';
     color: white;
     font-size: 30px;
@@ -196,14 +213,14 @@ a:hover, a:active{
 .titleDepartArrivee{
     font-family: 'A Gentle Touch';
     font-size: 35px;
-    color: #65E3FF;
+    color: #FFb741;
     margin-right: 8px;
 }
 
 .buttonResa{
     margin-bottom:20px;
     border: none;
-    background-color: #65E3FF;
+    background-color: #FFb741;
     border-radius: 100px;
     font-size: 20px;
     padding: 10px 20px;
@@ -224,7 +241,7 @@ a:hover, a:active{
 .nbPlaces{
     font-family: 'A Gentle Touch';
     font-size: 30px;
-    color: #65E3FF;
+    color: #FFb741;
 }
 
 .userTrajet{
@@ -376,6 +393,61 @@ a:hover, a:active{
 .texteCom{
     font-size: 20px;
 }
+
+.containerInfoTrajet{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;;
+
+}
+
+
+.informationTrajet{
+    display: flex;
+    background-color: white;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 100px;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.resaCom{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+.resaCom>div{
+    text-align: center;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: white;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 50px;
+}
+
+.resa{
+    width: 20%;
+}
+
+.com{
+    padding: 10px;
+}
+
+table>tbody>tr>td>a{
+    color: #666666;
+}
+table>tbody>tr>td>a:hover{
+    color: #AAAAAA;
+}
+
+
+
 
 
 
